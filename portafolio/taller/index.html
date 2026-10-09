@@ -1,111 +1,22 @@
 <!doctype html>
-<html lang="es" data-niche="el taller Torque">
+<html lang="es" data-niche="Taller mecánico">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Torque — Taller mecánico</title>
-<meta name="description" content="Concepto de demostración de PairX: sitio para un taller mecánico (negocio ficticio).">
-<meta name="theme-color" content="#0D0D0D">
-<style>
-@font-face{font-family:"Big Shoulders Display";src:url(../fonts/bigshoulders-900-normal.woff2) format("woff2");font-weight:900;font-display:swap}
-@font-face{font-family:"Big Shoulders Display";src:url(../fonts/bigshoulders-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
-@font-face{font-family:Barlow;src:url(../fonts/barlow-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
-@font-face{font-family:Barlow;src:url(../fonts/barlow-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
-:root{--ink:#0D0D0D;--panel:#161616;--steel:#9A9A96;--line:#2A2A2A;--hazard:#FFC400;--paper:#EDEDEA;--ease:cubic-bezier(.23,1,.32,1)}
-*{box-sizing:border-box;margin:0}
-body{background:var(--ink);color:var(--paper);font:400 1.05rem/1.55 Barlow,system-ui,sans-serif}
-::selection{background:var(--hazard);color:var(--ink)}
-a{color:inherit}:focus-visible{outline:2px solid var(--hazard);outline-offset:3px}
-.wrap{width:min(1240px,100% - 40px);margin-inline:auto}
-.stripe{height:10px;background:repeating-linear-gradient(-45deg,var(--hazard) 0 14px,var(--ink) 14px 28px)}
-header{display:flex;justify-content:space-between;align-items:center;padding:22px 0;border-bottom:1px solid var(--line)}
-.logo{font:900 1.9rem/1 "Big Shoulders Display",sans-serif;letter-spacing:.04em;text-transform:uppercase;text-decoration:none}
-.logo span{color:var(--hazard)}
-.call{font-weight:600;text-decoration:none;padding:10px 16px;border:1px solid var(--hazard);color:var(--hazard)}
-.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;padding:72px 0 88px;align-items:end}
-h1{font:900 clamp(3.4rem,9vw,8rem)/.88 "Big Shoulders Display",sans-serif;text-transform:uppercase;letter-spacing:-.01em}
-h1 span{color:var(--hazard)}
-.sub{margin-top:24px;max-width:46ch;color:var(--steel);font-size:1.15rem}
-.ticket{background:var(--paper);color:var(--ink);padding:26px;font-size:.95rem;position:relative;box-shadow:0 18px 40px rgba(0,0,0,.45);transform:rotate(1.5deg)}
-.ticket h2{font:700 1.4rem/1 "Big Shoulders Display",sans-serif;text-transform:uppercase;letter-spacing:.06em;display:flex;justify-content:space-between}
-.ticket ul{list-style:none;padding:0;margin-top:16px}
-.ticket li{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed #B9B9B4}
-.ok{font-weight:600;color:#1E7B3A}.warn{font-weight:600;color:#B25B00}
-.ticket small{display:block;margin-top:14px;color:#5F5F5B}
-.btn{display:inline-block;margin-top:30px;padding:16px 26px;background:var(--hazard);color:var(--ink);font:700 1.15rem/1 "Big Shoulders Display",sans-serif;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;transition:transform 140ms var(--ease)}
-.btn:active{transform:scale(.97)}
-section{padding:88px 0;border-top:1px solid var(--line)}
-h2.big{font:900 clamp(2.4rem,5vw,4.4rem)/.95 "Big Shoulders Display",sans-serif;text-transform:uppercase;margin-bottom:40px}
-.bays{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--line)}
-.bay{padding:28px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:220px;display:flex;flex-direction:column;justify-content:space-between;transition:background 200ms ease}
-@media (hover:hover){.bay:hover{background:var(--panel)}}
-.bay em{font:700 .9rem/1 "Big Shoulders Display",sans-serif;font-style:normal;letter-spacing:.2em;color:var(--hazard)}
-.bay h3{font:700 1.9rem/1 "Big Shoulders Display",sans-serif;text-transform:uppercase;margin:14px 0 8px}
-.bay p{color:var(--steel)}
-.process{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;counter-reset:s}
-.process div{border-top:4px solid var(--hazard);padding-top:16px}
-.process strong{display:block;font:700 1.5rem/1.1 "Big Shoulders Display",sans-serif;text-transform:uppercase;margin-bottom:6px}
-.process p{color:var(--steel)}
-.cta{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
-footer{padding:36px 0 120px;color:var(--steel);border-top:1px solid var(--line);font-size:.9rem}
-@media (max-width:860px){.hero{grid-template-columns:1fr}.bays{grid-template-columns:1fr}.process{grid-template-columns:1fr 1fr}.ticket{transform:none}}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mecánica Ruiz — Taller mecánico en Kennedy · Concepto PairX</title>
+<meta name="description" content="Frenos, aceite, suspensión y diagnóstico computarizado. Cotiza por WhatsApp con la placa y te respondemos el mismo día. Concepto de página web diseñado por PairX; negocio ficticio.">
+<meta name="theme-color" content="#eef1f4">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2032%2032'%3E%3Crect%20width%3D'32'%20height%3D'32'%20rx%3D'7'%20fill%3D'%23e09a1a'%2F%3E%3Ctext%20x%3D'16'%20y%3D'22'%20font-family%3D'Arial%2Csans-serif'%20font-weight%3D'800'%20font-size%3D'17'%20text-anchor%3D'middle'%20fill%3D'%2312263a'%3ER%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../demo.css?v=2">
+<style>:root{--bg:#eef1f4;--bg-2:#e3e8ee;--surface:#ffffff;--ink:#12263a;--muted:#51657a;--line:#cfd8e2;--line-2:#8fa1b3;--acc:#e09a1a;--acc-h:#c98510;--on-acc:#12263a;--art-bg:linear-gradient(160deg,#2c5375,#12263a);--font-d:'Archivo',system-ui,sans-serif;--font-b:'Space Grotesk',system-ui,sans-serif;--font-l:'JetBrains Mono',ui-monospace,monospace;--d-w:900;--d-track:-.04em;--d-lh:.9;--strip-bg:#12263a;--strip-ink:#eef1f4;--r-btn:6px;--r-card:6px;--r-art:8px;--r-ic:6px}</style>
 </head>
 <body>
-<div class="stripe" aria-hidden="true"></div>
-<div class="wrap">
-  <header><a class="logo" href="#">Torque<span>.</span></a><a class="call" href="#cita">Agendar revisión</a></header>
-  <main>
-    <div class="hero">
-      <div>
-        <h1 data-reveal>Tu carro en <span>manos que saben</span>.</h1>
-        <p class="sub" data-reveal style="--i:1">Diagnóstico computarizado, mecánica general y mantenimiento preventivo. Te explicamos qué tiene tu carro antes de tocar una tuerca.</p>
-        <a class="btn" href="#cita" data-reveal style="--i:2">Agendar revisión</a>
-      </div>
-      <div class="ticket" data-reveal style="--i:2" aria-label="Ejemplo de orden de servicio">
-        <h2><span>Orden #0427</span><span>Ejemplo</span></h2>
-        <ul>
-          <li>Frenos delanteros <span class="ok">OK</span></li>
-          <li>Aceite y filtro <span class="warn">Cambiar</span></li>
-          <li>Suspensión <span class="ok">OK</span></li>
-          <li>Batería <span class="ok">OK</span></li>
-          <li>Alineación <span class="warn">Revisar</span></li>
-        </ul>
-        <small>Recibes el diagnóstico por WhatsApp con fotos antes de aprobar el trabajo.</small>
-      </div>
-    </div>
-
-    <section>
-      <h2 class="big" data-reveal>Lo que hacemos</h2>
-      <div class="bays">
-        <div class="bay" data-reveal><em>Bahía 1</em><div><h3>Diagnóstico</h3><p>Escáner, lectura de fallas y reporte claro.</p></div></div>
-        <div class="bay" data-reveal style="--i:1"><em>Bahía 2</em><div><h3>Frenos</h3><p>Pastillas, discos y líquido de frenos.</p></div></div>
-        <div class="bay" data-reveal style="--i:2"><em>Bahía 3</em><div><h3>Motor</h3><p>Sincronización, correas y reparaciones.</p></div></div>
-        <div class="bay" data-reveal><em>Bahía 4</em><div><h3>Suspensión</h3><p>Amortiguadores, tijeras y terminales.</p></div></div>
-        <div class="bay" data-reveal style="--i:1"><em>Bahía 5</em><div><h3>Mantenimiento</h3><p>Cambio de aceite y revisión por kilometraje.</p></div></div>
-        <div class="bay" data-reveal style="--i:2"><em>Bahía 6</em><div><h3>Eléctrico</h3><p>Batería, alternador y luces.</p></div></div>
-      </div>
-    </section>
-
-    <section>
-      <h2 class="big" data-reveal>Así trabajamos</h2>
-      <div class="process">
-        <div data-reveal><strong>Recibimos</strong><p>Escuchamos qué le pasa a tu carro.</p></div>
-        <div data-reveal style="--i:1"><strong>Diagnosticamos</strong><p>Te mandamos fotos y el detalle.</p></div>
-        <div data-reveal style="--i:2"><strong>Apruebas</strong><p>Nada se hace sin tu visto bueno.</p></div>
-        <div data-reveal style="--i:3"><strong>Entregamos</strong><p>Con el trabajo explicado.</p></div>
-      </div>
-    </section>
-
-    <section id="cita">
-      <div class="cta">
-        <h2 class="big" data-reveal style="margin:0">¿Suena raro? <span style="color:var(--hazard)">Tráelo.</span></h2>
-        <p data-reveal style="--i:1;max-width:38ch;color:var(--steel)">Lunes a sábado, 7:30 a. m. – 6:00 p. m. · Dirección de ejemplo · Tu ciudad</p>
-      </div>
-    </section>
-  </main>
-  <footer>Torque · Taller mecánico · Sitio de demostración diseñado por PairX</footer>
-</div>
-<script src="../demo.js?v=4" defer></script>
+<noscript><p style="padding:24px">Mecánica Ruiz · Taller mecánico. Concepto de PairX: activa JavaScript para ver la página completa.</p></noscript>
+<script>window.SITE={"niche":"Taller mecánico","name":"Mecánica Ruiz","mono":"R","layout":"industrial","art":["carro","engrane","llave"],"navCta":"Cotizar","orderLabel":"Ver cotización","waText":"Hola Mecánica Ruiz, mi carro es un Spark GT. Suena al frenar, ¿me cotizan las pastillas?","hero":{"kicker":"Taller · Kennedy","h1":"Te decimos / el precio <em>antes</em> / de tocar tu carro.","sub":"Frenos, aceite, suspensión y diagnóstico computarizado. Cotiza por WhatsApp con la placa y te respondemos el mismo día.","cta1":"Ver tarifas","cta2":"Cotizar por WhatsApp","chips":[["★ 4,9","· 97 reseñas"],["Garantía","3 meses"]]},"strip":["Frenos","Cambio de aceite","Suspensión","Diagnóstico","Sincronización","Alineación","Aire acondicionado"],"catalog":{"kicker":"Servicios","title":"Tarifas <em>claras</em>","sub":"Precios base para carros particulares. Repuestos aparte, siempre con tu aprobación.","navLabel":"Servicios","tabs":[{"name":"Mantenimiento","items":[["Cambio de aceite","Aceite sintético y filtro, 45 min","$120.000","aceite"],["Sincronización","Bujías, filtros y escáner","$280.000","engrane"],["Revisión preventiva","32 puntos antes de viajar","$90.000","llave"],["Lavado de motor","Desengrase y secado","$45.000","aceite"]]},{"name":"Reparación","items":[["Frenos","Pastillas delanteras, mano de obra","$180.000","engrane"],["Suspensión","Revisión y cambio de amortiguadores","$220.000","llave"],["Embrague","Cambio de kit completo","$650.000","engrane"]]},{"name":"Diagnóstico","items":[["Escáner computarizado","Lectura de fallas y reporte","$60.000","carro"],["Revisión para compra","Antes de comprar un usado","$150.000","carro"],["Aire acondicionado","Carga y revisión de fugas","$130.000","llave"]]}]},"feats":[["Precio antes de empezar","Te mandamos la cotización por WhatsApp y esperamos tu aprobación."],["Fotos del trabajo","Ves las piezas que cambiamos, antes y después."],["Garantía escrita","Tres meses en mano de obra."],["Te avisamos","Un mensaje cuando tu carro esté listo."]],"about":{"kicker":"El taller","quote":"“Tres hermanos, un taller y una regla: <em>nada se cambia sin avisarte</em>.”","sig":"— Hermanos Ruiz","facts":[["1998","abrió el taller"],["6","bahías"],["3 meses","de garantía"]],"bg":"linear-gradient(160deg,#2c5375,#12263a)"},"galleryTitle":"Dentro <em>del taller</em>","gallery":[["carro","Bahía 1","linear-gradient(160deg,#2c5375,#12263a)","w h"],["engrane","Repuestos","linear-gradient(160deg,#e09a1a,#9a5f05)"],["llave","Herramienta","linear-gradient(160deg,#51657a,#1d3248)"],["aceite","Lubricantes","linear-gradient(160deg,#1d3248,#0a1622)","w"]],"reviewsTitle":"Clientes <em>que vuelven</em>","reviews":[["Me mandaron fotos de las pastillas viejas. Por fin un taller honesto.","Luis F.","Chevrolet Spark"],["La cotización llegó el mismo día y respetaron el precio.","Paola C.","Renault Sandero"],["Me avisaron por WhatsApp cuando estaba listo.","Germán T.","Mazda 3"]],"visitTitle":"Trae tu carro <em>a revisión</em>","hours":[["Lunes a viernes","7:30 a. m. – 6:00 p. m.",[1,2,3,4,5]],["Sábados","8:00 a. m. – 1:00 p. m.",[6]],["Domingos","Cerrado",[0]]],"sched":[null,"07:30-18:00","07:30-18:00","07:30-18:00","07:30-18:00","07:30-18:00","08:00-13:00"],"address":"Avenida 1 de Mayo # 72-40","barrio":"Kennedy","city":"Bogotá","faq":[["¿Necesito cita?","Para diagnóstico no. Para reparaciones, agenda por WhatsApp y te reservamos la bahía."],["¿Los repuestos son originales?","Te damos dos opciones, original y homologado, y tú eliges."],["¿Recogen el carro?","Sí, en un radio de 5 km con costo adicional."]],"final":{"h2":"Manda la placa y <em>te cotizamos</em> hoy.","p":"Describe el ruido o la falla y te respondemos con precio antes de que traigas el carro.","cta":"Cotizar por WhatsApp"}};</script>
+<script src="../demo.js?v=2"></script>
 </body>
 </html>

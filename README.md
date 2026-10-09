@@ -5,7 +5,7 @@ Landing de PairX para vender páginas web a negocios de barrio: planes, cotizado
 - Página principal: `index.html` (HTML + CSS + JS, sin build).
 - Base visual: sistema de diseño PairX (Claude Design) con la paleta de marca negro + carmesí.
 - En producción: https://pairx-web.vercel.app (proyecto Vercel `pairx-web`, equipo `pairx-pair`)
-- `portafolio/` y `fonts/`: los 10 conceptos por giro, traídos del sitio anterior.
+- `portafolio/`: 12 conceptos por giro (negocios ficticios). Motor compartido en `demo.js` + `demo.css`; cada página define `window.SITE`. `sitios.js` lista los trabajos para el índice y la página principal.
 
 ## Antes de publicar
 

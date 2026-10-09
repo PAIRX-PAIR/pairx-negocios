@@ -618,6 +618,65 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 .js .tags.in .tag{opacity:1;translate:0 0;transition:translate .9s cubic-bezier(.34,1.3,.5,1),opacity .4s ease;transition-delay:calc(var(--i) * 110ms)}
 
 /* ==========================================================================
+   PORTAFOLIO EN LA PÁGINA (carmesí, teléfonos con los sitios en vivo)
+   ========================================================================== */
+.s-crimson{--bg:#9e1028;--bg-2:#7d0d0d;--fg:#fff5f3;--muted:rgba(255,245,243,.8);--ln:rgba(255,255,255,.22);--ln-2:rgba(255,255,255,.55);--acc:#ffffff;--ring:#9e1028}
+.folio{padding:clamp(88px,11vw,150px) 0 clamp(64px,8vw,110px);overflow:hidden;background:radial-gradient(110% 80% at 85% 0%,#c8152f,#930d24 50%,#5c0716)}
+.folio::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 88px);pointer-events:none}
+.folio .eyebrow{color:rgba(255,245,243,.75)}
+.folio-head{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,5vw,72px);align-items:end}
+.folio .h2{margin-top:20px;max-width:13ch}
+.folio .h2 em{color:#fff}
+.folio .lead{color:var(--muted)}
+.rail-ctl{display:flex;align-items:center;gap:14px;margin-top:26px}
+.rail-ctl button{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font:500 1.2rem/1 var(--sans);color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.5);transition:background-color .2s ease,color .2s ease,transform .14s var(--ease-out)}
+.rail-ctl button:active{transform:scale(.94)}
+.rail-ctl button:disabled{opacity:.35;cursor:default}
+@media (hover:hover) and (pointer:fine){.rail-ctl button:not(:disabled):hover{background:#fff;color:var(--crimson)}}
+.rail-ctl .mono{font:500 .9rem/1 var(--mono);letter-spacing:.06em;min-width:72px;text-align:center}
+.reel{position:relative;display:flex;gap:clamp(20px,3vw,40px);overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:max(var(--gutter),calc((100vw - 1320px) / 2 + var(--gutter)));padding:56px max(var(--gutter),calc((100vw - 1320px) / 2 + var(--gutter))) 34px;scrollbar-width:none;overscroll-behavior-x:contain;cursor:grab}
+.reel::-webkit-scrollbar{display:none}
+.reel.dragging{cursor:grabbing;scroll-snap-type:none}
+.reel.dragging *{pointer-events:none}
+.work{flex:none;width:252px;scroll-snap-align:start;perspective:1000px}
+.work:nth-child(even){padding-top:34px}
+.dev{position:relative;display:block;width:252px;aspect-ratio:9/19.2;border-radius:42px;padding:10px;background:linear-gradient(140deg,#4a4a4f 0%,#1b1b1e 22%,#2b2b2f 60%,#0e0e10 100%);box-shadow:inset 0 0 0 1.5px #77777d,inset 0 0 0 3px #0b0b0c,0 50px 60px -30px rgba(40,0,8,.85),0 24px 24px -18px rgba(0,0,0,.6);will-change:transform;text-decoration:none}
+.dev .scr{position:relative;display:block;height:100%;border-radius:33px;overflow:hidden;background:var(--c0,#111);isolation:isolate}
+.dev .ph{position:absolute;inset:0;display:grid;place-content:center;gap:6px;text-align:center;padding:20px;color:var(--c2,#fff);background:linear-gradient(160deg,var(--c0),color-mix(in srgb,var(--c1) 35%,var(--c0)))}
+.dev .ph b{font:600 1.2rem/1.1 var(--sans);letter-spacing:-.02em}
+.dev .ph small{font:500 .7rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+.dev .scr::before{content:"9:41";position:absolute;left:24px;top:13px;z-index:2;font:600 11px/1 var(--sans);color:var(--c2,#fff)}
+.dev iframe{position:absolute;left:0;top:34px;width:390px;height:2600px;border:0;transform-origin:0 0;transform:scale(var(--s,.595)) translateY(var(--y,0px));pointer-events:none;opacity:0;transition:opacity .5s ease,transform .9s var(--ease-out);background:#fff}
+.dev iframe.ready{opacity:1}
+.dev .isl{position:absolute;z-index:3;top:18px;left:50%;width:30%;height:22px;border-radius:999px;background:#000;transform:translateX(-50%)}
+.dev .gl{position:absolute;inset:0;z-index:4;border-radius:42px;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0) 32%,rgba(255,255,255,.13) 44%,rgba(255,255,255,0) 56%);mix-blend-mode:screen}
+@media (hover:hover) and (pointer:fine){
+  .work:hover .dev iframe{--y:-1650px;transition:opacity .5s ease,transform 9s linear}
+}
+.cap{margin-top:22px;padding-top:16px;border-top:1px solid rgba(255,255,255,.22)}
+.cap .num{font:500 .72rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:rgba(255,245,243,.7)}
+.cap h3{font:600 1.35rem/1.15 var(--sans);letter-spacing:-.02em;margin:8px 0 2px;color:#fff5f3}
+.cap p{font-size:.88rem;color:rgba(255,245,243,.72)}
+.cap .acts{display:flex;gap:8px;margin-top:14px}
+.cap .acts a,.cap .acts button{min-height:40px;padding:0 14px;border-radius:999px;display:inline-flex;align-items:center;font:600 .84rem/1 var(--sans);text-decoration:none;white-space:nowrap;transition:background-color .2s ease,color .2s ease,transform .14s var(--ease-out)}
+.cap .acts a{background:#fff;color:#7d0d0d}
+.cap .acts button{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.5)}
+.cap .acts a:active,.cap .acts button:active{transform:scale(.96)}
+@media (hover:hover) and (pointer:fine){.cap .acts button:hover{background:rgba(255,255,255,.12)}}
+.folio-foot{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;margin-top:18px}
+.folio-foot span{font:500 .8rem/1.4 var(--mono);color:rgba(255,245,243,.75)}
+.btn-light{background:#fff;color:#7d0d0d;box-shadow:0 18px 30px -16px rgba(0,0,0,.6)}
+@media (hover:hover) and (pointer:fine){.btn-light:hover{background:#fff5f3}}
+.see-full{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font:500 .86rem/1.3 var(--sans);color:var(--cream);text-decoration:none;border-bottom:1px solid rgba(242,236,229,.35);padding-bottom:3px;transition:border-color .2s ease,color .2s ease}
+@media (hover:hover) and (pointer:fine){.see-full:hover{color:#fff;border-color:var(--crimson-fresh)}}
+.folio-link{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:28px;padding:18px 20px;border-radius:var(--radius-md);background:var(--night);color:var(--cream-muted);font:500 .82rem/1.4 var(--mono);text-decoration:none;box-shadow:0 18px 30px -18px rgba(0,0,0,.5);transition:transform .4s var(--ease-out)}
+.folio-link b{display:block;font:600 1.02rem/1.3 var(--sans);color:var(--cream);margin-bottom:2px}
+.folio-link i{font-style:normal;width:42px;height:42px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--crimson);color:#fff;transition:transform .3s var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.folio-link:hover{transform:translateY(-2px)}.folio-link:hover i{transform:translateX(3px)}}
+@media (max-width:960px){.folio-head{grid-template-columns:1fr}.work:nth-child(even){padding-top:0}}
+@media (max-width:640px){.work,.dev{width:220px}}
+
+/* ==========================================================================
    Responsivo
    ========================================================================== */
 @media (max-width:1100px){
@@ -698,6 +757,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
       <a href="#incluye">Qué incluye</a>
       <a href="#proceso">Cómo trabajamos</a>
       <a href="#planes">Planes</a>
+      <a href="#portafolio">Portafolio</a>
       <a href="#cotiza">Cotiza</a>
       <a href="#preguntas">Preguntas</a>
     </nav>
@@ -710,6 +770,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
     <a href="#incluye">Qué incluye <span>→</span></a>
     <a href="#proceso">Cómo trabajamos <span>→</span></a>
     <a href="#planes">Planes <span>→</span></a>
+    <a href="#portafolio">Portafolio <span>→</span></a>
     <a href="#cotiza">Cotiza <span>→</span></a>
     <a href="#preguntas">Preguntas <span>→</span></a>
     <a href="#contacto">Pedir mi página <span>→</span></a>
@@ -733,6 +794,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
       <div class="picker" data-reveal style="--i:4">
         <p class="picker-label" id="picker-label">Mira cómo se vería tu negocio <b aria-live="polite" id="picked"></b></p>
         <div class="chips" role="group" aria-labelledby="picker-label" id="chips"></div>
+        <a class="see-full" id="seeFull" href="portafolio/panaderia/">Ver la página completa de La Espiga →</a>
       </div>
       <div class="hero-meta" data-reveal style="--i:5"><span>Hecha desde cero</span><span>Lista para celular</span><span>Botón a WhatsApp</span></div>
     </div>
@@ -970,6 +1032,25 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
   </div>
 </section>
 
+<!-- ======================= PORTAFOLIO ======================= -->
+<section class="folio s-crimson" id="portafolio" aria-labelledby="folio-title">
+  <div class="wrap folio-head">
+    <div>
+      <p class="eyebrow" data-reveal>Portafolio · 12 giros</p>
+      <h2 class="h2" id="folio-title" data-split>¿No sabes qué pedir? <em>Mira nuestro</em> <span class="nw"><em>portafolio</em>.</span></h2>
+    </div>
+    <div data-reveal style="--i:2">
+      <p class="lead">Doce páginas completas, una por giro. Encuentra la tuya, pasa el cursor para recorrerla y dinos “quiero una así”. Los negocios son ficticios; el diseño y las funciones, no.</p>
+      <div class="rail-ctl"><button type="button" id="reelPrev" aria-label="Trabajo anterior">←</button><span class="mono" id="reelCount" aria-live="polite">01 / 12</span><button type="button" id="reelNext" aria-label="Trabajo siguiente">→</button></div>
+    </div>
+  </div>
+  <div class="reel" id="reel" tabindex="0" role="region" aria-label="Trabajos del portafolio; desliza para ver más"></div>
+  <div class="wrap folio-foot" data-reveal>
+    <a class="btn btn-light magnet" href="portafolio/"><span class="btn-in">Ver el portafolio completo <span class="arw">→</span></span></a>
+    <span>6 estilos de diseño · pedidos por WhatsApp en todos · listos para celular</span>
+  </div>
+</section>
+
 <!-- ======================= COTIZADOR ======================= -->
 <section class="quote s-paper" id="cotiza" aria-labelledby="quote-title">
   <div class="wrap quote-grid">
@@ -977,6 +1058,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
       <p class="eyebrow" data-reveal>Cotiza en un minuto</p>
       <h2 class="h2" id="quote-title" data-split>Arma tu plan, <em>a tu</em> <span class="nw"><em>medida</em>.</span></h2>
       <p class="lead" data-reveal>Elige un plan, súmale lo que tu negocio necesite y mira el total al instante. Después nos lo mandas por WhatsApp y lo afinamos juntos.</p>
+      <a class="folio-link" href="#portafolio" data-reveal style="--i:2"><span><b>¿No sabes qué pedir?</b>Mira 12 páginas de ejemplo, una por giro</span><i aria-hidden="true">→</i></a>
 
       <p class="qlabel" id="ql-plan">1 · Tu plan</p>
       <div class="qplans" role="radiogroup" aria-labelledby="ql-plan" id="qplans"></div>
@@ -1115,7 +1197,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
   <div class="wrap">
     <div class="foot-top">
       <div><a class="brand" href="#top"><i aria-hidden="true" style="width:22px;height:22px;border-radius:5px;background:var(--crimson);box-shadow:inset 0 0 0 4px var(--night),inset 0 0 0 5px var(--crimson)"></i>PairX</a><p style="margin-top:14px">Páginas web a la medida para negocios de barrio. Tu vitrina, abierta todo el día.</p></div>
-      <nav aria-label="Pie de página"><a href="#top">Inicio</a><a href="#planes">Planes</a><a href="portafolio/">Portafolio</a><a href="#cotiza">Cotiza</a><a href="#preguntas">Preguntas</a><a href="#contacto">Contacto</a></nav>
+      <nav aria-label="Pie de página"><a href="#top">Inicio</a><a href="#planes">Planes</a><a href="#portafolio">Portafolio</a><a href="#cotiza">Cotiza</a><a href="#preguntas">Preguntas</a><a href="#contacto">Contacto</a></nav>
     </div>
     <p class="word" id="word" aria-hidden="true"><span style="--i:0">P</span><span style="--i:1">a</span><span style="--i:2">i</span><span style="--i:3">r</span><span style="--i:4">X</span></p>
     <div class="legal"><span>© <span id="year">2026</span> PairX</span><span>Negocios y precios de esta página son ejemplos ilustrativos</span></div>
@@ -1127,6 +1209,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
   <a class="btn btn-primary" href="#contacto"><span class="btn-in">Pedir mi página</span></a>
 </div>
 
+<script src="portafolio/sitios.js"></script>
 <script>
 (() => {
 "use strict";
@@ -1259,11 +1342,11 @@ const ART = {
   fogon: () => `<svg viewBox="0 0 200 140"><ellipse cx="100" cy="126" rx="70" ry="7" fill="#000" opacity=".3"/><path d="M42 64c0-30 26-44 58-44s58 14 58 44z" fill="#e8a33a"/><g fill="#fbe3b0"><ellipse cx="78" cy="40" rx="3.5" ry="2"/><ellipse cx="100" cy="32" rx="3.5" ry="2"/><ellipse cx="120" cy="42" rx="3.5" ry="2"/><ellipse cx="92" cy="50" rx="3.5" ry="2"/><ellipse cx="130" cy="54" rx="3.5" ry="2"/></g><path d="M36 70q8-8 16 0t16 0 16 0 16 0 16 0 16 0 16 0 16 0" stroke="#5fae3c" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M40 78h120l-12 12H52z" fill="#f7c948"/><rect x="38" y="84" width="124" height="16" rx="8" fill="#5a2a14"/><path d="M42 104h116c0 14-12 20-58 20s-58-6-58-20z" fill="#e8a33a"/></svg>`
 };
 const BIZ = [
-  { id: "pan", label: "Panadería", name: "La Espiga", domain: "laespiga.co", tag: "Pan de masa madre, horneado cada mañana.", hours: "Abierto · cierra 8:00 p. m.", rating: "4,9", reviews: "212", bg: "#f6ecdc", ink: "#3b2414", acc: "#a8551a", soft: "#ecdcc2", hero: "linear-gradient(160deg,#f3cf96,#c98a45)", items: [["Pan de bono", "$1.500"], ["Almojábana", "$2.000"], ["Torta por encargo", "$45.000"]], toasts: [["w", "WhatsApp", "¿Les quedan almojábanas para las 4?"], ["m", "Google Maps", "Alguien pidió cómo llegar"], ["p", "Pedido", "Torta de 20 porciones · sábado"]] },
-  { id: "barber", label: "Barbería", name: "Navaja Norte", domain: "navajanorte.co", tag: "Fade, clásico y barba. Agenda en dos toques.", hours: "Abierto · cierra 9:00 p. m.", rating: "4,8", reviews: "168", bg: "#14161a", ink: "#f1ece4", acc: "#d6a54a", soft: "#262a31", hero: "linear-gradient(160deg,#2f343d,#0d0f12)", items: [["Corte", "$25.000"], ["Barba", "$15.000"], ["Corte + barba", "$35.000"]], toasts: [["p", "Cita nueva", "Jueves 6:30 p. m. · Corte + barba"], ["w", "WhatsApp", "¿Atienden sin cita hoy?"], ["r", "Reseña", "★★★★★ “El mejor fade del barrio”"]] },
-  { id: "taller", label: "Taller", name: "Mecánica Ruiz", domain: "mecanicaruiz.co", tag: "Frenos, aceite y diagnóstico. Precio antes de tocar tu carro.", hours: "Abierto · cierra 6:00 p. m.", rating: "4,9", reviews: "97", bg: "#eef1f4", ink: "#12263a", acc: "#c47f0c", soft: "#dae1e8", hero: "linear-gradient(160deg,#2c5375,#12263a)", items: [["Cambio de aceite", "$120.000"], ["Frenos", "$180.000"], ["Diagnóstico", "$60.000"]], toasts: [["p", "Cotización", "Pastillas de freno · Spark GT"], ["c", "Llamada", "Desde tu página · 2 min"], ["m", "Google Maps", "Alguien pidió cómo llegar"]] },
-  { id: "flor", label: "Floristería", name: "Flor de Mayo", domain: "flordemayo.co", tag: "Arreglos del día, con domicilio en tu barrio.", hours: "Abierto · cierra 7:00 p. m.", rating: "5,0", reviews: "134", bg: "#fbf1f2", ink: "#4a1426", acc: "#b23a5b", soft: "#f2dce2", hero: "linear-gradient(160deg,#f8d3dc,#de8299)", items: [["Ramo del día", "$65.000"], ["Arreglo en caja", "$120.000"], ["Domicilio", "$8.000"]], toasts: [["p", "Pedido", "Ramo de rosas · entrega 4:00 p. m."], ["w", "WhatsApp", "¿Hacen arreglos para eventos?"], ["$", "Pago recibido", "$120.000 · Arreglo en caja"]] },
-  { id: "fogon", label: "Comidas rápidas", name: "El Fogón", domain: "elfogon.co", tag: "Hamburguesas al carbón y domicilios hasta la medianoche.", hours: "Abierto · cierra 12:00 a. m.", rating: "4,7", reviews: "389", bg: "#1f140e", ink: "#fbeee0", acc: "#f0592a", soft: "#33231a", hero: "linear-gradient(160deg,#f7b733,#e2412a)", items: [["Hamburguesa", "$18.000"], ["Perro caliente", "$14.000"], ["Salchipapa", "$16.000"]], toasts: [["p", "Domicilio", "2 hamburguesas · Cra. 15 # 82"], ["w", "WhatsApp", "¿Hasta qué hora atienden?"], ["r", "Reseña", "★★★★★ “La salsa de la casa, increíble”"]] }
+  { id: "pan", slug: "panaderia", label: "Panadería", name: "La Espiga", domain: "laespiga.co", tag: "Pan de masa madre, horneado cada mañana.", hours: "Abierto · cierra 8:00 p. m.", rating: "4,9", reviews: "212", bg: "#f6ecdc", ink: "#3b2414", acc: "#a8551a", soft: "#ecdcc2", hero: "linear-gradient(160deg,#f3cf96,#c98a45)", items: [["Pan de bono", "$1.500"], ["Almojábana", "$2.000"], ["Torta por encargo", "$45.000"]], toasts: [["w", "WhatsApp", "¿Les quedan almojábanas para las 4?"], ["m", "Google Maps", "Alguien pidió cómo llegar"], ["p", "Pedido", "Torta de 20 porciones · sábado"]] },
+  { id: "barber", slug: "barberia", label: "Barbería", name: "Navaja Norte", domain: "navajanorte.co", tag: "Fade, clásico y barba. Agenda en dos toques.", hours: "Abierto · cierra 9:00 p. m.", rating: "4,8", reviews: "168", bg: "#14161a", ink: "#f1ece4", acc: "#d6a54a", soft: "#262a31", hero: "linear-gradient(160deg,#2f343d,#0d0f12)", items: [["Corte", "$25.000"], ["Barba", "$15.000"], ["Corte + barba", "$40.000"]], toasts: [["p", "Cita nueva", "Jueves 6:30 p. m. · Corte + barba"], ["w", "WhatsApp", "¿Atienden sin cita hoy?"], ["r", "Reseña", "★★★★★ “El mejor fade del barrio”"]] },
+  { id: "taller", slug: "taller", label: "Taller", name: "Mecánica Ruiz", domain: "mecanicaruiz.co", tag: "Frenos, aceite y diagnóstico. Precio antes de tocar tu carro.", hours: "Abierto · cierra 6:00 p. m.", rating: "4,9", reviews: "97", bg: "#eef1f4", ink: "#12263a", acc: "#c47f0c", soft: "#dae1e8", hero: "linear-gradient(160deg,#2c5375,#12263a)", items: [["Cambio de aceite", "$120.000"], ["Frenos", "$180.000"], ["Diagnóstico", "$60.000"]], toasts: [["p", "Cotización", "Pastillas de freno · Spark GT"], ["c", "Llamada", "Desde tu página · 2 min"], ["m", "Google Maps", "Alguien pidió cómo llegar"]] },
+  { id: "flor", slug: "floristeria", label: "Floristería", name: "Flor de Mayo", domain: "flordemayo.co", tag: "Arreglos del día, con domicilio en tu barrio.", hours: "Abierto · cierra 7:00 p. m.", rating: "5,0", reviews: "134", bg: "#fbf1f2", ink: "#4a1426", acc: "#b23a5b", soft: "#f2dce2", hero: "linear-gradient(160deg,#f8d3dc,#de8299)", items: [["Ramo del día", "$65.000"], ["Arreglo en caja", "$120.000"], ["Domicilio", "$8.000"]], toasts: [["p", "Pedido", "Ramo de rosas · entrega 4:00 p. m."], ["w", "WhatsApp", "¿Hacen arreglos para eventos?"], ["$", "Pago recibido", "$120.000 · Arreglo en caja"]] },
+  { id: "fogon", slug: "restaurante", label: "Comidas rápidas", name: "El Fogón", domain: "elfogon.co", tag: "Hamburguesas al carbón y domicilios hasta la medianoche.", hours: "Abierto · cierra 12:00 a. m.", rating: "4,7", reviews: "389", bg: "#1f140e", ink: "#fbeee0", acc: "#f0592a", soft: "#33231a", hero: "linear-gradient(160deg,#f7b733,#e2412a)", items: [["Hamburguesa", "$18.000"], ["Perro caliente", "$14.000"], ["Salchipapa", "$16.000"]], toasts: [["p", "Domicilio", "2 hamburguesas · Cra. 15 # 82"], ["w", "WhatsApp", "¿Hasta qué hora atienden?"], ["r", "Reseña", "★★★★★ “La salsa de la casa, increíble”"]] }
 ];
 let uid = 0;
 const vars = b => `--m-bg:${b.bg};--m-ink:${b.ink};--m-acc:${b.acc};--m-soft:${b.soft};--m-hero:${b.hero}`;
@@ -1292,6 +1375,7 @@ function renderBiz(i, animate = true) {
     pscreen.classList.remove("swap-out"); bscreen.classList.remove("swap-out");
   };
   picked.textContent = "· " + b.label;
+  const sf = $("#seeFull"); if (sf) { sf.href = "portafolio/" + b.slug + "/"; sf.textContent = "Ver la página completa de " + b.name + " →"; }
   $$(".chip", chipsEl).forEach((c, k) => c.setAttribute("aria-pressed", k === i));
   if (!animate || reduce || !pscreen.firstChild) { apply(); return; }
   pscreen.classList.add("swap-out"); bscreen.classList.add("swap-out");
@@ -1676,6 +1760,104 @@ form.addEventListener("submit", e => {
   }, reduce ? 0 : 650);
 });
 $("#again").addEventListener("click", () => { done.classList.remove("show"); form.reset(); form.elements.name.focus(); });
+
+
+/* ===================== Portafolio: teléfonos con los sitios en vivo ===================== */
+const WORKS = window.PAIRX_WORKS || [];
+const reel = $("#reel");
+if (reel && WORKS.length) {
+  reel.innerHTML = WORKS.map((w, i) => `<article class="work" style="--c0:${w.colors[0]};--c1:${w.colors[1]};--c2:${w.colors[2]}">
+    <a class="dev" href="portafolio/${w.slug}/" aria-label="Abrir la página de ejemplo de ${w.name}, ${w.niche}">
+      <span class="scr"><span class="ph" aria-hidden="true"><small>${w.niche}</small><b>${w.name}</b></span><iframe data-src="portafolio/${w.slug}/?preview" title="Vista previa de ${w.name}" tabindex="-1" aria-hidden="true"></iframe></span>
+      <span class="isl" aria-hidden="true"></span><span class="gl" aria-hidden="true"></span>
+    </a>
+    <div class="cap"><span class="num">${String(i + 1).padStart(2, "0")} · ${w.niche}</span><h3>${w.name}</h3><p>${w.barrio}, ${w.city}</p>
+      <div class="acts"><a href="portafolio/${w.slug}/">Ver sitio →</a><button type="button" data-want="${w.slug}">Quiero una así</button></div></div>
+  </article>`).join("");
+  const items = $$(".work", reel), devs = $$(".dev", reel);
+  // Escala del iframe al ancho real del teléfono
+  const fit = () => devs.forEach(d => { const sc = $(".scr", d); d.style.setProperty("--s", (sc.clientWidth / 390).toFixed(4)); });
+  fit(); addEventListener("resize", fit);
+  // Carga perezosa: solo los teléfonos cerca de la vista
+  const lazy = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const f = $("iframe", e.target);
+    if (f && !f.src) { f.addEventListener("load", () => f.classList.add("ready"), { once: true }); f.src = f.dataset.src; }
+    lazy.unobserve(e.target);
+  }), { root: reel, rootMargin: "0px 280px" });
+  const outer = new IntersectionObserver(([e], o) => { if (e.isIntersecting) { items.forEach(it => lazy.observe(it)); o.disconnect(); } }, { rootMargin: "400px 0px" });
+  outer.observe(reel);
+
+  // Contador y botones
+  const prev = $("#reelPrev"), next = $("#reelNext"), count = $("#reelCount");
+  const step = () => items[0].offsetWidth + parseFloat(getComputedStyle(reel).columnGap || 32);
+  const current = () => Math.round(reel.scrollLeft / step());
+  function updateCount() {
+    const i = clamp(current(), 0, items.length - 1);
+    count.textContent = String(i + 1).padStart(2, "0") + " / " + String(items.length).padStart(2, "0");
+    prev.disabled = reel.scrollLeft < 4;
+    next.disabled = reel.scrollLeft > reel.scrollWidth - reel.clientWidth - 4;
+  }
+  prev.addEventListener("click", () => reel.scrollBy({ left: -step(), behavior: reduce ? "auto" : "smooth" }));
+  next.addEventListener("click", () => reel.scrollBy({ left: step(), behavior: reduce ? "auto" : "smooth" }));
+
+  // Efecto carrusel 3D: cada teléfono gira según su distancia al centro
+  const flow = { active: false, dirty: true };
+  flow.tick = () => {
+    if (!flow.dirty) return; flow.dirty = false;
+    const mid = innerWidth / 2;
+    devs.forEach(d => {
+      const r = d.getBoundingClientRect(), off = clamp((r.left + r.width / 2 - mid) / innerWidth, -1, 1);
+      d.style.transform = `rotateY(${(off * -16).toFixed(2)}deg) translateZ(${(-Math.abs(off) * 60).toFixed(1)}px)`;
+    });
+  };
+  reel.addEventListener("scroll", () => { flow.dirty = true; updateCount(); }, { passive: true });
+  addEventListener("resize", () => { flow.dirty = true; });
+  if (!reduce) watch(reel, flow, "0px");
+  updateCount();
+
+  // Arrastrar con el mouse, con inercia
+  let drag = null;
+  reel.addEventListener("pointerdown", e => {
+    if (e.pointerType !== "mouse" || e.button !== 0) return;
+    drag = { x: e.clientX, left: reel.scrollLeft, moved: false, v: 0, t: performance.now(), lx: e.clientX };
+  });
+  addEventListener("pointermove", e => {
+    if (!drag) return;
+    const dx = e.clientX - drag.x;
+    if (!drag.moved && Math.abs(dx) > 6) { drag.moved = true; reel.classList.add("dragging"); }
+    if (!drag.moved) return;
+    const now = performance.now();
+    drag.v = (e.clientX - drag.lx) / Math.max(1, now - drag.t); drag.lx = e.clientX; drag.t = now;
+    reel.scrollLeft = drag.left - dx;
+  });
+  addEventListener("pointerup", () => {
+    if (!drag) return;
+    const d = drag; drag = null;
+    if (!d.moved) return;
+    let v = -d.v * 16;
+    const glide = () => {
+      if (Math.abs(v) < .4) { reel.classList.remove("dragging"); return; }
+      reel.scrollLeft += v; v *= .93; requestAnimationFrame(glide);
+    };
+    reduce ? reel.classList.remove("dragging") : requestAnimationFrame(glide);
+  });
+  reel.addEventListener("click", e => { if (reel.classList.contains("dragging")) { e.preventDefault(); e.stopPropagation(); } }, true);
+  reel.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") { reel.scrollBy({ left: step(), behavior: "smooth" }); e.preventDefault(); }
+    if (e.key === "ArrowLeft") { reel.scrollBy({ left: -step(), behavior: "smooth" }); e.preventDefault(); }
+  });
+
+  // "Quiero una así": prepara el formulario de contacto con ese giro
+  reel.addEventListener("click", e => {
+    const b = e.target.closest("[data-want]"); if (!b) return;
+    const w = WORKS.find(x => x.slug === b.dataset.want);
+    const msg = $("#f-msg");
+    msg.value = `Quiero una página como la de ${w.name} (${w.niche.toLowerCase()}) del portafolio.` + (msg.value ? "\n" + msg.value : "");
+    $("#contacto").scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+    setTimeout(() => form.elements.name.focus({ preventScroll: true }), reduce ? 0 : 700);
+  });
+}
 
 onScroll();
 })();
