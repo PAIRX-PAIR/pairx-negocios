@@ -368,9 +368,14 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 .card .k{font:500 .7rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted)}
 .card .for{margin:10px 0 22px;color:var(--ink-muted);font-size:.95rem;line-height:1.45;min-height:2.9em}
 .price{padding:16px 0;border-block:1.5px dashed #c9bfb3}
-.price .big{display:flex;align-items:baseline;gap:8px;font:600 clamp(1.75rem,1.2rem + 1.2vw,2.3rem)/1 var(--mono);letter-spacing:-.04em}
-.price .big small{font:500 .78rem/1 var(--mono);letter-spacing:0;color:var(--ink-muted)}
-.price .sub{margin-top:8px;font:500 .8rem/1.4 var(--mono);color:var(--ink-muted)}
+.price .plbl{font:600 .78rem/1 var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:8px}
+.price .big{display:flex;align-items:baseline;gap:8px;font:700 clamp(2.1rem,1.5rem + 1.3vw,2.7rem)/1 var(--sans);letter-spacing:-.02em;font-variant-numeric:tabular-nums lining-nums}
+.price .big{flex-wrap:wrap;row-gap:4px}
+.price .big small{font:600 .95rem/1 var(--sans);letter-spacing:0;color:var(--ink-muted);white-space:nowrap}
+.price .sub{margin-top:10px;font:500 .92rem/1.4 var(--sans);color:var(--ink-muted)}
+.price .sub b{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+.tag.hot .price .sub b{color:#fff}
+.tag.hot .price .plbl{color:rgba(255,253,249,.8)}
 .feat{display:grid;gap:9px;margin:20px 0 24px;font-size:.93rem;line-height:1.4}
 .feat li{display:grid;grid-template-columns:18px 1fr;gap:8px}
 .feat li::before{content:"✓";font-weight:600;color:var(--crimson)}
@@ -401,10 +406,10 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 
 /* Odómetro */
 .odo{display:inline-flex;height:1.2em;line-height:1.2em;overflow:hidden;vertical-align:-.2em}
-.od{display:inline-block;width:.6em;height:1.2em;overflow:hidden}
+.od{display:inline-block;width:1ch;height:1.2em;overflow:hidden}
 .od-c{display:flex;flex-direction:column;transition:transform .9s var(--ease-out);transition-delay:calc(var(--i,0) * 45ms)}
 .od-c span{display:block;height:1.2em;line-height:1.2em;text-align:center}
-.od-s{display:inline-block;width:.6em;text-align:center}
+.od-s{display:inline-block;text-align:center}
 
 /* Comparativa */
 .cmp{margin-top:40px;border-top:1px solid var(--night-line)}
@@ -435,7 +440,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 .qplan{position:relative;display:block;padding:16px;border-radius:var(--radius-md);background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;transition:box-shadow .2s ease,background-color .2s ease}
 .qplan input{position:absolute;opacity:0;pointer-events:none}
 .qplan b{display:block;font-weight:600;font-size:1.05rem}
-.qplan span{font:500 .8rem/1.3 var(--mono);color:var(--muted)}
+.qplan span{font:600 .95rem/1.3 var(--sans);color:var(--muted);font-variant-numeric:tabular-nums}
 .qplan:has(input:checked){box-shadow:inset 0 0 0 2px var(--crimson);background:var(--crimson-wash)}
 .qplan:has(input:focus-visible){box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--crimson)}
 .qplan:active{transform:scale(.98)}
@@ -451,7 +456,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 .addon:has(input:disabled){cursor:default;opacity:.6}
 .addon .t b{display:block;font-weight:600}
 .addon .t small{color:var(--muted);font-size:.86rem}
-.addon .p{font:500 .86rem/1 var(--mono);white-space:nowrap}
+.addon .p{font:700 .95rem/1 var(--sans);white-space:nowrap;font-variant-numeric:tabular-nums}
 .addon:active{transform:scale(.99)}
 @media (hover:hover) and (pointer:fine){.addon:not(:has(input:disabled)):hover,.qplan:hover{box-shadow:inset 0 0 0 1.5px var(--line-strong)}}
 
@@ -470,7 +475,9 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 .qline .m{color:#6d655e}
 .qtot{display:grid;gap:6px}
 .qtot p{display:flex;justify-content:space-between;align-items:baseline}
-.qtot .big{font:600 1.7rem/1 var(--mono);color:var(--crimson);letter-spacing:-.03em}
+.qtot .big{font:700 1.9rem/1 var(--sans);color:var(--crimson);letter-spacing:-.02em}
+.qlines p,.qtot p{font-family:var(--sans);font-size:.95rem;font-variant-numeric:tabular-nums}
+.qtot .mono{font:700 1.1rem/1 var(--sans)}
 .qnote{margin-top:12px;font-size:.72rem;color:#6d655e;text-align:center}
 .qactions{display:grid;gap:10px;margin-top:22px}
 .qactions .btn{justify-content:center}
@@ -938,7 +945,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
         <div class="card">
           <div class="nm"><h3>Vitrina</h3><span class="k">Para empezar</span></div>
           <p class="for">Para existir en internet: quién eres, dónde estás y cómo escribirte.</p>
-          <div class="price"><div class="big"><span class="odo" data-odo></span><small data-unit></small></div><p class="sub" data-sub></p></div>
+          <div class="price"><p class="plbl" data-lbl>Pago único</p><div class="big"><span class="odo" data-odo></span><small data-unit></small></div><p class="sub" data-sub></p></div>
           <ul class="feat">
             <li>Página única con tus secciones clave</li>
             <li>Botón de WhatsApp y llamada</li>
@@ -956,7 +963,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
           <span class="stamp" aria-hidden="true">RECOMENDADO</span>
           <div class="nm"><h3>Local</h3></div>
           <p class="for">Para el negocio que ya tiene clientela y quiere que lo recomienden más.</p>
-          <div class="price"><div class="big"><span class="odo" data-odo></span><small data-unit></small></div><p class="sub" data-sub></p></div>
+          <div class="price"><p class="plbl" data-lbl>Pago único</p><div class="big"><span class="odo" data-odo></span><small data-unit></small></div><p class="sub" data-sub></p></div>
           <ul class="feat">
             <li>Todo lo de Vitrina</li>
             <li>Hasta 5 secciones o páginas</li>
@@ -973,7 +980,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
         <div class="card">
           <div class="nm"><h3>Tienda</h3><span class="k">Vende en línea</span></div>
           <p class="for">Para vender en internet, también mientras duermes.</p>
-          <div class="price"><div class="big"><span class="odo" data-odo></span><small data-unit></small></div><p class="sub" data-sub></p></div>
+          <div class="price"><p class="plbl" data-lbl>Pago único</p><div class="big"><span class="odo" data-odo></span><small data-unit></small></div><p class="sub" data-sub></p></div>
           <ul class="feat">
             <li>Todo lo de Local</li>
             <li>Tienda en línea con carrito</li>
@@ -1534,14 +1541,16 @@ function placeInd() {
 function renderPrices() {
   $$(".tag[data-plan]").forEach(tag => {
     const p = CONFIG.plans[tag.dataset.plan]; if (!p) return;
-    const odo = $("[data-odo]", tag), unit = $("[data-unit]", tag), sub = $("[data-sub]", tag);
+    const odo = $("[data-odo]", tag), unit = $("[data-unit]", tag), sub = $("[data-sub]", tag), lbl = $("[data-lbl]", tag);
     if (payMode === "once") {
-      setOdo(odo, "$" + money(p.once)); unit.textContent = CONFIG.currency + " · pago único";
-      sub.textContent = `+ $${money(p.monthly)} ${CONFIG.currency}/mes de mantenimiento`;
+      lbl.textContent = "Pago único";
+      setOdo(odo, "$" + money(p.once)); unit.textContent = CONFIG.currency;
+      sub.innerHTML = `Y luego <b>$${money(p.monthly)}</b> al mes por hosting y soporte`;
     } else {
       const m = Math.round((p.once / CONFIG.months + p.monthly) / 100) * 100;
-      setOdo(odo, "$" + money(m)); unit.textContent = CONFIG.currency + "/mes";
-      sub.textContent = `${CONFIG.months} cuotas · luego $${money(p.monthly)}/mes`;
+      lbl.textContent = `${CONFIG.months} cuotas de`;
+      setOdo(odo, "$" + money(m)); unit.textContent = "al mes";
+      sub.innerHTML = `Desde el mes ${CONFIG.months + 1}: <b>$${money(p.monthly)}</b> al mes`;
     }
   });
 }
@@ -1556,7 +1565,7 @@ document.fonts && document.fonts.ready.then(placeInd);
 placeInd();
 // Los odómetros arrancan en cero y ruedan cuando los planes aparecen en pantalla
 $$(".tag[data-plan] [data-odo]").forEach(o => setOdo(o, "$0"));
-new IntersectionObserver(([e], o) => { if (e.isIntersecting) { setTimeout(renderPrices, reduce ? 0 : 450); o.disconnect(); } }, { threshold: .2 }).observe($("#tags"));
+new IntersectionObserver(([e], o) => { if (e.isIntersecting) { setTimeout(renderPrices, reduce ? 0 : 450); o.disconnect(); } }, { threshold: 0, rootMargin: "0px 0px -15% 0px" }).observe($("#tags"));
 if (reduce) renderPrices();
 
 /* ===================== Etiquetas que se balancean ===================== */
