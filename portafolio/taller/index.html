@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es" data-niche="el taller Torque">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Torque — Taller mecánico</title>
+<meta name="description" content="Concepto de demostración de PairX: sitio para un taller mecánico (negocio ficticio).">
+<meta name="theme-color" content="#0D0D0D">
+<style>
+@font-face{font-family:"Big Shoulders Display";src:url(../fonts/bigshoulders-900-normal.woff2) format("woff2");font-weight:900;font-display:swap}
+@font-face{font-family:"Big Shoulders Display";src:url(../fonts/bigshoulders-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:Barlow;src:url(../fonts/barlow-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:Barlow;src:url(../fonts/barlow-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
+:root{--ink:#0D0D0D;--panel:#161616;--steel:#9A9A96;--line:#2A2A2A;--hazard:#FFC400;--paper:#EDEDEA;--ease:cubic-bezier(.23,1,.32,1)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--ink);color:var(--paper);font:400 1.05rem/1.55 Barlow,system-ui,sans-serif}
+::selection{background:var(--hazard);color:var(--ink)}
+a{color:inherit}:focus-visible{outline:2px solid var(--hazard);outline-offset:3px}
+.wrap{width:min(1240px,100% - 40px);margin-inline:auto}
+.stripe{height:10px;background:repeating-linear-gradient(-45deg,var(--hazard) 0 14px,var(--ink) 14px 28px)}
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 0;border-bottom:1px solid var(--line)}
+.logo{font:900 1.9rem/1 "Big Shoulders Display",sans-serif;letter-spacing:.04em;text-transform:uppercase;text-decoration:none}
+.logo span{color:var(--hazard)}
+.call{font-weight:600;text-decoration:none;padding:10px 16px;border:1px solid var(--hazard);color:var(--hazard)}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;padding:72px 0 88px;align-items:end}
+h1{font:900 clamp(3.4rem,9vw,8rem)/.88 "Big Shoulders Display",sans-serif;text-transform:uppercase;letter-spacing:-.01em}
+h1 span{color:var(--hazard)}
+.sub{margin-top:24px;max-width:46ch;color:var(--steel);font-size:1.15rem}
+.ticket{background:var(--paper);color:var(--ink);padding:26px;font-size:.95rem;position:relative;box-shadow:0 18px 40px rgba(0,0,0,.45);transform:rotate(1.5deg)}
+.ticket h2{font:700 1.4rem/1 "Big Shoulders Display",sans-serif;text-transform:uppercase;letter-spacing:.06em;display:flex;justify-content:space-between}
+.ticket ul{list-style:none;padding:0;margin-top:16px}
+.ticket li{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed #B9B9B4}
+.ok{font-weight:600;color:#1E7B3A}.warn{font-weight:600;color:#B25B00}
+.ticket small{display:block;margin-top:14px;color:#5F5F5B}
+.btn{display:inline-block;margin-top:30px;padding:16px 26px;background:var(--hazard);color:var(--ink);font:700 1.15rem/1 "Big Shoulders Display",sans-serif;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;transition:transform 140ms var(--ease)}
+.btn:active{transform:scale(.97)}
+section{padding:88px 0;border-top:1px solid var(--line)}
+h2.big{font:900 clamp(2.4rem,5vw,4.4rem)/.95 "Big Shoulders Display",sans-serif;text-transform:uppercase;margin-bottom:40px}
+.bays{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--line)}
+.bay{padding:28px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:220px;display:flex;flex-direction:column;justify-content:space-between;transition:background 200ms ease}
+@media (hover:hover){.bay:hover{background:var(--panel)}}
+.bay em{font:700 .9rem/1 "Big Shoulders Display",sans-serif;font-style:normal;letter-spacing:.2em;color:var(--hazard)}
+.bay h3{font:700 1.9rem/1 "Big Shoulders Display",sans-serif;text-transform:uppercase;margin:14px 0 8px}
+.bay p{color:var(--steel)}
+.process{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;counter-reset:s}
+.process div{border-top:4px solid var(--hazard);padding-top:16px}
+.process strong{display:block;font:700 1.5rem/1.1 "Big Shoulders Display",sans-serif;text-transform:uppercase;margin-bottom:6px}
+.process p{color:var(--steel)}
+.cta{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+footer{padding:36px 0 120px;color:var(--steel);border-top:1px solid var(--line);font-size:.9rem}
+@media (max-width:860px){.hero{grid-template-columns:1fr}.bays{grid-template-columns:1fr}.process{grid-template-columns:1fr 1fr}.ticket{transform:none}}
+</style>
+</head>
+<body>
+<div class="stripe" aria-hidden="true"></div>
+<div class="wrap">
+  <header><a class="logo" href="#">Torque<span>.</span></a><a class="call" href="#cita">Agendar revisión</a></header>
+  <main>
+    <div class="hero">
+      <div>
+        <h1 data-reveal>Tu carro en <span>manos que saben</span>.</h1>
+        <p class="sub" data-reveal style="--i:1">Diagnóstico computarizado, mecánica general y mantenimiento preventivo. Te explicamos qué tiene tu carro antes de tocar una tuerca.</p>
+        <a class="btn" href="#cita" data-reveal style="--i:2">Agendar revisión</a>
+      </div>
+      <div class="ticket" data-reveal style="--i:2" aria-label="Ejemplo de orden de servicio">
+        <h2><span>Orden #0427</span><span>Ejemplo</span></h2>
+        <ul>
+          <li>Frenos delanteros <span class="ok">OK</span></li>
+          <li>Aceite y filtro <span class="warn">Cambiar</span></li>
+          <li>Suspensión <span class="ok">OK</span></li>
+          <li>Batería <span class="ok">OK</span></li>
+          <li>Alineación <span class="warn">Revisar</span></li>
+        </ul>
+        <small>Recibes el diagnóstico por WhatsApp con fotos antes de aprobar el trabajo.</small>
+      </div>
+    </div>
+
+    <section>
+      <h2 class="big" data-reveal>Lo que hacemos</h2>
+      <div class="bays">
+        <div class="bay" data-reveal><em>Bahía 1</em><div><h3>Diagnóstico</h3><p>Escáner, lectura de fallas y reporte claro.</p></div></div>
+        <div class="bay" data-reveal style="--i:1"><em>Bahía 2</em><div><h3>Frenos</h3><p>Pastillas, discos y líquido de frenos.</p></div></div>
+        <div class="bay" data-reveal style="--i:2"><em>Bahía 3</em><div><h3>Motor</h3><p>Sincronización, correas y reparaciones.</p></div></div>
+        <div class="bay" data-reveal><em>Bahía 4</em><div><h3>Suspensión</h3><p>Amortiguadores, tijeras y terminales.</p></div></div>
+        <div class="bay" data-reveal style="--i:1"><em>Bahía 5</em><div><h3>Mantenimiento</h3><p>Cambio de aceite y revisión por kilometraje.</p></div></div>
+        <div class="bay" data-reveal style="--i:2"><em>Bahía 6</em><div><h3>Eléctrico</h3><p>Batería, alternador y luces.</p></div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="big" data-reveal>Así trabajamos</h2>
+      <div class="process">
+        <div data-reveal><strong>Recibimos</strong><p>Escuchamos qué le pasa a tu carro.</p></div>
+        <div data-reveal style="--i:1"><strong>Diagnosticamos</strong><p>Te mandamos fotos y el detalle.</p></div>
+        <div data-reveal style="--i:2"><strong>Apruebas</strong><p>Nada se hace sin tu visto bueno.</p></div>
+        <div data-reveal style="--i:3"><strong>Entregamos</strong><p>Con el trabajo explicado.</p></div>
+      </div>
+    </section>
+
+    <section id="cita">
+      <div class="cta">
+        <h2 class="big" data-reveal style="margin:0">¿Suena raro? <span style="color:var(--hazard)">Tráelo.</span></h2>
+        <p data-reveal style="--i:1;max-width:38ch;color:var(--steel)">Lunes a sábado, 7:30 a. m. – 6:00 p. m. · Dirección de ejemplo · Tu ciudad</p>
+      </div>
+    </section>
+  </main>
+  <footer>Torque · Taller mecánico · Sitio de demostración diseñado por PairX</footer>
+</div>
+<script src="../demo.js?v=4" defer></script>
+</body>
+</html>

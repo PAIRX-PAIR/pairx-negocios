@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es" data-niche="la psicóloga Laura Méndez">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laura Méndez — Psicóloga</title>
+<meta name="description" content="Concepto de demostración de PairX: sitio de marca personal para una psicóloga (persona ficticia).">
+<meta name="theme-color" content="#F3EFEA">
+<style>
+@font-face{font-family:Spectral;src:url(../fonts/spectral-300-normal.woff2) format("woff2");font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:Spectral;src:url(../fonts/spectral-300-italic.woff2) format("woff2");font-weight:300;font-style:italic;font-display:swap}
+@font-face{font-family:"Albert Sans";src:url(../fonts/albert-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Albert Sans";src:url(../fonts/albert-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
+:root{--bg:#F3EFEA;--plum:#3A2B3E;--sage:#7E9C7B;--sage-2:#DCE7D8;--lilac:#D9C6E3;--muted:#6A5E6C;--ease:cubic-bezier(.23,1,.32,1)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--plum);font:400 1.06rem/1.7 "Albert Sans",system-ui,sans-serif}
+::selection{background:var(--lilac)}
+a{color:inherit}:focus-visible{outline:2px solid var(--sage);outline-offset:3px}
+.wrap{width:min(1080px,100% - 40px);margin-inline:auto}
+header{display:flex;justify-content:space-between;align-items:center;padding:28px 0}
+.logo{font:300 1.5rem/1 Spectral,serif;text-decoration:none}
+.logo i{color:var(--sage)}
+.btn{display:inline-block;padding:13px 22px;border-radius:999px;background:var(--plum);color:var(--bg);text-decoration:none;font-weight:600;transition:transform 140ms var(--ease)}
+.btn:active{transform:scale(.97)}
+.btn.soft{background:var(--sage-2);color:var(--plum)}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:center;padding:56px 0 96px}
+h1{font:300 clamp(2.8rem,6.4vw,5.4rem)/1.04 Spectral,serif;letter-spacing:-.02em;text-wrap:balance}
+h1 em{color:var(--sage)}
+.lead{margin-top:22px;color:var(--muted);max-width:44ch;font-size:1.15rem}
+.acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.portrait{aspect-ratio:3/4;border-radius:200px 200px 16px 16px;background:linear-gradient(180deg,var(--lilac),#EBDDEF);display:grid;place-items:end center;overflow:hidden}
+.portrait svg{width:80%}
+section{padding:88px 0}
+h2{font:300 clamp(2.1rem,4.4vw,3.4rem)/1.1 Spectral,serif;margin-bottom:34px;text-wrap:balance}
+.topics{display:flex;flex-wrap:wrap;gap:12px}
+.topics span{padding:12px 18px;border-radius:999px;background:#fff;border:1px solid #E5DCE6}
+.ways{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.way{border-radius:24px;padding:34px;background:#fff}
+.way:nth-child(2){background:var(--sage-2)}
+.way h3{font:300 1.8rem/1.1 Spectral,serif;margin-bottom:10px}
+.way p{color:var(--muted)}
+.first{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px}
+.first ol{list-style:none;padding:0;display:grid;gap:22px;counter-reset:s}
+.first li{display:grid;grid-template-columns:44px 1fr;gap:16px;counter-increment:s}
+.first li::before{content:counter(s);width:44px;height:44px;border-radius:50%;background:var(--lilac);display:grid;place-items:center;font:300 1.3rem Spectral,serif}
+.first li strong{display:block;font-weight:600}
+.first li p{color:var(--muted)}
+.credit{font-size:.88rem;color:var(--muted);margin-top:28px}
+footer{padding:40px 0 120px;color:var(--muted);font-size:.9rem;border-top:1px solid #E1D8E2}
+@media (max-width:820px){.hero,.ways,.first{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><a class="logo" href="#">Laura Méndez <i>· psicóloga</i></a><a class="btn" href="#primera">Agendar</a></header>
+  <main>
+    <div class="hero">
+      <div>
+        <h1 data-reveal>Un espacio para entenderte, <em>sin juicios</em>.</h1>
+        <p class="lead" data-reveal style="--i:1">Acompaño a adultos y parejas en procesos de ansiedad, duelo y relaciones. Terapia presencial y en línea.</p>
+        <div class="acts" data-reveal style="--i:2"><a class="btn" href="#primera">Agendar primera sesión</a><a class="btn soft" href="#como">Cómo trabajo</a></div>
+      </div>
+      <div class="portrait" data-reveal style="--i:2" role="img" aria-label="Ilustración de retrato de la psicóloga">
+        <svg viewBox="0 0 240 260" aria-hidden="true"><circle cx="120" cy="96" r="48" fill="#E9C7B0"/><path d="M68 92c0-40 24-62 54-62s52 22 52 60c-10-20-28-28-52-28s-42 10-54 30z" fill="#3A2B3E"/><path d="M30 260c6-62 46-96 90-96s84 34 90 96z" fill="#7E9C7B"/><path d="M100 168l20 22 20-22" fill="none" stroke="#F3EFEA" stroke-width="4"/></svg>
+      </div>
+    </div>
+
+    <section>
+      <h2 data-reveal>Te puedo acompañar con</h2>
+      <div class="topics" data-reveal style="--i:1"><span>Ansiedad y estrés</span><span>Duelo</span><span>Autoestima</span><span>Terapia de pareja</span><span>Cambios de vida</span><span>Agotamiento laboral</span></div>
+    </section>
+
+    <section id="como">
+      <h2 data-reveal>Dos maneras de empezar</h2>
+      <div class="ways">
+        <div class="way" data-reveal><h3>Presencial</h3><p>En un consultorio tranquilo, con tiempo y sin afanes. Sesiones de 50 minutos.</p></div>
+        <div class="way" data-reveal style="--i:1"><h3>En línea</h3><p>Desde donde estés, por videollamada privada. Mismo acompañamiento, misma confidencialidad.</p></div>
+      </div>
+    </section>
+
+    <section id="primera">
+      <div class="first">
+        <h2 data-reveal>Tu primera sesión</h2>
+        <div>
+          <ol>
+            <li data-reveal><div><strong>Me escribes</strong><p>Por WhatsApp, con la hora que te sirve.</p></div></li>
+            <li data-reveal style="--i:1"><div><strong>Conversamos</strong><p>Escucho qué te trae y resolvemos dudas.</p></div></li>
+            <li data-reveal style="--i:2"><div><strong>Definimos un plan</strong><p>Frecuencia y objetivos, a tu ritmo.</p></div></li>
+          </ol>
+          <p class="credit">Persona y datos ficticios, creados para esta demostración.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>Laura Méndez · Psicóloga · Sitio de demostración diseñado por PairX</footer>
+</div>
+<script src="../demo.js?v=4" defer></script>
+</body>
+</html>

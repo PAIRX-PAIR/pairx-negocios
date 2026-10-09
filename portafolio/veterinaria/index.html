@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es" data-niche="la veterinaria Huellitas">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Huellitas — Clínica veterinaria</title>
+<meta name="description" content="Concepto de demostración de PairX: sitio para una clínica veterinaria (negocio ficticio).">
+<meta name="theme-color" content="#FFF3E6">
+<style>
+@font-face{font-family:"Baloo 2";src:url(../fonts/baloo-800-normal.woff2) format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"Baloo 2";src:url(../fonts/baloo-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:Nunito;src:url(../fonts/nunito-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:Nunito;src:url(../fonts/nunito-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+:root{--sand:#FFF3E6;--orange:#F26B2C;--orange-2:#FFB38A;--teal:#0E6B66;--teal-2:#D3EEEA;--ink:#2B211C;--muted:#6B5A50;--ease:cubic-bezier(.23,1,.32,1)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--sand);color:var(--ink);font:400 1.05rem/1.6 Nunito,system-ui,sans-serif}
+::selection{background:var(--orange-2)}
+a{color:inherit}:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.wrap{width:min(1160px,100% - 40px);margin-inline:auto}
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.logo{display:flex;gap:10px;align-items:center;font:800 1.6rem/1 "Baloo 2",sans-serif;text-decoration:none;color:var(--teal)}
+.sos{display:flex;gap:10px;align-items:center;padding:10px 16px;border-radius:999px;background:var(--teal);color:#fff;font-weight:700;text-decoration:none;transition:transform 140ms var(--ease)}
+.sos:active{transform:scale(.97)}
+.sos i{width:9px;height:9px;border-radius:50%;background:#7CF2C9}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:40px 0 90px}
+h1{font:800 clamp(2.8rem,6.6vw,5.4rem)/.95 "Baloo 2",sans-serif;letter-spacing:-.02em;text-wrap:balance}
+h1 span{color:var(--orange)}
+.lead{margin-top:18px;color:var(--muted);font-size:1.15rem;max-width:42ch}
+.btn{display:inline-block;margin-top:28px;padding:16px 26px;border-radius:18px;background:var(--orange);color:#fff;font:800 1.1rem/1 "Baloo 2",sans-serif;text-decoration:none;box-shadow:0 8px 0 #C24E17;transition:transform 140ms var(--ease),box-shadow 140ms var(--ease)}
+.btn:active{transform:translateY(6px);box-shadow:0 2px 0 #C24E17}
+.blob{aspect-ratio:1;border-radius:46% 54% 52% 48%/48% 44% 56% 52%;background:var(--orange-2);display:grid;place-items:center;position:relative}
+.blob svg{width:70%}
+.badge{position:absolute;right:4%;bottom:10%;background:#fff;border-radius:18px;padding:12px 16px;font-weight:700;box-shadow:0 12px 30px rgba(43,33,28,.12)}
+.badge small{display:block;font-weight:400;color:var(--muted)}
+section{padding:88px 0}
+h2{font:800 clamp(2.2rem,4.6vw,3.6rem)/1 "Baloo 2",sans-serif;margin-bottom:34px}
+.svc{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.s{background:#fff;border-radius:24px;padding:26px;transition:transform 200ms var(--ease)}
+@media (hover:hover){.s:hover{transform:translateY(-4px) rotate(-.6deg)}}
+.s .ic{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;margin-bottom:16px;background:var(--teal-2)}
+.s:nth-child(even) .ic{background:#FFE1D0}
+.s h3{font:800 1.35rem/1.1 "Baloo 2",sans-serif;margin-bottom:6px}
+.s p{color:var(--muted);font-size:.98rem}
+.pets{background:var(--teal);color:#fff;border-radius:32px;padding:clamp(28px,5vw,60px);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.pets h2{color:#fff}
+.pets p{color:#CFEAE6}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips span{padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.14);font-weight:700}
+footer{padding:40px 0 120px;color:var(--muted);font-size:.9rem;border-top:2px dashed #EBD3BD}
+@media (max-width:900px){.hero,.pets{grid-template-columns:1fr}.svc{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.svc{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="logo" href="#"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><g fill="#F26B2C"><ellipse cx="15" cy="20" rx="7" ry="6"/><circle cx="7" cy="12" r="3"/><circle cx="12" cy="7" r="3"/><circle cx="18" cy="7" r="3"/><circle cx="23" cy="12" r="3"/></g></svg>Huellitas</a>
+    <a class="sos" href="#contacto"><i aria-hidden="true"></i>Urgencias 24 h</a>
+  </header>
+  <main>
+    <div class="hero">
+      <div>
+        <h1 data-reveal>Cuidamos a quien te <span>cuida a ti</span>.</h1>
+        <p class="lead" data-reveal style="--i:1">Consulta general, vacunas, cirugía y peluquería para perros y gatos. Con paciencia, cariño y un premio al final.</p>
+        <a class="btn" href="#contacto" data-reveal style="--i:2">Agendar consulta</a>
+      </div>
+      <div class="blob" data-reveal style="--i:2" role="img" aria-label="Ilustración de un perro sonriente">
+        <svg viewBox="0 0 200 200" aria-hidden="true"><ellipse cx="100" cy="112" rx="62" ry="58" fill="#FFF3E6"/><path d="M44 80c-14 10-18 40-6 54 8-14 12-34 6-54zM156 80c14 10 18 40 6 54-8-14-12-34-6-54z" fill="#8A5A3B"/><circle cx="80" cy="104" r="7" fill="#2B211C"/><circle cx="120" cy="104" r="7" fill="#2B211C"/><ellipse cx="100" cy="126" rx="12" ry="9" fill="#2B211C"/><path d="M86 142c8 8 20 8 28 0" fill="none" stroke="#2B211C" stroke-width="4" stroke-linecap="round"/><path d="M100 146c0 10-4 16-8 16s-6-6 0-14" fill="#F26B2C"/></svg>
+        <div class="badge">Toby, 4 años<small>Paciente de ejemplo</small></div>
+      </div>
+    </div>
+
+    <section>
+      <h2 data-reveal>Servicios</h2>
+      <div class="svc">
+        <div class="s" data-reveal><div class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 26 26"><path d="M13 4v18M4 13h18" stroke="#0E6B66" stroke-width="3" stroke-linecap="round"/></svg></div><h3>Consulta</h3><p>Chequeo general y plan de salud.</p></div>
+        <div class="s" data-reveal style="--i:1"><div class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 26 26"><path d="M5 21l12-12M15 5l6 6M9 15l2 2" stroke="#F26B2C" stroke-width="3" stroke-linecap="round"/></svg></div><h3>Vacunas</h3><p>Esquema completo y recordatorios.</p></div>
+        <div class="s" data-reveal style="--i:2"><div class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="8" fill="none" stroke="#0E6B66" stroke-width="3"/><path d="M13 9v4l3 2" stroke="#0E6B66" stroke-width="3" stroke-linecap="round"/></svg></div><h3>Cirugía</h3><p>Esterilización y procedimientos.</p></div>
+        <div class="s" data-reveal style="--i:3"><div class="ic" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 26 26"><circle cx="8" cy="18" r="4" fill="none" stroke="#F26B2C" stroke-width="3"/><circle cx="18" cy="18" r="4" fill="none" stroke="#F26B2C" stroke-width="3"/><path d="M10 15l8-11M16 15L8 4" stroke="#F26B2C" stroke-width="3" stroke-linecap="round"/></svg></div><h3>Peluquería</h3><p>Baño, corte y uñas.</p></div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="pets">
+        <div><h2 data-reveal>Perros, gatos y sus humanos</h2><p data-reveal style="--i:1">Lunes a sábado de 8:00 a. m. a 7:00 p. m. Urgencias por WhatsApp a cualquier hora. Dirección de ejemplo, tu ciudad.</p></div>
+        <div class="chips" data-reveal style="--i:2"><span>Historia clínica digital</span><span>Recordatorio de vacunas</span><span>Domicilio para gatos</span><span>Plan cachorro</span></div>
+      </div>
+    </section>
+  </main>
+  <footer>Huellitas · Clínica veterinaria · Sitio de demostración diseñado por PairX</footer>
+</div>
+<script src="../demo.js?v=4" defer></script>
+</body>
+</html>

@@ -2,9 +2,10 @@
 
 Landing de PairX para vender páginas web a negocios de barrio: planes, cotizador y contacto por WhatsApp.
 
-- Un solo archivo: `index.html` (HTML + CSS + JS, sin build).
+- Página principal: `index.html` (HTML + CSS + JS, sin build).
 - Base visual: sistema de diseño PairX (Claude Design) con la paleta de marca negro + carmesí.
-- Sitio principal: https://pairx-web.vercel.app
+- En producción: https://pairx-web.vercel.app (proyecto Vercel `pairx-web`, equipo `pairx-pair`)
+- `portafolio/` y `fonts/`: los 10 conceptos por giro, traídos del sitio anterior.
 
 ## Antes de publicar
 

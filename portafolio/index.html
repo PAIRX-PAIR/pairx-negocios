@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portafolio — PairX</title>
+<meta name="description" content="Diez conceptos de páginas web diseñados por PairX para distintos tipos de negocio.">
+<meta name="theme-color" content="#0A0909">
+<link rel="preload" href="../fonts/alegreya-sans-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Alegreya Sans";src:url(../fonts/alegreya-sans-300-normal.woff2) format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"Alegreya Sans";src:url(../fonts/alegreya-sans-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Alegreya Sans";src:url(../fonts/alegreya-sans-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+:root{--water:#0A0909;--paper:#EFEAE3;--muted:#A39C97;--crimson:#B0122C;--fresh:#E0263F;--line:rgba(239,234,227,.14);--ease:cubic-bezier(.23,1,.32,1)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--water);color:var(--paper);font:400 1.06rem/1.6 "Alegreya Sans",system-ui,sans-serif}
+::selection{background:var(--crimson);color:#fff}
+a{color:inherit}:focus-visible{outline:2px solid var(--fresh);outline-offset:3px}
+.wrap{width:min(1280px,100% - 40px);margin-inline:auto}
+header{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:1px solid var(--line)}
+.brand{display:flex;gap:12px;align-items:center;text-decoration:none;font:500 .95rem/1 "Alegreya Sans",sans-serif;letter-spacing:.32em}
+.cta{padding:12px 20px;background:var(--crimson);color:#fff;text-decoration:none;font:500 .82rem/1 "Alegreya Sans",sans-serif;letter-spacing:.18em;text-transform:uppercase;transition:transform 140ms var(--ease)}
+.cta:active{transform:scale(.97)}
+.intro{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:end;padding:88px 0 64px}
+h1{font-weight:300;font-size:clamp(2.8rem,6.4vw,5.6rem);line-height:1.02;letter-spacing:-.025em;text-wrap:balance}
+.intro p{color:var(--muted);max-width:42ch;font-size:1.15rem}
+.list{display:grid;grid-template-columns:repeat(2,1fr);gap:56px 40px;padding-bottom:96px}
+.work{display:block;text-decoration:none}
+.shot{position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:6px;background:#141212;box-shadow:0 0 0 1px var(--line)}
+.shot iframe{position:absolute;left:0;top:0;width:1440px;height:900px;border:0;transform-origin:0 0;pointer-events:none;opacity:0;transition:opacity 400ms var(--ease)}
+.shot iframe.ready{opacity:1}
+.shot::after{content:"";position:absolute;inset:0;transition:background 200ms ease}
+@media (hover:hover){.work:hover .shot::after{background:rgba(10,9,9,.12)}.work:hover h2{color:#fff}}
+.meta{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.meta h2{font-weight:300;font-size:1.8rem;line-height:1.1;transition:color 200ms ease}
+.meta p{color:var(--muted);font-size:.95rem}
+.sw{display:flex;gap:6px}
+.sw i{width:14px;height:14px;border-radius:50%;box-shadow:0 0 0 1px var(--line)}
+.honest{color:var(--muted);font-size:.92rem;padding:28px 0 0;border-top:1px solid var(--line)}
+.close{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding:72px 0 96px}
+.close h2{font-weight:300;font-size:clamp(2rem,4vw,3.2rem);line-height:1.1;max-width:20ch}
+.btn{display:inline-block;padding:16px 26px;background:var(--crimson);color:#fff;text-decoration:none;font:500 .85rem/1 "Alegreya Sans",sans-serif;letter-spacing:.18em;text-transform:uppercase;transition:transform 140ms var(--ease)}
+.btn:active{transform:scale(.97)}
+footer{padding:28px 0 48px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+@media (max-width:860px){.intro,.list{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.shot iframe{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="../"><svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C11 10 7 15 7 20a9 9 0 0 0 18 0c0-5-4-10-9-17z" fill="none" stroke="#EFEAE3" stroke-width="1.6"/><path d="M16 15a4 4 0 1 1-3.5 6" fill="none" stroke="#E0263F" stroke-width="1.6" stroke-linecap="round"/></svg>PAIRX</a>
+    <a class="cta" href="https://wa.me/573218596840?text=Hola%20PairX%2C%20vi%20tu%20portafolio%20y%20quiero%20una%20p%C3%A1gina%20web." target="_blank" rel="noopener">Pedir mi web</a>
+  </header>
+  <main>
+    <div class="intro">
+      <h1>Diez negocios, diez mundos distintos.</h1>
+      <p>Conceptos que diseñamos para mostrar cómo trabajamos: cada sitio parte de lo que hace único a su negocio, no de una plantilla.</p>
+    </div>
+    <div class="list" id="list"></div>
+    <p class="honest">Todos los negocios, nombres, precios y datos de estas demostraciones son ficticios. Fueron creados por PairX como muestra de diseño.</p>
+    <div class="close">
+      <h2>¿Tu negocio sería el número once?</h2>
+      <a class="btn" href="https://wa.me/573218596840?text=Hola%20PairX%2C%20vi%20tu%20portafolio%20y%20quiero%20una%20p%C3%A1gina%20web." target="_blank" rel="noopener">Hablemos por WhatsApp</a>
+    </div>
+  </main>
+  <footer>© 2026 PairX · Diseño y desarrollo de páginas web · <a href="../">Volver al inicio</a></footer>
+</div>
+<script>
+(function(){
+  var works=[
+    ['panaderia','La Espiga','Panadería artesanal',['#3B2216','#E0AE4C','#F4EDE1']],
+    ['taller','Torque','Taller mecánico',['#0D0D0D','#FFC400','#EDEDEA']],
+    ['restaurante','Fogón de la Abuela','Restaurante típico',['#1F3D2A','#C2552B','#F2C14E']],
+    ['barberia','Navaja Fina','Barbería',['#10231B','#C9A45C','#F1EBDD']],
+    ['dental','Sonrisa Clara','Clínica odontológica',['#0B2545','#1FAF8E','#F4F8F9']],
+    ['gimnasio','Hierro 24','Gimnasio',['#0A0A0A','#C6FF00','#F4F4F0']],
+    ['veterinaria','Huellitas','Clínica veterinaria',['#F26B2C','#0E6B66','#FFF3E6']],
+    ['inmobiliaria','Hábitat','Inmobiliaria',['#3E4A34','#E9E4DB','#1E1F1C']],
+    ['abogados','Restrepo & Asociados','Firma de abogados',['#14213D','#7A1F2B','#F5F1EA']],
+    ['psicologa','Laura Méndez','Psicóloga · marca personal',['#3A2B3E','#7E9C7B','#D9C6E3']]
+  ];
+  var list=document.getElementById('list');
+  works.forEach(function(w){
+    var a=document.createElement('a');a.className='work';a.href=w[0]+'/';
+    a.innerHTML='<div class="shot"><iframe title="Vista previa de '+w[1]+'" tabindex="-1" aria-hidden="true" loading="lazy" src="'+w[0]+'/?preview"></iframe></div>'+
+      '<div class="meta"><div><h2>'+w[1]+'</h2><p>'+w[2]+'</p></div><div class="sw" aria-hidden="true">'+w[3].map(function(c){return '<i style="background:'+c+'"></i>'}).join('')+'</div></div>';
+    list.appendChild(a);
+    var fr=a.querySelector('iframe');fr.addEventListener('load',function(){fr.classList.add('ready');});
+  });
+  function fit(){document.querySelectorAll('.shot').forEach(function(s){var f=s.querySelector('iframe');f.style.transform='scale('+(s.clientWidth/1440)+')';});}
+  window.addEventListener('resize',fit);fit();
+})();
+</script>
+</body>
+</html>
