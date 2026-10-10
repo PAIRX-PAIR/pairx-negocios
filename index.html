@@ -940,16 +940,9 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
       <div>
         <p class="eyebrow" data-reveal>Planes</p>
         <h2 class="h2" id="plans-title" data-split>Planes que se ajustan a <em>lo que</em> <span class="nw"><em>vendes</em>.</span></h2>
-        <p class="lead plans-cot" data-reveal style="--i:1">Cada negocio es distinto. Estos valores son el punto de partida: <b>el precio final se cotiza según lo que necesites</b>, sin compromiso y por WhatsApp.</p>
+        <p class="lead plans-cot" data-reveal style="--i:1">Cada negocio es distinto, por eso <b>no manejamos precios fijos</b>: cotizamos tu página según lo que necesites, sin compromiso y por WhatsApp.</p>
       </div>
-      <div class="pay" data-reveal style="--i:2">
-        <div class="seg" id="paySeg" role="group" aria-label="Forma de pago">
-          <span class="ind" aria-hidden="true"></span>
-          <button type="button" aria-pressed="true" data-pay="once">De contado</button>
-          <button type="button" aria-pressed="false" data-pay="months">A 12 cuotas</button>
-        </div>
-        <small id="priceNote">Precios de referencia en COP · el valor final se cotiza según lo que necesites</small>
-      </div>
+      <div class="pay" data-reveal style="--i:2"><a class="btn btn-primary magnet" href="#cotiza"><span class="btn-in">Pedir mi cotización <span class="arw">→</span></span></a></div>
     </div>
 
     <div class="rail" aria-hidden="true"></div>
@@ -959,7 +952,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
         <div class="card">
           <div class="nm"><h3>Vitrina</h3><span class="k">Para empezar</span></div>
           <p class="for">Para existir en internet: quién eres, dónde estás y cómo escribirte.</p>
-          <div class="price"><p class="plbl" data-lbl>Pago único</p><div class="big"><span class="odo" data-odo></span><small data-unit></small></div><p class="sub" data-sub></p></div>
+          <div class="price"><div class="big" style="font-size:1.7rem">Cotización</div><p class="sub">Según lo que necesites</p></div>
           <ul class="feat">
             <li>Página única con tus secciones clave</li>
             <li>Botón de WhatsApp y llamada</li>
@@ -977,7 +970,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
           <span class="stamp" aria-hidden="true">RECOMENDADO</span>
           <div class="nm"><h3>Local</h3></div>
           <p class="for">Para el negocio que ya tiene clientela y quiere que lo recomienden más.</p>
-          <div class="price"><p class="plbl" data-lbl>Pago único</p><div class="big"><span class="odo" data-odo></span><small data-unit></small></div><p class="sub" data-sub></p></div>
+          <div class="price"><div class="big" style="font-size:1.7rem">Cotización</div><p class="sub">Según lo que necesites</p></div>
           <ul class="feat">
             <li>Todo lo de Vitrina</li>
             <li>Hasta 5 secciones o páginas</li>
@@ -994,7 +987,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
         <div class="card">
           <div class="nm"><h3>Tienda</h3><span class="k">Vende en línea</span></div>
           <p class="for">Para vender en internet, también mientras duermes.</p>
-          <div class="price"><p class="plbl" data-lbl>Pago único</p><div class="big"><span class="odo" data-odo></span><small data-unit></small></div><p class="sub" data-sub></p></div>
+          <div class="price"><div class="big" style="font-size:1.7rem">Cotización</div><p class="sub">Según lo que necesites</p></div>
           <ul class="feat">
             <li>Todo lo de Local</li>
             <li>Tienda en línea con carrito</li>
@@ -1076,9 +1069,9 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 <section class="quote s-paper" id="cotiza" aria-labelledby="quote-title">
   <div class="wrap quote-grid">
     <div>
-      <p class="eyebrow" data-reveal>Cotiza en un minuto</p>
-      <h2 class="h2" id="quote-title" data-split>Calcula el precio de <em>tu</em> <span class="nw"><em>página</em>.</span></h2>
-      <p class="lead" data-reveal>Elige un plan, súmale lo que tu negocio necesite y mira el total al instante. Después nos lo mandas por WhatsApp y lo afinamos juntos.</p>
+      <p class="eyebrow" data-reveal>Cotización sin compromiso</p>
+      <h2 class="h2" id="quote-title" data-split>Arma tu <em>cotización</em>.</h2>
+      <p class="lead" data-reveal>Elige un plan y súmale lo que tu negocio necesite. Nos lo mandas por WhatsApp y te respondemos con el precio según lo que necesites.</p>
       <a class="folio-link" href="#portafolio" data-reveal style="--i:2"><span><b>¿No sabes qué pedir?</b>Mira 13 páginas de ejemplo, una por giro</span><i aria-hidden="true">→</i></a>
 
       <p class="qlabel" id="ql-plan">1 · Tu plan</p>
@@ -1096,14 +1089,13 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
         <div class="qlines" id="qlines" aria-live="polite"></div>
         <hr>
         <div class="qtot">
-          <p><span>Pago inicial</span><span class="big"><span class="odo" id="qOnce"></span></span></p>
-          <p><span>Mensual</span><span class="mono"><span class="odo" id="qMonth"></span></span></p>
+          <p><span>Precio</span><span class="big">COTIZACIÓN</span></p>
         </div>
-        <p class="qnote" id="qnote">Valor estimado en COP · el precio final se cotiza según lo que necesites</p>
+        <p class="qnote" id="qnote">Te enviamos el precio según lo que necesites · sin compromiso</p>
         <div class="barcode" aria-hidden="true"></div>
       </div>
       <div class="qactions">
-        <a class="btn btn-wa magnet" href="#" id="qSend" target="_blank" rel="noopener"><span class="btn-in">Enviar cotización por WhatsApp <span class="arw">→</span></span></a>
+        <a class="btn btn-wa magnet" href="#" id="qSend" target="_blank" rel="noopener"><span class="btn-in">Pedir cotización por WhatsApp <span class="arw">→</span></span></a>
         <a class="btn btn-ghost" href="#contacto" id="qForm"><span class="btn-in">Prefiero llenar el formulario</span></a>
       </div>
     </div>
@@ -1245,18 +1237,18 @@ const CONFIG = {
   currency: "COP",
   months: 12,
   plans: {
-    vitrina: { name: "Vitrina", once: 230000,  monthly: 15000 },
-    local:   { name: "Local",   once: 470000,  monthly: 25000 },
-    tienda:  { name: "Tienda",  once: 950000,  monthly: 39000 }
+    vitrina: { name: "Vitrina" },
+    local:   { name: "Local" },
+    tienda:  { name: "Tienda" }
   },
   addons: [
-    { id: "fotos",   name: "Fotos de tu local y productos", hint: "Una sesión en tu negocio",        once: 95000 },
-    { id: "logo",    name: "Logo e identidad básica",       hint: "Si aún no tienes logo",           once: 120000 },
-    { id: "textos",  name: "Textos escritos por nosotros",  hint: "Te entrevistamos y redactamos",   once: 55000 },
-    { id: "google",  name: "Ficha de Google Maps",          hint: "Incluida en Local y Tienda",      once: 40000, includedIn: ["local", "tienda"] },
-    { id: "reservas",name: "Reservas o citas en línea",     hint: "Agenda que se llena sola",        once: 110000 },
-    { id: "ingles",  name: "Versión en inglés",             hint: "Para turistas y extranjeros",     once: 95000 },
-    { id: "correo",  name: "Correos con tu dominio",        hint: "hola@tunegocio.co",               monthly: 6000 }
+    { id: "fotos",   name: "Fotos de tu local y productos", hint: "Una sesión en tu negocio" },
+    { id: "logo",    name: "Logo e identidad básica",       hint: "Si aún no tienes logo" },
+    { id: "textos",  name: "Textos escritos por nosotros",  hint: "Te entrevistamos y redactamos" },
+    { id: "google",  name: "Ficha de Google Maps",          hint: "Incluida en Local y Tienda", includedIn: ["local", "tienda"] },
+    { id: "reservas",name: "Reservas o citas en línea",     hint: "Agenda que se llena sola" },
+    { id: "ingles",  name: "Versión en inglés",             hint: "Para turistas y extranjeros" },
+    { id: "correo",  name: "Correos con tu dominio",        hint: "hola@tunegocio.co", monthly: true }
   ]
 };
 
@@ -1547,42 +1539,6 @@ function setOdo(el, str) {
   el.setAttribute("aria-label", str);
   el.setAttribute("role", "text");
 }
-let payMode = "once";
-const seg = $("#paySeg"), ind = $(".ind", seg);
-function placeInd() {
-  const btn = $(`[data-pay="${payMode}"]`, seg);
-  ind.style.width = btn.offsetWidth + "px";
-  ind.style.transform = `translateX(${btn.offsetLeft - 4}px)`;
-}
-function renderPrices() {
-  $$(".tag[data-plan]").forEach(tag => {
-    const p = CONFIG.plans[tag.dataset.plan]; if (!p) return;
-    const odo = $("[data-odo]", tag), unit = $("[data-unit]", tag), sub = $("[data-sub]", tag), lbl = $("[data-lbl]", tag);
-    if (payMode === "once") {
-      lbl.textContent = "Desde · pago único";
-      setOdo(odo, "$" + money(p.once)); unit.textContent = CONFIG.currency;
-      sub.innerHTML = `Y luego desde <b>$${money(p.monthly)}</b> al mes por hosting y soporte`;
-    } else {
-      const m = Math.round((p.once / CONFIG.months + p.monthly) / 100) * 100;
-      lbl.textContent = `Desde · ${CONFIG.months} cuotas de`;
-      setOdo(odo, "$" + money(m)); unit.textContent = "al mes";
-      sub.innerHTML = `Desde el mes ${CONFIG.months + 1}: <b>$${money(p.monthly)}</b> al mes`;
-    }
-  });
-}
-seg.addEventListener("click", e => {
-  const b = e.target.closest("button"); if (!b) return;
-  payMode = b.dataset.pay;
-  $$("button", seg).forEach(x => x.setAttribute("aria-pressed", x === b));
-  placeInd(); renderPrices();
-});
-addEventListener("resize", placeInd);
-document.fonts && document.fonts.ready.then(placeInd);
-placeInd();
-// Los odómetros arrancan en cero y ruedan cuando los planes aparecen en pantalla
-$$(".tag[data-plan] [data-odo]").forEach(o => setOdo(o, "$0"));
-new IntersectionObserver(([e], o) => { if (e.isIntersecting) { setTimeout(renderPrices, reduce ? 0 : 450); o.disconnect(); } }, { threshold: 0, rootMargin: "0px 0px -15% 0px" }).observe($("#tags"));
-if (reduce) renderPrices();
 
 /* ===================== Etiquetas que se balancean ===================== */
 const tags = $$(".tag");
@@ -1631,11 +1587,11 @@ if (!reduce) {
 const qState = { plan: "local", add: new Set() };
 const qplans = $("#qplans"), addonsEl = $("#addons"), qlines = $("#qlines");
 Object.entries(CONFIG.plans).forEach(([id, p]) => {
-  qplans.insertAdjacentHTML("beforeend", `<label class="qplan"><input type="radio" name="qplan" value="${id}" ${id === qState.plan ? "checked" : ""}><b>${p.name}</b><span>$${money(p.once)}</span></label>`);
+  qplans.insertAdjacentHTML("beforeend", `<label class="qplan"><input type="radio" name="qplan" value="${id}" ${id === qState.plan ? "checked" : ""}><b>${p.name}</b><span>Cotización</span></label>`);
 });
 const check = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg>`;
 CONFIG.addons.forEach(a => {
-  const price = a.once ? `+$${money(a.once)}` : `+$${money(a.monthly)}/mes`;
+  const price = "A cotizar";
   addonsEl.insertAdjacentHTML("beforeend", `<label class="addon" data-id="${a.id}"><input type="checkbox" value="${a.id}"><span class="box">${check}</span><span class="t"><b>${a.name}</b><small>${a.hint}</small></span><span class="p">${price}</span></label>`);
 });
 qplans.addEventListener("change", e => { qState.plan = e.target.value; renderQuote(); });
@@ -1645,21 +1601,13 @@ $("#qdate").textContent = today;
 
 function quoteLines() {
   const p = CONFIG.plans[qState.plan];
-  const lines = [{ key: "plan", label: `Plan ${p.name}`, val: `$${money(p.once)}` }, { key: "mant", label: "Mantenimiento", val: `$${money(p.monthly)}/mes`, m: true }];
+  const lines = [{ key: "plan", label: `Plan ${p.name}`, val: "A cotizar" }, { key: "mant", label: "Mantenimiento mensual", val: "A cotizar", m: true }];
   CONFIG.addons.forEach(a => {
     if (!qState.add.has(a.id)) return;
     const inc = a.includedIn && a.includedIn.includes(qState.plan);
-    lines.push({ key: a.id, label: a.name, val: inc ? "Incluido" : a.once ? `$${money(a.once)}` : `$${money(a.monthly)}/mes`, m: !!a.monthly || inc });
+    lines.push({ key: a.id, label: a.name, val: inc ? "Incluido" : "A cotizar", m: !!a.monthly || inc });
   });
   return lines;
-}
-function totals() {
-  const p = CONFIG.plans[qState.plan]; let once = p.once, monthly = p.monthly;
-  CONFIG.addons.forEach(a => {
-    if (!qState.add.has(a.id) || (a.includedIn && a.includedIn.includes(qState.plan))) return;
-    once += a.once || 0; monthly += a.monthly || 0;
-  });
-  return { once, monthly };
 }
 function renderQuote() {
   // Complementos incluidos en el plan: se marcan y se bloquean
@@ -1669,7 +1617,7 @@ function renderQuote() {
     if (inc) { inp.checked = true; qState.add.add(a.id); }
     else if (l.dataset.inc === "1") { inp.checked = false; qState.add.delete(a.id); }
     l.dataset.inc = inc ? "1" : "0";
-    $(".p", l).textContent = inc ? "Incluido" : a.once ? `+$${money(a.once)}` : `+$${money(a.monthly)}/mes`;
+    $(".p", l).textContent = inc ? "Incluido" : "A cotizar";
   });
   const want = quoteLines(), have = new Map($$(".qline", qlines).map(n => [n.dataset.key, n]));
   want.forEach((ln, i) => {
@@ -1682,15 +1630,12 @@ function renderQuote() {
     } else { n.innerHTML = html; n.classList.remove("leave"); have.delete(ln.key); }
   });
   have.forEach(n => { if (n.classList.contains("leave")) return; n.classList.add("leave"); setTimeout(() => n.remove(), reduce ? 0 : 360); });
-  const t = totals();
-  setOdo($("#qOnce"), "$" + money(t.once));
-  setOdo($("#qMonth"), "$" + money(t.monthly));
   $("#qSend").href = waLink(quoteText());
 }
 function quoteText() {
-  const p = CONFIG.plans[qState.plan], t = totals();
+  const p = CONFIG.plans[qState.plan];
   const extras = CONFIG.addons.filter(a => qState.add.has(a.id) && !(a.includedIn && a.includedIn.includes(qState.plan))).map(a => "· " + a.name);
-  return [`Hola PairX, quiero cotizar una página web.`, ``, `Plan: ${p.name}`, extras.length ? `Adicionales:\n${extras.join("\n")}` : `Sin adicionales`, ``, `Valor de referencia: desde $${money(t.once)} ${CONFIG.currency} + $${money(t.monthly)} ${CONFIG.currency}/mes. Entiendo que el precio final se cotiza según lo que necesite.`].join("\n");
+  return [`Hola PairX, quiero cotizar una página web.`, ``, `Plan: ${p.name}`, extras.length ? `Adicionales:\n${extras.join("\n")}` : `Sin adicionales`, ``, `¿Me pueden enviar la cotización?`].join("\n");
 }
 const waLink = text => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
 renderQuote();
