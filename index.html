@@ -892,7 +892,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 </section>
 
 <!-- ======================= MARQUESINA ======================= -->
-<div class="band" aria-label="Hacemos páginas para panaderías, barberías, talleres, floristerías, restaurantes, ferreterías, peluquerías, veterinarias, papelerías, tiendas de barrio, consultorios, gimnasios, tiendas de ropa y emprendimientos">
+<div class="band" role="img" aria-label="Hacemos páginas para panaderías, barberías, talleres, floristerías, restaurantes, ferreterías, peluquerías, veterinarias, papelerías, tiendas de barrio, consultorios, gimnasios, tiendas de ropa y emprendimientos">
   <div class="band-track" id="band" aria-hidden="true"></div>
 </div>
 
@@ -1825,7 +1825,7 @@ const WORKS = window.PAIRX_WORKS || [];
 const reel = $("#reel");
 if (reel && WORKS.length) {
   reel.innerHTML = WORKS.map((w, i) => `<article class="work" style="--c0:${w.colors[0]};--c1:${w.colors[1]};--c2:${w.colors[2]}">
-    <a class="dev" href="portafolio/${w.slug}/" aria-label="Abrir la página de ejemplo de ${w.name}, ${w.niche}">
+    <a class="dev" href="portafolio/${w.slug}/" aria-label="${w.niche} ${w.name}: abrir la página de ejemplo">
       <span class="scr"><span class="ph" aria-hidden="true"><small>${w.niche}</small><b>${w.name}</b></span><iframe data-src="portafolio/${w.slug}/?preview" title="Vista previa de ${w.name}" tabindex="-1" aria-hidden="true"></iframe></span>
       <span class="isl" aria-hidden="true"></span><span class="gl" aria-hidden="true"></span>
     </a>

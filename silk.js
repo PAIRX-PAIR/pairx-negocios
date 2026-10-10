@@ -280,8 +280,10 @@
   // Rendimiento: el patrón es una seda suave, así que se dibuja a baja resolución y el navegador la escala
   // (50 % en escritorio, 40 % en táctiles), a máximo 30 cuadros por segundo, y solo mientras se ve.
   var coarse = matchMedia("(pointer: coarse)").matches;
-  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var SCALE = coarse ? 0.4 : 0.5, STEP = 1000 / 30;
+  // En celulares y equipos modestos la seda se dibuja una sola vez (imagen fija): misma estética, cero trabajo continuo.
+  var lowPower = coarse || (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4;
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches || lowPower;
+  var SCALE = coarse ? 0.5 : 0.5, STEP = 1000 / 30;
   var W = 0, H = 0;
   function resize() {
     var w = Math.max(1, Math.round(canvas.clientWidth * SCALE)), h = Math.max(1, Math.round(canvas.clientHeight * SCALE));
@@ -297,9 +299,9 @@
   function frame(now) {
     raf = 0;
     if (now - last >= STEP - 2) { last = now; draw(now); }
-    if (!reduce && visible && onScreen > 0) raf = requestAnimationFrame(frame);
+    if (!reduce && !scrolling && visible && onScreen > 0) raf = requestAnimationFrame(frame);
   }
-  function start() { if (!raf && !reduce && visible && onScreen > 0) raf = requestAnimationFrame(frame); }
+  function start() { if (!raf && !reduce && !scrolling && visible && onScreen > 0) raf = requestAnimationFrame(frame); }
   function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
 
   // Solo animar cuando alguna sección oscura (donde se ve el fondo) está en pantalla
@@ -315,7 +317,12 @@
   }
   onScreen = darks.length ? 1 : 0;
   setInterval(function () { if (visible) check(); }, 400);
-  window.addEventListener("scroll", function () { if (!raf && visible) check(); }, { passive: true });
+  // Mientras se hace scroll, la animación se pausa para que el desplazamiento vaya fluido
+  var scrolling = 0, scrollT = 0;
+  window.addEventListener("scroll", function () {
+    scrolling = 1; stop(); clearTimeout(scrollT);
+    scrollT = setTimeout(function () { scrolling = 0; check(); start(); }, 180);
+  }, { passive: true });
 
   document.addEventListener("visibilitychange", function () {
     if (document.hidden) { visible = false; pausedAt = performance.now(); stop(); }
