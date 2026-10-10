@@ -829,7 +829,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 </section>
 
 <!-- ======================= MARQUESINA ======================= -->
-<div class="band" aria-label="Hacemos páginas para panaderías, barberías, talleres, floristerías, restaurantes, ferreterías, peluquerías, veterinarias, papelerías, tiendas de barrio, consultorios, gimnasios y emprendimientos">
+<div class="band" aria-label="Hacemos páginas para panaderías, barberías, talleres, floristerías, restaurantes, ferreterías, peluquerías, veterinarias, papelerías, tiendas de barrio, consultorios, gimnasios, tiendas de ropa y emprendimientos">
   <div class="band-track" id="band" aria-hidden="true"></div>
 </div>
 
@@ -1043,12 +1043,12 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 <section class="folio s-crimson" id="portafolio" aria-labelledby="folio-title">
   <div class="wrap folio-head">
     <div>
-      <p class="eyebrow" data-reveal>Portafolio · 12 giros</p>
+      <p class="eyebrow" data-reveal>Portafolio · 13 giros</p>
       <h2 class="h2" id="folio-title" data-split>¿No sabes qué pedir? <em>Mira nuestro</em> <span class="nw"><em>portafolio</em>.</span></h2>
     </div>
     <div data-reveal style="--i:2">
-      <p class="lead">Doce páginas completas, una por giro. Encuentra la tuya, pasa el cursor para recorrerla y dinos “quiero una así”. Los negocios son ficticios; el diseño y las funciones, no.</p>
-      <div class="rail-ctl"><button type="button" id="reelPrev" aria-label="Trabajo anterior">←</button><span class="mono" id="reelCount" aria-live="polite">01 / 12</span><button type="button" id="reelNext" aria-label="Trabajo siguiente">→</button></div>
+      <p class="lead">Trece páginas completas, una por giro. Encuentra la tuya, pasa el cursor para recorrerla y dinos “quiero una así”. Los negocios son ficticios; el diseño y las funciones, no.</p>
+      <div class="rail-ctl"><button type="button" id="reelPrev" aria-label="Trabajo anterior">←</button><span class="mono" id="reelCount" aria-live="polite">01 / 13</span><button type="button" id="reelNext" aria-label="Trabajo siguiente">→</button></div>
     </div>
   </div>
   <div class="reel" id="reel" tabindex="0" role="region" aria-label="Trabajos del portafolio; desliza para ver más"></div>
@@ -1065,7 +1065,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
       <p class="eyebrow" data-reveal>Cotiza en un minuto</p>
       <h2 class="h2" id="quote-title" data-split>Calcula el precio de <em>tu</em> <span class="nw"><em>página</em>.</span></h2>
       <p class="lead" data-reveal>Elige un plan, súmale lo que tu negocio necesite y mira el total al instante. Después nos lo mandas por WhatsApp y lo afinamos juntos.</p>
-      <a class="folio-link" href="#portafolio" data-reveal style="--i:2"><span><b>¿No sabes qué pedir?</b>Mira 12 páginas de ejemplo, una por giro</span><i aria-hidden="true">→</i></a>
+      <a class="folio-link" href="#portafolio" data-reveal style="--i:2"><span><b>¿No sabes qué pedir?</b>Mira 13 páginas de ejemplo, una por giro</span><i aria-hidden="true">→</i></a>
 
       <p class="qlabel" id="ql-plan">1 · Tu plan</p>
       <div class="qplans" role="radiogroup" aria-labelledby="ql-plan" id="qplans"></div>
@@ -1342,6 +1342,7 @@ if (fine && !reduce) $$(".magnet").forEach(b => {
 
 /* ===================== Negocios de ejemplo ===================== */
 const ART = {
+  ropa: () => `<svg viewBox="0 0 200 140"><ellipse cx="100" cy="128" rx="74" ry="6" fill="#000" opacity=".2"/><path d="M28 30h144" stroke="#171412" stroke-width="5" stroke-linecap="round"/><path d="M66 30v10l-26 18h52L66 40" fill="none" stroke="#6a6058" stroke-width="3" stroke-linejoin="round"/><path d="M52 50l-14 8 5 12 7-3v50h32V67l7 3 5-12-14-8c-2 5-6 8-14 8s-12-3-14-8z" fill="#b8442b"/><path d="M134 30v10l-24 16h48L134 40" fill="none" stroke="#6a6058" stroke-width="3" stroke-linejoin="round"/><path d="M124 56h20l-2 14 20 50h-56l20-50z" fill="#e9d8c4"/><path d="M124 70h20" stroke="#171412" stroke-width="4"/></svg>`,
   pan: () => `<svg viewBox="0 0 200 140"><ellipse cx="96" cy="124" rx="76" ry="7" fill="#000" opacity=".2"/><path d="M26 108c0-36 38-56 70-56s70 20 70 56c0 9-140 9-140 0z" fill="#d99a4e"/><path d="M26 108c0-36 38-56 70-56s70 20 70 56" fill="none" stroke="#8a4a1a" stroke-width="3"/><path d="M58 80l12 20M88 70l12 24M118 72l12 22" stroke="#f6dcae" stroke-width="6" stroke-linecap="round"/><circle cx="158" cy="46" r="24" fill="#f3d9a8"/><circle cx="158" cy="46" r="24" fill="none" stroke="#c9915a" stroke-width="2"/><path d="M142 38h32M139 48h38M144 58h28M150 26v40M160 23v46M170 28v36" stroke="#c9915a" stroke-width="2.2" stroke-linecap="round" opacity=".75"/></svg>`,
   barber: id => `<svg viewBox="0 0 200 140"><defs><clipPath id="${id}"><rect x="38" y="16" width="28" height="104" rx="14"/></clipPath></defs><ellipse cx="100" cy="126" rx="70" ry="6" fill="#000" opacity=".35"/><rect x="38" y="16" width="28" height="104" rx="14" fill="#f1ece4"/><g clip-path="url(#${id})" stroke="#c0392b" stroke-width="8"><path d="M30 30l44-22M30 54l44-22M30 78l44-22M30 102l44-22M30 126l44-22"/></g><rect x="34" y="10" width="36" height="9" rx="4" fill="#d6a54a"/><rect x="34" y="117" width="36" height="9" rx="4" fill="#d6a54a"/><g transform="translate(132 72) rotate(-28)"><circle cx="-34" cy="-14" r="13" fill="none" stroke="#d6a54a" stroke-width="7"/><circle cx="-34" cy="14" r="13" fill="none" stroke="#d6a54a" stroke-width="7"/><path d="M-22 -8L44 16M-22 8L44 -16" stroke="#e8e8ea" stroke-width="7" stroke-linecap="round"/><circle cx="8" cy="0" r="4" fill="#14161a"/></g></svg>`,
   taller: () => `<svg viewBox="0 0 200 140"><ellipse cx="100" cy="126" rx="72" ry="6" fill="#000" opacity=".3"/><circle cx="78" cy="68" r="36" fill="none" stroke="#e09a1a" stroke-width="12" stroke-dasharray="9.2 6.9"/><circle cx="78" cy="68" r="30" fill="#e09a1a"/><circle cx="78" cy="68" r="11" fill="#12263a"/><g transform="translate(146 70) rotate(38)"><rect x="-7" y="-6" width="14" height="66" rx="7" fill="#d9e0e7"/><path d="M-20 -24a20 20 0 1 0 40 0h-9v11h-22v-11z" fill="#d9e0e7"/></g></svg>`,
@@ -1353,7 +1354,8 @@ const BIZ = [
   { id: "barber", slug: "barberia", label: "Barbería", name: "Navaja Norte", domain: "navajanorte.co", tag: "Fade, clásico y barba. Agenda en dos toques.", hours: "Abierto · cierra 9:00 p. m.", rating: "4,8", reviews: "168", bg: "#14161a", ink: "#f1ece4", acc: "#d6a54a", soft: "#262a31", hero: "linear-gradient(160deg,#2f343d,#0d0f12)", items: [["Corte", "$25.000"], ["Barba", "$15.000"], ["Corte + barba", "$40.000"]], toasts: [["p", "Cita nueva", "Jueves 6:30 p. m. · Corte + barba"], ["w", "WhatsApp", "¿Atienden sin cita hoy?"], ["r", "Reseña", "★★★★★ “El mejor fade del barrio”"]] },
   { id: "taller", slug: "taller", label: "Taller", name: "Mecánica Ruiz", domain: "mecanicaruiz.co", tag: "Frenos, aceite y diagnóstico. Precio antes de tocar tu carro.", hours: "Abierto · cierra 6:00 p. m.", rating: "4,9", reviews: "97", bg: "#eef1f4", ink: "#12263a", acc: "#c47f0c", soft: "#dae1e8", hero: "linear-gradient(160deg,#2c5375,#12263a)", items: [["Cambio de aceite", "$120.000"], ["Frenos", "$180.000"], ["Diagnóstico", "$60.000"]], toasts: [["p", "Cotización", "Pastillas de freno · Spark GT"], ["c", "Llamada", "Desde tu página · 2 min"], ["m", "Google Maps", "Alguien pidió cómo llegar"]] },
   { id: "flor", slug: "floristeria", label: "Floristería", name: "Flor de Mayo", domain: "flordemayo.co", tag: "Arreglos del día, con domicilio en tu barrio.", hours: "Abierto · cierra 7:00 p. m.", rating: "5,0", reviews: "134", bg: "#fbf1f2", ink: "#4a1426", acc: "#b23a5b", soft: "#f2dce2", hero: "linear-gradient(160deg,#f8d3dc,#de8299)", items: [["Ramo del día", "$65.000"], ["Arreglo en caja", "$120.000"], ["Domicilio", "$8.000"]], toasts: [["p", "Pedido", "Ramo de rosas · entrega 4:00 p. m."], ["w", "WhatsApp", "¿Hacen arreglos para eventos?"], ["$", "Pago recibido", "$120.000 · Arreglo en caja"]] },
-  { id: "fogon", slug: "restaurante", label: "Comidas rápidas", name: "El Fogón", domain: "elfogon.co", tag: "Hamburguesas al carbón y domicilios hasta la medianoche.", hours: "Abierto · cierra 12:00 a. m.", rating: "4,7", reviews: "389", bg: "#1f140e", ink: "#fbeee0", acc: "#f0592a", soft: "#33231a", hero: "linear-gradient(160deg,#f7b733,#e2412a)", items: [["Hamburguesa", "$18.000"], ["Perro caliente", "$14.000"], ["Salchipapa", "$16.000"]], toasts: [["p", "Domicilio", "2 hamburguesas · Cra. 15 # 82"], ["w", "WhatsApp", "¿Hasta qué hora atienden?"], ["r", "Reseña", "★★★★★ “La salsa de la casa, increíble”"]] }
+  { id: "fogon", slug: "restaurante", label: "Comidas rápidas", name: "El Fogón", domain: "elfogon.co", tag: "Hamburguesas al carbón y domicilios hasta la medianoche.", hours: "Abierto · cierra 12:00 a. m.", rating: "4,7", reviews: "389", bg: "#1f140e", ink: "#fbeee0", acc: "#f0592a", soft: "#33231a", hero: "linear-gradient(160deg,#f7b733,#e2412a)", items: [["Hamburguesa", "$18.000"], ["Perro caliente", "$14.000"], ["Salchipapa", "$16.000"]], toasts: [["p", "Domicilio", "2 hamburguesas · Cra. 15 # 82"], ["w", "WhatsApp", "¿Hasta qué hora atienden?"], ["r", "Reseña", "★★★★★ “La salsa de la casa, increíble”"]] },
+  { id: "ropa", slug: "ropa", label: "Tienda de ropa", name: "Trama", domain: "trama.co", tag: "Ropa que se siente tuya. Separa tu talla por WhatsApp.", hours: "Abierto · cierra 8:00 p. m.", rating: "4,9", reviews: "214", bg: "#f3eee7", ink: "#171412", acc: "#b8442b", soft: "#e9d8c4", hero: "linear-gradient(160deg,#efe2d1,#d9b79a)", items: [["Camisa de lino", "$99.000"], ["Vestido midi", "$129.000"], ["Tenis blancos", "$159.000"]], toasts: [["p", "Pedido", "Vestido midi · talla S · envío"], ["w", "WhatsApp", "¿Tienen la camisa en talla L?"], ["$", "Pago recibido", "$99.000 · Camisa de lino"]] }
 ];
 let uid = 0;
 const vars = b => `--m-bg:${b.bg};--m-ink:${b.ink};--m-acc:${b.acc};--m-soft:${b.soft};--m-hero:${b.hero}`;
@@ -1458,7 +1460,7 @@ tilt.tick = (dt, t) => {
 if (!reduce) watch(stage, tilt); else rig.style.transform = "rotateX(3deg) rotateY(-6deg)";
 
 /* ===================== Marquesina reactiva al scroll ===================== */
-const NICHOS = ["Panaderías", "Barberías", "Talleres", "Floristerías", "Restaurantes", "Ferreterías", "Peluquerías", "Veterinarias", "Papelerías", "Tiendas de barrio", "Consultorios", "Gimnasios", "Emprendimientos"];
+const NICHOS = ["Panaderías", "Barberías", "Talleres", "Floristerías", "Restaurantes", "Ferreterías", "Peluquerías", "Veterinarias", "Papelerías", "Tiendas de barrio", "Consultorios", "Gimnasios", "Tiendas de ropa", "Emprendimientos"];
 const band = $("#band");
 band.innerHTML = (NICHOS.map(n => `<span>${n}</span>`).join("")).repeat(2);
 const mq = { x: 0, dir: 1, boost: 0, skew: 0, active: false, half: 0 };

@@ -203,5 +203,22 @@ window.PAIRX_WORKS = [
    "#f4f4f0"
   ],
   "art": "barra"
+ },
+ {
+  "slug": "ropa",
+  "cat": "Comercio",
+  "niche": "Tienda de ropa",
+  "name": "Trama",
+  "barrio": "El Prado",
+  "city": "Barranquilla",
+  "layout": "poster",
+  "tagline": "Ropa que se siente tuya.",
+  "sub": "Colecciones cortas para mujer y hombre, tallas XS a XXL. Separa tu talla por WhatsApp y te la enviamos o la recoges.",
+  "colors": [
+   "#f3eee7",
+   "#b8442b",
+   "#171412"
+  ],
+  "art": "camisa"
  }
 ];
