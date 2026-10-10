@@ -533,6 +533,9 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 .qlines p,.qtot p{font-family:var(--sans);font-size:.95rem;font-variant-numeric:tabular-nums}
 .qtot .mono{font:700 1.1rem/1 var(--sans)}
 .plans-cot{margin-top:18px;max-width:560px}
+.legal-links{display:flex;flex-wrap:wrap;gap:6px 18px}
+.legal-links a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.legal-links a:hover{color:var(--cream)}
 .qnote{margin-top:12px;font-size:.72rem;color:#6d655e;text-align:center}
 .qactions{display:grid;gap:10px;margin-top:22px}
 .qactions .btn{justify-content:center}
@@ -1147,7 +1150,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
         <div class="qtot">
           <p><span>Precio</span><span class="big">COTIZACIÓN</span></p>
         </div>
-        <p class="qnote" id="qnote">Te enviamos el precio según lo que necesites · sin compromiso</p>
+        <p class="qnote" id="qnote">Te enviamos el precio según lo que necesites · sin compromiso · <a href="legal/terminos/" style="color:inherit;text-decoration:underline">términos</a></p>
         <div class="barcode" aria-hidden="true"></div>
       </div>
       <div class="qactions">
@@ -1249,7 +1252,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
         <div class="field full"><label for="f-msg">Cuéntanos más <span>(opcional)</span></label><textarea id="f-msg" name="msg" placeholder="Ej.: Tengo una panadería y quiero que me hagan pedidos por WhatsApp."></textarea></div>
       </div>
       <div class="send">
-        <small>Se abrirá WhatsApp con tu mensaje listo para enviar. No guardamos tus datos en esta página.</small>
+        <small>Se abrirá WhatsApp con tu mensaje listo para enviar. No guardamos tus datos en esta página. Al enviarlo, autorizas el tratamiento de tus datos según nuestra <a href="legal/privacidad/" style="color:var(--crimson);font-weight:600">política de datos personales</a>.</small>
         <button class="btn btn-primary magnet" type="submit" id="fSubmit"><span class="btn-in"><span class="spin" aria-hidden="true"></span><span class="lbl">Enviar por WhatsApp</span> <span class="arw">→</span></span></button>
       </div>
       <div class="done" id="done" role="status" aria-live="polite">
@@ -1270,7 +1273,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
       <nav aria-label="Pie de página"><a href="#top">Inicio</a><a href="#planes">Planes</a><a href="#portafolio">Portafolio</a><a href="#cotiza">Cotiza</a><a href="#preguntas">Preguntas</a><a href="#contacto">Contacto</a></nav>
     </div>
     <p class="word" id="word" aria-hidden="true"><span style="--i:0">P</span><span style="--i:1">a</span><span style="--i:2">i</span><span style="--i:3">r</span><span style="--i:4">X</span></p>
-    <div class="legal"><span>© <span id="year">2026</span> PairX</span><span>Negocios y precios de esta página son ejemplos ilustrativos</span></div>
+    <div class="legal"><span>© <span id="year">2026</span> PairX</span><nav class="legal-links" aria-label="Legal"><a href="legal/privacidad/">Datos personales</a><a href="legal/terminos/">Términos y condiciones</a><a href="legal/cookies/">Cookies</a><a href="legal/">PQR</a></nav><span>Los negocios del portafolio son ejemplos ilustrativos</span></div>
   </div>
 </footer>
 
