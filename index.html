@@ -280,6 +280,13 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 .slip .tot{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;font-weight:600}
 .slip .tot b{font-size:1.5rem;line-height:1;color:var(--crimson)}
 .slip .foot{margin-top:16px;font-size:.74rem;color:#6d655e;text-align:center}
+.slip .cols{display:flex;justify-content:space-between;font-size:.68rem;letter-spacing:.1em;color:#6d655e;margin-bottom:6px}
+.slip li small{display:block;margin-top:3px;font-size:.72rem;line-height:1.4;color:#1f7a45}
+.slip li b{color:var(--crimson)}
+.slip .tot b{display:inline;font-size:1rem;margin-right:4px}
+.loss .how{margin-top:28px;padding:18px 20px;border-radius:14px;background:rgba(176,18,44,.06);box-shadow:inset 3px 0 0 var(--crimson)}
+.loss .how-t{font:600 .78rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--crimson);margin-bottom:10px}
+.loss .how p:last-child{color:var(--muted);font-size:.98rem;line-height:1.6}
 .barcode{height:40px;margin:16px auto 0;width:78%;background:repeating-linear-gradient(90deg,#26211d 0 2px,transparent 2px 4px,#26211d 4px 5px,transparent 5px 8px,#26211d 8px 11px,transparent 11px 12px,#26211d 12px 13px,transparent 13px 16px)}
 
 /* ==========================================================================
@@ -853,7 +860,11 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
       <p class="eyebrow" data-reveal>El problema</p>
       <h2 class="h2" id="loss-title" data-split>Tus clientes te buscan <em>primero</em> en internet.</h2>
       <p class="lead" data-reveal>Antes de cruzar la calle, tu próximo cliente ya te buscó en el celular. Si no te encuentra, encuentra a otro. Eso no sale en tu caja, pero se nota.</p>
-      <div class="note" data-reveal style="--i:2"><span>→ Horario y dirección siempre a la mano</span><span>→ Pedidos directo a tu WhatsApp</span></div>
+      <div class="how" data-reveal style="--i:2">
+        <p class="how-t">¿Cómo leer el tiquete?</p>
+        <p>Es como la factura de un día normal, pero de lo que <b>no</b> vendiste. Cada línea es una persona que quería comprarte y se fue porque no te encontró en internet. Debajo de cada una ves cómo lo resuelve tu página.</p>
+      </div>
+      <div class="note" data-reveal style="--i:3"><span>→ Horario y dirección siempre a la mano</span><span>→ Pedidos directo a tu WhatsApp</span></div>
     </div>
     <div class="printer" id="printer" aria-label="Tiquete ilustrativo de lo que pierde un negocio sin página web">
       <div class="printer-mouth" aria-hidden="true"><i></i></div>
@@ -862,15 +873,16 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
           <h3>LO QUE PIERDES SIN PÁGINA</h3>
           <p class="sub" id="slip-date">Tu negocio · hoy</p>
           <hr>
+          <p class="cols"><span>LO QUE PASÓ</span><span>CLIENTES</span></p>
           <ul>
-            <li><span>Buscó “panadería cerca” y llegó a otra</span><b>1</b></li>
-            <li><span>Preguntó el horario a las 11:40 p. m.</span><b>1</b></li>
-            <li><span>No vio el menú y no pidió</span><b>1</b></li>
-            <li><span>Quiso recomendarte y no tenía qué mandar</span><b>1</b></li>
+            <li><span>Buscó “panadería cerca” y llegó a otra<small>Con página: apareces en Google y en Maps.</small></span><b>−1</b></li>
+            <li><span>Preguntó el horario a las 11:40 p. m. y nadie respondió<small>Con página: el horario está siempre visible.</small></span><b>−1</b></li>
+            <li><span>No vio el menú ni los precios y no pidió<small>Con página: ve tu catálogo y pide por WhatsApp.</small></span><b>−1</b></li>
+            <li><span>Quiso recomendarte y no tenía qué enlace mandar<small>Con página: comparte tu enlace en un toque.</small></span><b>−1</b></li>
           </ul>
           <hr>
-          <div class="tot"><span>TOTAL</span><span>Clientes que no sabían que existías</span></div>
-          <p class="foot">Esto pasa todos los días · Gracias por su visita</p>
+          <div class="tot"><span>TOTAL</span><span><b>−4</b> clientes que no supieron que existías</span></div>
+          <p class="foot">Ejemplo de un día cualquiera · Con tu página, cada línea es una venta</p>
           <div class="barcode" aria-hidden="true"></div>
         </div>
       </div>
