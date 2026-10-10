@@ -418,6 +418,41 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 .tag.custom .price{border-color:var(--night-line-2)}
 .tag.custom .feat li::before{color:var(--crimson-fresh)}
 .tag.custom .btn-ghost{--fg:var(--cream);--ln-2:var(--night-line-2)}
+/* Sastrería: metro, tallas y test */
+.rail{height:24px;border-radius:3px;background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0) 40%,rgba(0,0,0,.18)),repeating-linear-gradient(90deg,#1d1916 0 1.5px,transparent 1.5px 100%) 0 0/50px 11px repeat-x,repeating-linear-gradient(90deg,#1d1916 0 1px,transparent 1px 100%) 0 0/10px 6px repeat-x,#f2c14e;box-shadow:0 10px 18px -6px rgba(0,0,0,.8);overflow:hidden}
+.rail::before,.rail::after{top:-4px;height:32px;background:linear-gradient(90deg,#9a9a9a,#e8e8e8 45%,#8a8a8a)}
+.tape-n{position:absolute;left:0;right:0;bottom:2px;display:flex;justify-content:space-between;padding:0 4px;font:600 .55rem/1 var(--mono);color:#1d1916;pointer-events:none}
+.tape-n i{font-style:normal;width:0;display:flex;justify-content:center}
+.size{display:flex;align-items:center;gap:14px;padding:16px 0;border-block:1.5px dashed #c9bfb3}
+.sz{flex:none;display:grid;place-items:center;width:66px;height:66px;border-radius:50%;border:2.5px solid currentColor;font:700 1.9rem/1 var(--sans);letter-spacing:-.05em;box-shadow:inset 0 0 0 4px var(--surface),inset 0 0 0 5.5px currentColor}
+.sz-l{font:600 .74rem/1.25 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.sz-q{margin-top:6px;font-size:.86rem;line-height:1.4;color:var(--ink-muted)}
+.tag.hot .size{border-color:rgba(255,253,249,.35)}
+.tag.hot .sz{box-shadow:inset 0 0 0 4px var(--crimson),inset 0 0 0 5.5px #fff}
+.tag.hot .sz-q{color:rgba(255,253,249,.8)}
+.tag.custom .size{border-color:var(--night-line-2)}
+.tag.custom .sz{font-size:1.5rem;color:var(--crimson-fresh);box-shadow:inset 0 0 0 4px var(--night-3),inset 0 0 0 5.5px var(--crimson-fresh)}
+.tag.custom .sz-q{color:var(--cream-muted)}
+.size{position:relative}
+.fitstamp{position:absolute;right:-4px;top:-16px;z-index:2;background:inherit;padding:6px 10px;border:2.5px double currentColor;border-radius:4px;font:700 .72rem/1 var(--mono);letter-spacing:.12em;color:var(--crimson);rotate:-10deg;opacity:0;scale:1.8;transition:opacity .25s ease,scale .35s cubic-bezier(.2,1.6,.4,1);pointer-events:none}
+.tag.hot .fitstamp{color:#fff}
+.tag.custom .fitstamp{color:var(--crimson-fresh)}
+.tag.match .fitstamp{opacity:1;scale:1}
+.tag-shadow{transition:background-color .4s ease}
+.tag.match .tag-shadow{background:rgba(224,38,63,.75)}
+.fitq{width:min(430px,100%);padding:18px 20px 20px;border-radius:18px;background:var(--night-2);box-shadow:inset 0 0 0 1px var(--night-line)}
+.fitq-t{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px;font:600 1.1rem/1.2 var(--sans);color:var(--cream)}
+.fitq-t span{font:500 .7rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--cream-muted)}
+.fq{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--night-line);font-size:.92rem;line-height:1.35;color:var(--cream)}
+.yn{display:flex;gap:6px;flex:none}
+.yn button{min-width:52px;min-height:44px;padding:0 12px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--night-line-2);font-weight:600;font-size:.88rem;color:var(--cream-muted);transition:background-color .2s ease,color .2s ease,transform .14s var(--ease-out)}
+.yn button:active{transform:scale(.95)}
+.yn button[aria-pressed="true"]{background:var(--crimson);color:#fff;box-shadow:none}
+.fitq-r{margin-top:12px;font-size:.92rem;line-height:1.45;color:var(--cream-muted)}
+.fitq-r b{color:var(--cream)}
+#fitqGo{width:100%;margin-top:12px;justify-content:center}
+@media (max-width:760px){.tape-n i:nth-child(even){visibility:hidden}.fq{font-size:.88rem}}
+@media (prefers-reduced-motion:reduce){.fitstamp{transition:none}}
 .maint{margin-top:56px;display:grid;grid-template-columns:auto 1fr;gap:20px 36px;align-items:center;padding:24px 28px;border-radius:var(--radius-md);box-shadow:inset 0 0 0 1px var(--night-line)}
 .maint h3{font:600 1.1rem/1.2 var(--sans)}
 .maint ul{display:flex;flex-wrap:wrap;gap:8px 22px;color:var(--cream-muted);font-size:.93rem}
@@ -952,19 +987,26 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
       <div>
         <p class="eyebrow" data-reveal>Planes</p>
         <h2 class="h2" id="plans-title" data-split>Planes que se ajustan a <em>lo que</em> <span class="nw"><em>vendes</em>.</span></h2>
-        <p class="lead plans-cot" data-reveal style="--i:1">Cada negocio es distinto, por eso <b>no manejamos precios fijos</b>: cotizamos tu página según lo que necesites, sin compromiso y por WhatsApp.</p>
+        <p class="lead plans-cot" data-reveal style="--i:1">Cada negocio es distinto, por eso <b>no manejamos precios fijos</b>. Como en una sastrería: tomamos tus medidas y te cotizamos la página a tu talla, sin compromiso y por WhatsApp.</p>
       </div>
-      <div class="pay" data-reveal style="--i:2"><a class="btn btn-primary magnet" href="#cotiza"><span class="btn-in">Pedir mi cotización <span class="arw">→</span></span></a></div>
+      <div class="fitq" data-reveal style="--i:2" role="group" aria-labelledby="fitq-t">
+        <p class="fitq-t" id="fitq-t">¿Cuál es tu talla? <span>3 preguntas</span></p>
+        <div class="fq" data-q="catalog"><span>¿Tienes menú o catálogo con precios?</span><div class="yn"><button type="button" data-v="1" aria-pressed="false">Sí</button><button type="button" data-v="0" aria-pressed="false">No</button></div></div>
+        <div class="fq" data-q="online"><span>¿Quieres vender y cobrar en línea?</span><div class="yn"><button type="button" data-v="1" aria-pressed="false">Sí</button><button type="button" data-v="0" aria-pressed="false">No</button></div></div>
+        <div class="fq" data-q="special"><span>¿Varias sedes o algo muy especial?</span><div class="yn"><button type="button" data-v="1" aria-pressed="false">Sí</button><button type="button" data-v="0" aria-pressed="false">No</button></div></div>
+        <p class="fitq-r" id="fitqR" aria-live="polite">Responde y te mostramos qué talla le queda a tu negocio.</p>
+        <a class="btn btn-primary" id="fitqGo" href="#cotiza" data-pick="local" hidden><span class="btn-in">Cotizar mi talla <span class="arw">→</span></span></a>
+      </div>
     </div>
 
-    <div class="rail" aria-hidden="true"></div>
+    <div class="rail" aria-hidden="true"><span class="tape-n"><i>0</i><i>10</i><i>20</i><i>30</i><i>40</i><i>50</i><i>60</i><i>70</i><i>80</i><i>90</i><i>100</i><i>110</i><i>120</i><i>130</i><i>140</i><i>150</i><i>160</i><i>170</i><i>180</i><i>190</i><i>200</i></span></div>
     <div class="tags" id="tags">
       <article class="tag" style="--i:0" data-plan="vitrina">
         <div class="tag-shadow" aria-hidden="true"></div>
         <div class="card">
           <div class="nm"><h3>Vitrina</h3><span class="k">Para empezar</span></div>
           <p class="for">Para existir en internet: quién eres, dónde estás y cómo escribirte.</p>
-          <div class="price"><div class="big" style="font-size:1.7rem">Cotización</div><p class="sub">Según lo que necesites</p></div>
+          <div class="size"><span class="fitstamp" aria-hidden="true">TU TALLA</span><span class="sz">S</span><div><p class="sz-l">Talla S · ajuste básico</p><p class="sz-q">Precio a tu medida: lo cotizamos según lo que necesites</p></div></div>
           <ul class="feat">
             <li>Página única con tus secciones clave</li>
             <li>Botón de WhatsApp y llamada</li>
@@ -983,7 +1025,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
           <span class="stamp" aria-hidden="true">RECOMENDADO</span>
           <div class="nm"><h3>Local</h3></div>
           <p class="for">Para el negocio que ya tiene clientela y quiere que lo recomienden más.</p>
-          <div class="price"><div class="big" style="font-size:1.7rem">Cotización</div><p class="sub">Según lo que necesites</p></div>
+          <div class="size"><span class="fitstamp" aria-hidden="true">TU TALLA</span><span class="sz">M</span><div><p class="sz-l">Talla M · la más pedida</p><p class="sz-q">Precio a tu medida: lo cotizamos según lo que necesites</p></div></div>
           <ul class="feat">
             <li>Todo lo de Vitrina</li>
             <li>Hasta 5 secciones o páginas</li>
@@ -1000,7 +1042,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
         <div class="card">
           <div class="nm"><h3>Tienda</h3><span class="k">Vende en línea</span></div>
           <p class="for">Para vender en internet, también mientras duermes.</p>
-          <div class="price"><div class="big" style="font-size:1.7rem">Cotización</div><p class="sub">Según lo que necesites</p></div>
+          <div class="size"><span class="fitstamp" aria-hidden="true">TU TALLA</span><span class="sz">L</span><div><p class="sz-l">Talla L · para vender</p><p class="sz-q">Precio a tu medida: lo cotizamos según lo que necesites</p></div></div>
           <ul class="feat">
             <li>Todo lo de Local</li>
             <li>Tienda en línea con carrito</li>
@@ -1017,7 +1059,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
         <div class="card">
           <div class="nm"><h3>A medida</h3><span class="k">Hablemos</span></div>
           <p class="for">¿Varias sedes, reservas, domicilios propios o algo especial?</p>
-          <div class="price"><div class="big" style="font-size:1.7rem">Cotización</div><p class="sub">Según lo que necesites</p></div>
+          <div class="size"><span class="fitstamp" aria-hidden="true">TU TALLA</span><span class="sz">XL</span><div><p class="sz-l">Sastrería · hecha a mano</p><p class="sz-q">Te tomamos medidas y cotizamos todo a tu forma</p></div></div>
           <ul class="feat">
             <li>Varias sedes o franquicias</li>
             <li>Reservas y agenda en línea</li>
@@ -1597,6 +1639,27 @@ if (!reduce) {
     if (!e.isIntersecting) return; o.disconnect();
     swing.forEach((s, i) => setTimeout(() => kick(s, (i % 2 ? -1 : 1) * 26), 380 + i * 110));
   }, { threshold: .25 }).observe($("#tags"));
+}
+
+/* ===================== ¿Cuál es tu talla? ===================== */
+{
+  const ans = {}, R = $("#fitqR"), go = $("#fitqGo");
+  const SIZES = { vitrina: ["S", "Vitrina"], local: ["M", "Local"], tienda: ["L", "Tienda"], medida: ["XL", "A medida"] };
+  $$(".fq").forEach(q => q.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    $$("button", q).forEach(x => x.setAttribute("aria-pressed", x === b));
+    ans[q.dataset.q] = b.dataset.v === "1";
+    if (Object.keys(ans).length < 3) { R.textContent = "Te falta " + (3 - Object.keys(ans).length === 1 ? "1 pregunta." : (3 - Object.keys(ans).length) + " preguntas."); return; }
+    const plan = ans.special ? "medida" : ans.online ? "tienda" : ans.catalog ? "local" : "vitrina";
+    const [sz, name] = SIZES[plan];
+    R.innerHTML = `Tu talla es <b>${sz} · ${name}</b>. Te la cotizamos a tu medida, sin compromiso.`;
+    go.hidden = false; go.dataset.pick = plan; $(".btn-in", go).firstChild.textContent = `Cotizar talla ${sz} `;
+    go.setAttribute("href", plan === "medida" ? "#contacto" : "#cotiza");
+    $$(".tag[data-plan]").forEach((t, i) => {
+      const on = t.dataset.plan === plan; t.classList.toggle("match", on);
+      if (on && typeof kick === "function" && swing[i]) kick(swing[i], 22);
+    });
+  }));
 }
 
 /* ===================== Cotizador ===================== */
