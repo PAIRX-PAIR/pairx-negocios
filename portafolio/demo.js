@@ -143,8 +143,57 @@
     hero = '<div class="wrap hero-g"><div>' + head + ctas + meta + "</div>" + art + "</div>" + (S.layout === "playful" ? '<span class="blob-bg" style="width:380px;height:380px;left:-120px;top:40px;background:var(--acc-2)"></span><span class="blob-bg" style="width:260px;height:260px;right:-80px;bottom:-60px;background:var(--acc)"></span>' : "");
   }
 
+  /* ---------------- Personalidad: banner, nota del dueño y sección propia ---------------- */
+  if (S.banner || S.owner || S.special) {
+    var hf = document.createElement("link");
+    hf.rel = "stylesheet"; hf.href = "https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap";
+    document.head.appendChild(hf);
+  }
+  if (S.css) { var sx = document.createElement("style"); sx.textContent = S.css; document.head.appendChild(sx); }
+  var B = S.banner, bannerHTML = "";
+  if (B) {
+    if (B.style === "ticker") {
+      var parts = B.text.split(" · "), run = parts.concat(parts, parts, parts);
+      bannerHTML = '<div class="d-banner b-ticker" role="note"><div class="tk" aria-hidden="true">' + run.map(function (p) { return "<span>" + esc(p) + "</span>"; }).join("") + '</div><span class="sr" style="position:absolute;left:-9999px">' + esc(B.text) + "</span></div>";
+    } else {
+      bannerHTML = '<div class="d-banner b-' + (B.style || "bar") + '" role="note"><div class="wrap">' + (B.tag ? "<b>" + esc(B.tag) + "</b>" : "") + "<span>" + esc(B.text) + "</span></div></div>";
+    }
+  }
+  var O = S.owner, ownerHTML = "";
+  if (O) {
+    var ini = O.name.replace(/^(Don|Doña|Dra\.|Dr\.)\s+/, "").split(/\s+y\s+|\s+/).filter(Boolean).slice(0, 2).map(function (w) { return w[0]; }).join("");
+    ownerHTML = '<section class="sec owner o-' + (O.style || "letter") + '" id="dueno"><div class="wrap own-g">' +
+      '<figure class="own-pic" data-r><div class="ph">' + icon(O.art || S.art[0]) + '<span class="ini" aria-hidden="true">' + esc(ini) + "</span></div><figcaption><b>" + esc(O.name) + "</b>" + esc(O.role) + "</figcaption></figure>" +
+      '<div class="own-note" data-r style="--i:1"><div class="card"><p class="kick">' + esc(O.kicker || "Del dueño") + '</p><p class="own-text">“' + esc(O.note) + '”</p><p class="own-sign hand">' + esc(O.sign) + "</p></div></div></div></section>";
+  }
+  var X = S.special, specialHTML = "";
+  if (X) {
+    var xh = '<div class="spc-h"><p class="kick" data-r>' + esc(X.kicker) + '</p><h2 class="d-display" data-r>' + X.title + "</h2>" + (X.text ? '<p class="t" data-r>' + esc(X.text) + "</p>" : "") + "</div>";
+    var xcta = X.cta ? '<div class="cta-row" data-r><button class="d-btn pri" type="button" data-wa="hola">' + wa + esc(X.cta) + "</button></div>" : "";
+    var body = "";
+    if (X.type === "promo") {
+      body = '<div class="promo" data-r><div><p class="kick">' + esc(X.kicker) + '</p><h2 class="d-display">' + X.title + "</h2><p>" + esc(X.text) + '</p><button class="d-btn" type="button" data-wa="hola">' + wa + esc(X.cta) + '</button></div><div class="pa">' + icon(X.art || S.art[0]) + (X.badge ? '<span class="badge">' + esc(X.badge) + "</span>" : "") + "</div></div>";
+    } else if (X.type === "chalk") {
+      body = '<div class="chalk" data-r>' + (X.badge ? '<span class="stamp">' + esc(X.badge) + "</span>" : "") + '<p class="ttl hand">' + esc(X.board || X.kicker) + "</p><ul>" + X.items.map(function (it) { return '<li class="hand"><span>' + esc(it[0]) + "</span><i></i><b>" + esc(it[1]) + "</b></li>"; }).join("") + "</ul></div>";
+      body = xh + body + xcta;
+    } else if (X.type === "notebook") {
+      body = xh + '<ul class="notebook" data-r>' + X.items.map(function (it) { return '<li class="hand"><i aria-hidden="true">✓</i>' + esc(it) + "</li>"; }).join("") + "</ul>" + xcta;
+    } else if (X.type === "dates") {
+      body = xh + '<div class="dates">' + X.items.map(function (it, i) { return '<div class="date" data-r style="--i:' + i + '"><span class="d">' + esc(it[0]) + "</span><h3>" + esc(it[1]) + "</h3><p>" + esc(it[2]) + "</p></div>"; }).join("") + "</div>" + xcta;
+    } else if (X.type === "steps") {
+      body = xh + '<div class="steps">' + X.items.map(function (it, i) { return '<div class="stp" data-r style="--i:' + i + '"><span class="n">' + (i + 1) + "</span><h3>" + esc(it[0]) + "</h3><p>" + esc(it[1]) + "</p></div>"; }).join("") + "</div>" + xcta;
+    } else if (X.type === "team") {
+      body = xh + '<div class="team">' + X.items.map(function (it, i) { return '<div class="mem" data-r style="--i:' + i + '"><span class="av" style="--art-bg:' + (it[3] || "var(--art-bg)") + '">' + esc(it[0][0]) + "</span><h3>" + esc(it[0]) + "</h3><small>" + esc(it[1]) + '</small><p class="hand">' + esc(it[2]) + "</p></div>"; }).join("") + "</div>" + xcta;
+    } else if (X.type === "spotlight") {
+      body = '<div class="spot"><div class="sp-art" data-r>' + icon(X.art || S.art[0]) + (X.badge ? '<span class="badge">' + esc(X.badge) + "</span>" : "") + '</div><div><p class="kick" data-r>' + esc(X.kicker) + '</p><h2 class="d-display" data-r>' + X.title + '</h2><p class="t" data-r>' + esc(X.text) + "</p><ul data-r>" + X.items.map(function (it) { return "<li><span>" + esc(it[0]) + "</span><b>" + esc(it[1]) + "</b></li>"; }).join("") + "</ul>" + (X.cta ? '<button class="d-btn pri" type="button" data-wa="hola" data-r>' + wa + esc(X.cta) + "</button>" : "") + "</div></div>";
+    } else if (X.type === "progress") {
+      body = xh + '<div class="prog" data-r>' + X.items.map(function (it) { return '<div class="bar-r"><span>' + esc(it[0]) + '</span><span class="tr"><i style="--w:' + it[2] + '%"></i></span><small>' + esc(it[1]) + "</small></div>"; }).join("") + "</div>" + (X.badge ? '<span class="prog-badge" data-r>' + esc(X.badge) + "</span>" : "") + xcta;
+    }
+    specialHTML = '<section class="sec spc alt" id="especial"><div class="wrap">' + body + "</div></section>";
+  }
+
   var tabs = S.catalog.tabs;
-  var html =
+  var html = bannerHTML +
     '<a class="sr" href="#catalogo" style="position:absolute;left:-9999px">Saltar al catálogo</a>' +
     '<header class="d-nav" id="nav"><div class="wrap"><a class="d-logo" href="#"><i>' + esc(S.mono) + "</i>" + esc(S.name) + '</a><nav class="d-links" aria-label="Secciones"><a href="#catalogo">' + esc(S.catalog.navLabel || "Catálogo") + '</a><a href="#nosotros">Nosotros</a><a href="#visitanos">Horario</a><a href="#preguntas">Preguntas</a></nav><button class="d-btn pri" type="button" data-wa="hola">' + wa + '<span class="l">' + esc(S.navCta || "Escríbenos") + "</span></button></div></header>" +
     "<main>" +
@@ -153,6 +202,7 @@
     '<section class="sec" id="catalogo"><div class="wrap"><div class="sec-h"><div><p class="kick" data-r>' + esc(S.catalog.kicker) + '</p><h2 class="d-display" data-r>' + S.catalog.title + '</h2></div><p data-r style="--i:2">' + esc(S.catalog.sub) + "</p></div>" +
     (tabs.length > 1 ? '<div class="tabs" role="tablist" aria-label="Categorías" data-r><span class="ind" aria-hidden="true"></span>' + tabs.map(function (t, i) { return '<button role="tab" aria-selected="' + (i === 0) + '" data-t="' + i + '">' + esc(t.name) + "</button>"; }).join("") + "</div>" : "") +
     '<div class="items" id="items" role="tabpanel"></div></div></section>' +
+    specialHTML + ownerHTML +
     '<section class="sec alt"><div class="wrap"><div class="feats">' + S.feats.map(function (f, i) { return '<div class="feat" data-r style="--i:' + i + '"><span class="n">0' + (i + 1) + "</span><h3>" + esc(f[0]) + "</h3><p>" + esc(f[1]) + "</p></div>"; }).join("") + "</div></div></section>" +
     '<section class="sec" id="nosotros"><div class="wrap about"><div class="art-card par" data-par="1" data-r style="--art-bg:' + S.about.bg + '">' + heroArt([S.art[1], S.art[2], S.art[0]]) + '</div><div><p class="kick" data-r>' + esc(S.about.kicker) + '</p><blockquote class="d-display" data-r style="margin-top:18px">' + S.about.quote + '</blockquote><p class="sig" data-r>' + esc(S.about.sig) + '</p><div class="facts" data-r>' + S.about.facts.map(function (f) { return "<div><b>" + esc(f[0]) + "</b><span>" + esc(f[1]) + "</span></div>"; }).join("") + "</div></div></div></section>" +
     '<section class="sec alt"><div class="wrap"><div class="sec-h"><div><p class="kick" data-r>Galería</p><h2 class="d-display" data-r>' + S.galleryTitle + '</h2></div></div><div class="gal">' + S.gallery.map(function (g, i) { return '<figure class="tile ' + (g[3] || "") + '" data-r style="--i:' + i + ";--t-bg:" + g[2] + '">' + icon(g[0]) + "<figcaption>" + esc(g[1]) + "</figcaption></figure>"; }).join("") + "</div></div></section>" +
