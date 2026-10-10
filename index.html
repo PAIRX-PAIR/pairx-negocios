@@ -2,6 +2,18 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<script>
+/* Siempre abrir desde el principio: sin restaurar la posición anterior ni saltar a #secciones al entrar. */
+(function () {
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+  var top = function () { window.scrollTo(0, 0); };
+  top();
+  document.addEventListener("DOMContentLoaded", top);
+  window.addEventListener("load", function () { top(); setTimeout(top, 0); });
+  window.addEventListener("pageshow", function (e) { if (e.persisted) top(); });
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PairX — Páginas web para negocios y emprendedores</title>
 <meta name="description" content="PairX hace la página web de tu negocio o emprendimiento: con tus precios, tu horario y un botón directo a WhatsApp. Planes que se ajustan a lo que vendes.">
@@ -795,7 +807,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
       <h1 id="hero-title" data-split>La vitrina que nunca <span class="nw"><em>cierra</em>.</span></h1>
       <p class="lead" data-reveal style="--i:2">Hacemos la página web de tu negocio o emprendimiento: con tus precios, tu horario y un botón para que te escriban por WhatsApp. Sin tecnicismos, con un plan que se ajusta a lo que vendes.</p>
       <div class="hero-ctas" data-reveal style="--i:3">
-        <a class="btn btn-primary magnet" href="#planes"><span class="btn-in">Ver planes <span class="arw">→</span></span></a>
+        <a class="btn btn-primary magnet" href="#problema"><span class="btn-in">Empezar <span class="arw">↓</span></span></a>
         <a class="btn btn-ghost" href="portafolio/"><span class="btn-in">Ver ejemplos por giro</span></a>
       </div>
       <div class="picker" data-reveal style="--i:4">
@@ -834,7 +846,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 </div>
 
 <!-- ======================= TIQUETE ======================= -->
-<section class="loss s-paper" aria-labelledby="loss-title">
+<section class="loss s-paper" id="problema" aria-labelledby="loss-title">
   <div class="wrap loss-grid">
     <div>
       <p class="eyebrow" data-reveal>El problema</p>
@@ -1231,18 +1243,18 @@ const CONFIG = {
   currency: "COP",
   months: 12,
   plans: {
-    vitrina: { name: "Vitrina", once: 290000,  monthly: 19000 },
-    local:   { name: "Local",   once: 590000,  monthly: 29000 },
-    tienda:  { name: "Tienda",  once: 1190000, monthly: 49000 }
+    vitrina: { name: "Vitrina", once: 230000,  monthly: 15000 },
+    local:   { name: "Local",   once: 470000,  monthly: 25000 },
+    tienda:  { name: "Tienda",  once: 950000,  monthly: 39000 }
   },
   addons: [
-    { id: "fotos",   name: "Fotos de tu local y productos", hint: "Una sesión en tu negocio",        once: 120000 },
-    { id: "logo",    name: "Logo e identidad básica",       hint: "Si aún no tienes logo",           once: 150000 },
-    { id: "textos",  name: "Textos escritos por nosotros",  hint: "Te entrevistamos y redactamos",   once: 70000 },
-    { id: "google",  name: "Ficha de Google Maps",          hint: "Incluida en Local y Tienda",      once: 50000, includedIn: ["local", "tienda"] },
-    { id: "reservas",name: "Reservas o citas en línea",     hint: "Agenda que se llena sola",        once: 140000 },
-    { id: "ingles",  name: "Versión en inglés",             hint: "Para turistas y extranjeros",     once: 120000 },
-    { id: "correo",  name: "Correos con tu dominio",        hint: "hola@tunegocio.co",               monthly: 8000 }
+    { id: "fotos",   name: "Fotos de tu local y productos", hint: "Una sesión en tu negocio",        once: 95000 },
+    { id: "logo",    name: "Logo e identidad básica",       hint: "Si aún no tienes logo",           once: 120000 },
+    { id: "textos",  name: "Textos escritos por nosotros",  hint: "Te entrevistamos y redactamos",   once: 55000 },
+    { id: "google",  name: "Ficha de Google Maps",          hint: "Incluida en Local y Tienda",      once: 40000, includedIn: ["local", "tienda"] },
+    { id: "reservas",name: "Reservas o citas en línea",     hint: "Agenda que se llena sola",        once: 110000 },
+    { id: "ingles",  name: "Versión en inglés",             hint: "Para turistas y extranjeros",     once: 95000 },
+    { id: "correo",  name: "Correos con tu dominio",        hint: "hola@tunegocio.co",               monthly: 6000 }
   ]
 };
 
