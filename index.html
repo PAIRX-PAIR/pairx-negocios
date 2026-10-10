@@ -87,6 +87,10 @@ button,.btn,.chip,.seg button,.stick-bar a{user-select:none;-webkit-user-select:
 .skip:focus{top:12px}
 
 section,footer{position:relative;background:var(--bg);color:var(--fg)}
+/* Fondo Silk animado detrás de las secciones oscuras */
+#silk-bg{position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh;z-index:-1;display:block;pointer-events:none}
+.has-silk body{background:var(--night)}
+.has-silk section.s-dark,.has-silk footer.s-dark{background:transparent}
 .wrap{width:min(1320px,100%);margin-inline:auto;padding-inline:var(--gutter)}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font:500 .78rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .eyebrow::before{content:"";width:22px;height:1px;background:currentColor}
@@ -812,6 +816,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 </style>
 </head>
 <body>
+<canvas id="silk-bg" aria-hidden="true"></canvas>
 <a class="skip" href="#main">Saltar al contenido</a>
 <div class="progress" aria-hidden="true"></div>
 
@@ -1282,6 +1287,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
   <a class="btn btn-primary" href="#contacto"><span class="btn-in">Pedir mi página</span></a>
 </div>
 
+<script src="silk.js" defer></script>
 <script src="portafolio/sitios.js"></script>
 <script>
 (() => {
