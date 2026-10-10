@@ -285,7 +285,8 @@ footer.d-foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;ga
 /* Responsivo */
 @media (max-width:960px){
   [data-layout] .hero-g{grid-template-columns:1fr!important}
-  [data-layout="poster"] .hero-art{position:relative;right:auto;top:auto;width:100%;margin-bottom:-20%}
+  [data-layout="poster"] .hero-art{position:relative;right:auto;top:auto;width:100%;margin-bottom:-6%}
+  [data-layout="poster"] .d-hero .kick{position:relative;z-index:2}
   [data-layout="poster"] .d-hero{min-height:0;padding-top:20px}
   [data-layout="poster"] .poster-row{grid-template-columns:1fr}
   .about,.visit{grid-template-columns:1fr}
