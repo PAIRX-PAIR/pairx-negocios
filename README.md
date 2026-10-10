@@ -1,6 +1,6 @@
 # PairX · Negocios locales
 
-Landing de PairX para vender páginas web a negocios de barrio: planes, cotizador y contacto por WhatsApp.
+Landing de PairX para vender páginas web a negocios y emprendedores: planes, cotizador y contacto por WhatsApp.
 
 - Página principal: `index.html` (HTML + CSS + JS, sin build).
 - Base visual: sistema de diseño PairX (Claude Design) con la paleta de marca negro + carmesí.
