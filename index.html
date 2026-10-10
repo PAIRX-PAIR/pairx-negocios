@@ -490,6 +490,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 .qtot .big{font:700 1.9rem/1 var(--sans);color:var(--crimson);letter-spacing:-.02em}
 .qlines p,.qtot p{font-family:var(--sans);font-size:.95rem;font-variant-numeric:tabular-nums}
 .qtot .mono{font:700 1.1rem/1 var(--sans)}
+.plans-cot{margin-top:18px;max-width:560px}
 .qnote{margin-top:12px;font-size:.72rem;color:#6d655e;text-align:center}
 .qactions{display:grid;gap:10px;margin-top:22px}
 .qactions .btn{justify-content:center}
@@ -939,6 +940,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
       <div>
         <p class="eyebrow" data-reveal>Planes</p>
         <h2 class="h2" id="plans-title" data-split>Planes que se ajustan a <em>lo que</em> <span class="nw"><em>vendes</em>.</span></h2>
+        <p class="lead plans-cot" data-reveal style="--i:1">Cada negocio es distinto. Estos valores son el punto de partida: <b>el precio final se cotiza según lo que necesites</b>, sin compromiso y por WhatsApp.</p>
       </div>
       <div class="pay" data-reveal style="--i:2">
         <div class="seg" id="paySeg" role="group" aria-label="Forma de pago">
@@ -946,7 +948,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
           <button type="button" aria-pressed="true" data-pay="once">De contado</button>
           <button type="button" aria-pressed="false" data-pay="months">A 12 cuotas</button>
         </div>
-        <small id="priceNote">Precios de referencia en COP · por confirmar</small>
+        <small id="priceNote">Precios de referencia en COP · el valor final se cotiza según lo que necesites</small>
       </div>
     </div>
 
@@ -1097,7 +1099,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
           <p><span>Pago inicial</span><span class="big"><span class="odo" id="qOnce"></span></span></p>
           <p><span>Mensual</span><span class="mono"><span class="odo" id="qMonth"></span></span></p>
         </div>
-        <p class="qnote" id="qnote">Valores de referencia en COP · por confirmar</p>
+        <p class="qnote" id="qnote">Valor estimado en COP · el precio final se cotiza según lo que necesites</p>
         <div class="barcode" aria-hidden="true"></div>
       </div>
       <div class="qactions">
@@ -1557,12 +1559,12 @@ function renderPrices() {
     const p = CONFIG.plans[tag.dataset.plan]; if (!p) return;
     const odo = $("[data-odo]", tag), unit = $("[data-unit]", tag), sub = $("[data-sub]", tag), lbl = $("[data-lbl]", tag);
     if (payMode === "once") {
-      lbl.textContent = "Pago único";
+      lbl.textContent = "Desde · pago único";
       setOdo(odo, "$" + money(p.once)); unit.textContent = CONFIG.currency;
-      sub.innerHTML = `Y luego <b>$${money(p.monthly)}</b> al mes por hosting y soporte`;
+      sub.innerHTML = `Y luego desde <b>$${money(p.monthly)}</b> al mes por hosting y soporte`;
     } else {
       const m = Math.round((p.once / CONFIG.months + p.monthly) / 100) * 100;
-      lbl.textContent = `${CONFIG.months} cuotas de`;
+      lbl.textContent = `Desde · ${CONFIG.months} cuotas de`;
       setOdo(odo, "$" + money(m)); unit.textContent = "al mes";
       sub.innerHTML = `Desde el mes ${CONFIG.months + 1}: <b>$${money(p.monthly)}</b> al mes`;
     }
@@ -1688,7 +1690,7 @@ function renderQuote() {
 function quoteText() {
   const p = CONFIG.plans[qState.plan], t = totals();
   const extras = CONFIG.addons.filter(a => qState.add.has(a.id) && !(a.includedIn && a.includedIn.includes(qState.plan))).map(a => "· " + a.name);
-  return [`Hola PairX, quiero cotizar una página web.`, ``, `Plan: ${p.name}`, extras.length ? `Adicionales:\n${extras.join("\n")}` : `Sin adicionales`, ``, `Referencia de la página: pago inicial $${money(t.once)} ${CONFIG.currency} + $${money(t.monthly)} ${CONFIG.currency}/mes.`].join("\n");
+  return [`Hola PairX, quiero cotizar una página web.`, ``, `Plan: ${p.name}`, extras.length ? `Adicionales:\n${extras.join("\n")}` : `Sin adicionales`, ``, `Valor de referencia: desde $${money(t.once)} ${CONFIG.currency} + $${money(t.monthly)} ${CONFIG.currency}/mes. Entiendo que el precio final se cotiza según lo que necesite.`].join("\n");
 }
 const waLink = text => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
 renderQuote();
