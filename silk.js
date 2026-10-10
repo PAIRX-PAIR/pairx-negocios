@@ -281,7 +281,8 @@
   // (50 % en escritorio, 40 % en táctiles), a máximo 30 cuadros por segundo, y solo mientras se ve.
   var coarse = matchMedia("(pointer: coarse)").matches;
   // En celulares y equipos modestos la seda se dibuja una sola vez (imagen fija): misma estética, cero trabajo continuo.
-  var lowPower = coarse || (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4;
+  var softGL = (function () { try { var e = gl.getExtension("WEBGL_debug_renderer_info"); var r = e ? gl.getParameter(e.UNMASKED_RENDERER_WEBGL) : ""; return /swiftshader|llvmpipe|software|basic render/i.test(r); } catch (_) { return false; } })();
+  var lowPower = softGL || coarse || (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4;
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches || lowPower;
   var SCALE = coarse ? 0.5 : 0.5, STEP = 1000 / 30;
   var W = 0, H = 0;
@@ -296,9 +297,15 @@
     gl.uniform4f(U.u_scene, W, H, (now - t0 - offset) / 1000 * 0.76, 4.0);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
   }
+  // Si en los primeros cuadros el equipo no da abasto (más de 45 ms por cuadro), la seda se queda fija.
+  var probe = [], prevT = 0;
   function frame(now) {
     raf = 0;
-    if (now - last >= STEP - 2) { last = now; draw(now); }
+    if (now - last >= STEP - 2) {
+      var t1 = performance.now(); last = now; draw(now); gl.finish();
+      if (probe.length < 20) { probe.push(performance.now() - t1 + (prevT && now - prevT > 120 ? 50 : 0)); prevT = now;
+        if (probe.length === 20) { var avg = probe.reduce(function (a, b) { return a + b; }, 0) / 20; if (avg > 45) { reduce = true; return; } } }
+    }
     if (!reduce && !scrolling && visible && onScreen > 0) raf = requestAnimationFrame(frame);
   }
   function start() { if (!raf && !reduce && !scrolling && visible && onScreen > 0) raf = requestAnimationFrame(frame); }
