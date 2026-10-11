@@ -4,7 +4,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 const here = path.dirname(fileURLToPath(import.meta.url));
-const UPDATED = "10 de octubre de 2026";
+const UPDATED = "11 de octubre de 2026";
 const WA = "573218596840";
 const ID = `<ul class="idl">
   <li><b>Responsable:</b> PairX (nombre comercial), estudio de diseño y desarrollo de páginas web.</li>
@@ -23,6 +23,7 @@ const PAGES = {
   <a class="lc" href="privacidad/"><span class="n">01</span><h2>Tratamiento de datos personales</h2><p>Qué datos usamos, para qué, por cuánto tiempo y cómo ejercer tus derechos (Ley 1581 de 2012).</p><span class="ar">→</span></a>
   <a class="lc" href="terminos/"><span class="n">02</span><h2>Términos y condiciones</h2><p>Cómo cotizamos, entregamos, cobramos y mantenemos tu página; garantías y derechos como consumidor.</p><span class="ar">→</span></a>
   <a class="lc" href="cookies/"><span class="n">03</span><h2>Cookies y servicios de terceros</h2><p>Qué guarda (y qué no) tu navegador cuando visitas este sitio.</p><span class="ar">→</span></a>
+  <a class="lc" href="aviso-legal/"><span class="n">04</span><h2>Aviso legal</h2><p>Quién es el titular del sitio, para qué sirve y las condiciones básicas de uso.</p><span class="ar">→</span></a>
 </div>
 <section>
   <h2>Peticiones, quejas y reclamos (PQR)</h2>
@@ -98,6 +99,7 @@ const PAGES = {
   <li><b>WhatsApp (Meta Platforms):</b> canal por el que conversamos contigo.</li>
   <li><b>Vercel:</b> alojamiento de este sitio y, cuando aplica, de las páginas que hacemos.</li>
   <li><b>Google Fonts:</b> tipografías del sitio; tu navegador se conecta a Google para descargarlas.</li>
+  <li><b>Google Analytics 4:</b> solo si aceptas las cookies de analítica; mide visitas de forma agregada, sin publicidad.</li>
   <li><b>Proveedores de dominio, correo o pagos</b> que tú elijas o que sean necesarios para tu proyecto.</li>
 </ul>
 <p>Estas transferencias y transmisiones se hacen para cumplir las finalidades de esta política, con proveedores que ofrecen medidas de seguridad adecuadas, de acuerdo con los artículos 26 de la Ley 1581 de 2012 y las normas que la reglamentan. También entregaremos datos a autoridades cuando una ley o una orden judicial lo exija.</p>
@@ -227,10 +229,46 @@ const PAGES = {
 </section>`
   },
 
+  "aviso-legal": {
+    title: "Aviso legal", kicker: "Legal · Aviso legal",
+    h1: "Aviso <em>legal</em>.",
+    lead: "Información sobre quién está detrás de este sitio, para qué sirve y las condiciones básicas para usarlo.",
+    body: `
+<section><h2>1. Titular del sitio</h2>${ID}</section>
+
+<section><h2>2. Objeto del sitio</h2>
+<p>Este sitio presenta los servicios de diseño y desarrollo de páginas web de PairX para negocios y emprendedores, y permite pedir una cotización por WhatsApp. No se venden productos directamente desde este sitio ni se procesan pagos en él.</p>
+</section>
+
+<section><h2>3. Contenido ilustrativo</h2>
+<p>Los negocios, nombres, reseñas, precios y datos del portafolio y de los ejemplos son <b>ficticios</b>: muestran cómo podría verse una página, no corresponden a clientes reales. Las fotos, íconos e ilustraciones son recursos de diseño.</p>
+</section>
+
+<section><h2>4. Propiedad intelectual</h2>
+<p>Los diseños, textos, código, logotipo y marca PairX que aparecen en este sitio pertenecen a PairX o se usan con autorización, y están protegidos por la Ley 23 de 1982 y demás normas sobre derechos de autor. Puedes compartir enlaces al sitio libremente; no está permitido copiarlo, reproducirlo o revenderlo como propio sin autorización.</p>
+</section>
+
+<section><h2>5. Responsabilidad</h2>
+<ul>
+  <li>Hacemos lo razonable para que la información sea correcta y esté actualizada, pero puede contener errores u omisiones; las condiciones que valen para un proyecto son las de la cotización escrita.</li>
+  <li>No respondemos por fallas temporales del sitio causadas por proveedores externos (hosting, internet, WhatsApp).</li>
+  <li>Los enlaces a sitios de terceros (por ejemplo, WhatsApp) se ofrecen por comodidad; esos sitios tienen sus propias condiciones.</li>
+</ul>
+</section>
+
+<section><h2>6. Documentos relacionados</h2>
+<p>El uso del sitio también se rige por los <a href="../terminos/">términos y condiciones</a>, la <a href="../privacidad/">política de tratamiento de datos personales</a> y la <a href="../cookies/">política de cookies</a>.</p>
+</section>
+
+<section><h2>7. Ley aplicable</h2>
+<p>Este aviso se rige por las leyes de la República de Colombia. Si tienes una consulta o reclamo, escríbenos por WhatsApp; también puedes acudir a la Superintendencia de Industria y Comercio (www.sic.gov.co).</p>
+</section>`
+  },
+
   cookies: {
     title: "Política de cookies", kicker: "Legal · Cookies",
     h1: "Cookies y <em>servicios de terceros</em>.",
-    lead: "Corto y claro: este sitio no usa cookies propias de seguimiento, ni publicidad, ni herramientas de analítica. Aquí te contamos qué pasa técnicamente cuando lo visitas.",
+    lead: "Corto y claro: este sitio no usa cookies de publicidad, y la analítica solo se activa si la aceptas. Aquí te contamos qué pasa técnicamente cuando lo visitas.",
     body: `
 <section><h2>1. ¿Qué son las cookies?</h2>
 <p>Son pequeños archivos que un sitio guarda en tu navegador para recordar cosas (por ejemplo, una sesión) o para medir visitas y mostrar publicidad.</p>
@@ -239,7 +277,8 @@ const PAGES = {
 <section><h2>2. Lo que usa este sitio</h2>
 <ul>
   <li><b>Cookies propias:</b> ninguna.</li>
-  <li><b>Analítica o publicidad</b> (Google Analytics, Meta Pixel u otros): ninguna.</li>
+  <li><b>Publicidad</b> (Meta Pixel, anuncios, remarketing): ninguna.</li>
+  <li><b>Analítica:</b> el sitio está preparado para Google Analytics 4, pero <b>solo se activa si lo aceptas</b> en el aviso de cookies. Si lo aceptas, Google guarda cookies como <code>_ga</code> para contar visitas de forma agregada (sin publicidad). Puedes cambiar tu decisión en "Preferencias de cookies", al pie de la página principal.</li>
   <li><b>Almacenamiento local:</b> no guardamos lo que escribes en el formulario, el cotizador ni el test de talla.</li>
 </ul>
 </section>
@@ -258,7 +297,7 @@ const PAGES = {
 </section>
 
 <section><h2>5. Cambios</h2>
-<p>Si algún día agregamos analítica u otras cookies, actualizaremos esta página y, cuando la ley lo exija, te pediremos tu consentimiento antes de activarlas.</p>
+<p>Si agregamos otras cookies no esenciales, actualizaremos esta página y te pediremos tu consentimiento antes de activarlas.</p>
 </section>`
   }
 };
@@ -308,7 +347,8 @@ li::marker{color:var(--crimson)}
 @media (max-width:600px){.top .wrap{flex-wrap:wrap;gap:6px 16px;padding-block:10px}.top nav{width:100%;gap:6px 16px;font-size:.84rem}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.lc{transition:none}}`;
 
-const NAV = [["index", "Centro legal"], ["privacidad", "Datos personales"], ["terminos", "Términos"], ["cookies", "Cookies"]];
+const SEO = {"index":"Centro legal de PairX: datos, términos, cookies y PQR","terminos":"Términos y condiciones de PairX · Páginas web","cookies":"Política de cookies de PairX · Páginas web","aviso-legal":"Aviso legal de PairX · Páginas web en Colombia","privacidad":"Política de datos personales de PairX (Ley 1581)"};
+const NAV = [["index", "Centro legal"], ["privacidad", "Datos personales"], ["terminos", "Términos"], ["cookies", "Cookies"], ["aviso-legal", "Aviso legal"]];
 fs.writeFileSync(path.join(here, "legal.css"), CSS + "\n");
 for (const [key, p] of Object.entries(PAGES)) {
   const depth = key === "index" ? "" : "../";
@@ -318,11 +358,25 @@ for (const [key, p] of Object.entries(PAGES)) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>${p.title} — PairX</title>
+<title>${SEO[key] || p.title + " — PairX"}</title>
 <meta name="description" content="${p.lead.replace(/<[^>]+>/g, "").replace(/"/g, "&quot;").slice(0, 155)}">
 <link rel="canonical" href="https://pairx-web.vercel.app/legal/${key === "index" ? "" : key + "/"}">
 <meta name="theme-color" content="#0c0a0a">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230c0a0a'/%3E%3Crect x='4' y='4' width='24' height='24' rx='4' fill='%23B0122C'/%3E%3Ctext x='16' y='22.5' font-family='Arial,sans-serif' font-weight='700' font-size='17' text-anchor='middle' fill='%23fffdf9'%3EP%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PairX">
+<meta property="og:locale" content="es_CO">
+<meta property="og:title" content="${p.title} — PairX">
+<meta property="og:description" content="${p.lead.replace(/<[^>]+>/g, "").replace(/"/g, "&quot;").slice(0, 155)}">
+<meta property="og:url" content="https://pairx-web.vercel.app/legal/${key === "index" ? "" : key + "/"}">
+<meta property="og:image" content="https://pairx-web.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Inicio", item: "https://pairx-web.vercel.app/" }, { "@type": "ListItem", position: 2, name: "Centro legal", item: "https://pairx-web.vercel.app/legal/" }].concat(key === "index" ? [] : [{ "@type": "ListItem", position: 3, name: p.title, item: "https://pairx-web.vercel.app/legal/" + key + "/" }]) })}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;600;700&family=IBM+Plex+Serif:ital,wght@1,500&display=swap" rel="stylesheet">
@@ -334,6 +388,7 @@ for (const [key, p] of Object.entries(PAGES)) {
 <main><div class="wrap">${p.body}
 </div></main>
 <footer class="foot"><div class="wrap"><span>© 2026 PairX · Páginas web para negocios y emprendedores</span><a href="${depth}../">Volver al sitio →</a></div></footer>
+<script src="/analytics.js" defer></script>
 </body>
 </html>
 `;

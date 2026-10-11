@@ -4,11 +4,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Portafolio — PairX · Trece negocios, trece vitrinas</title>
-<meta name="description" content="Trece páginas web de ejemplo, una por giro: panadería, barbería, taller, floristería, restaurante, ferretería, peluquería, veterinaria, papelería, tienda de barrio, consultorio, gimnasio y tienda de ropa.">
+<link rel="canonical" href="https://pairx-web.vercel.app/portafolio/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pairx-web.vercel.app/portafolio/">
+<meta property="og:site_name" content="PairX">
+<meta property="og:locale" content="es_CO">
+<meta property="og:image" content="https://pairx-web.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pairx-web.vercel.app/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://pairx-web.vercel.app/"},{"@type":"ListItem","position":2,"name":"Portafolio","item":"https://pairx-web.vercel.app/portafolio/"}]}</script>
+<meta name="description" content="Mira 13 páginas web de ejemplo hechas por PairX, una por giro: panaderías, barberías, talleres, tiendas, ropa y más. Encuentra la tuya y pídela por WhatsApp.">
 <meta name="theme-color" content="#0c0a0a">
 <meta property="og:title" content="Portafolio PairX — Trece negocios, trece vitrinas">
 <meta property="og:description" content="Mira cómo se vería la página de tu negocio.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230c0a0a'/%3E%3Crect x='4' y='4' width='24' height='24' rx='4' fill='%23B0122C'/%3E%3Ctext x='16' y='22.5' font-family='Arial,sans-serif' font-weight='700' font-size='17' text-anchor='middle' fill='%23fffdf9'%3EP%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@1,400&display=swap" rel="stylesheet">
@@ -40,7 +54,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 /* Navegación */
 .nav{position:sticky;top:0;z-index:50;padding-top:env(safe-area-inset-top,0px)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px;margin:10px auto 0;width:min(1320px,calc(100% - 2*var(--gutter)));padding:0 10px 0 18px;border-radius:10px;background:rgba(18,15,14,.8);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),0 10px 30px -12px rgba(0,0,0,.6)}
-.brand{display:flex;align-items:center;gap:10px;font:600 1.18rem/1 var(--sans);letter-spacing:-.02em;text-decoration:none}
+.brand{display:flex;align-items:center;gap:10px;min-height:44px;font:600 1.18rem/1 var(--sans);letter-spacing:-.02em;text-decoration:none}
 .brand i{width:22px;height:22px;border-radius:5px;background:var(--crimson);box-shadow:inset 0 0 0 4px var(--night),inset 0 0 0 5px var(--crimson)}
 .nav-links{display:flex;gap:4px}
 .nav-links a{padding:9px 12px;border-radius:6px;text-decoration:none;font-size:.93rem;color:var(--muted);transition:color .2s ease,background-color .2s ease}
@@ -174,7 +188,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   </section>
 </main>
 
-<footer><div class="wrap"><span>© <span id="y">2026</span> PairX</span><span>Negocios, precios y reseñas de estos conceptos son ficticios · <a href="../legal/privacidad/" style="color:inherit">Datos personales</a> · <a href="../legal/terminos/" style="color:inherit">Términos</a> · <a href="../legal/cookies/" style="color:inherit">Cookies</a></span></div></footer>
+<footer><div class="wrap"><span>© <span id="y">2026</span> PairX</span><span>Negocios, precios y reseñas de estos conceptos son ficticios · <a href="../legal/privacidad/" style="color:inherit">Datos personales</a> · <a href="../legal/terminos/" style="color:inherit">Términos</a> · <a href="../legal/cookies/" style="color:inherit">Cookies</a> · <a href="../legal/aviso-legal/" style="color:inherit">Aviso legal</a></span></div></footer>
 
 <script src="sitios.js"></script>
 <script>
@@ -250,5 +264,6 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   $$("[data-reveal],[data-split]").forEach(el => io.observe(el));
 })();
 </script>
+<script src="../analytics.js" defer></script>
 </body>
 </html>

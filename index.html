@@ -32,10 +32,13 @@
 <meta name="twitter:title" content="PairX — La vitrina que nunca cierra">
 <meta name="twitter:description" content="Páginas web para negocios y emprendedores. Cotiza según lo que necesites.">
 <meta name="twitter:image" content="https://pairx-web.vercel.app/og-image.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://pairx-web.vercel.app/#pairx","name":"PairX","url":"https://pairx-web.vercel.app/","image":"https://pairx-web.vercel.app/og-image.png","logo":"https://pairx-web.vercel.app/og-image.png","description":"Diseño y desarrollo de páginas web para negocios y emprendedores en Colombia, con pedidos por WhatsApp. Cotización según lo que necesites.","telephone":"+57 321 859 6840","areaServed":{"@type":"Country","name":"Colombia"},"availableLanguage":"es","contactPoint":{"@type":"ContactPoint","telephone":"+57 321 859 6840","contactType":"customer service","availableLanguage":"es"}},{"@type":"WebSite","@id":"https://pairx-web.vercel.app/#web","url":"https://pairx-web.vercel.app/","name":"PairX","inLanguage":"es-CO","publisher":{"@id":"https://pairx-web.vercel.app/#pairx"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://pairx-web.vercel.app/#pairx","name":"PairX","url":"https://pairx-web.vercel.app/","image":"https://pairx-web.vercel.app/og-image.png","logo":"https://pairx-web.vercel.app/og-image.png","description":"Diseño y desarrollo de páginas web para negocios y emprendedores en Colombia, con pedidos por WhatsApp. Cotización según lo que necesites.","telephone":"+57 321 859 6840","areaServed":{"@type":"Country","name":"Colombia"},"availableLanguage":"es","contactPoint":{"@type":"ContactPoint","telephone":"+57 321 859 6840","contactType":"customer service","availableLanguage":"es"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Planes de páginas web","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web Vitrina","description":"Página web para empezar: quién eres, dónde estás y cómo escribirte."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web Local","description":"Página con catálogo o menú, varias secciones y ficha de Google Maps."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web Tienda","description":"Tienda en línea con carrito, pagos y panel de pedidos."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web A medida","description":"Proyecto web a la medida para necesidades especiales."}}]}},{"@type":"WebSite","@id":"https://pairx-web.vercel.app/#web","url":"https://pairx-web.vercel.app/","name":"PairX","inLanguage":"es-CO","publisher":{"@id":"https://pairx-web.vercel.app/#pairx"}}]}</script>
 <meta property="og:title" content="PairX — La vitrina que nunca cierra">
 <meta property="og:description" content="Páginas web para negocios y emprendedores. Planes que se ajustan a lo que vendes.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230c0a0a'/%3E%3Crect x='4' y='4' width='24' height='24' rx='4' fill='%23B0122C'/%3E%3Ctext x='16' y='22.5' font-family='Arial,sans-serif' font-weight='700' font-size='17' text-anchor='middle' fill='%23fffdf9'%3EP%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Serif:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
@@ -133,7 +136,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 .nav{position:fixed;inset:0 0 auto 0;z-index:100;padding-top:env(safe-area-inset-top,0px);transition:transform .45s var(--ease-drawer)}
 .nav.hide{transform:translateY(-110%)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px;margin:10px auto 0;width:min(1320px,calc(100% - 2*var(--gutter)));padding:0 10px 0 18px;border-radius:10px;background:rgba(18,15,14,.8);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),inset 0 0 0 1px rgba(255,255,255,.06),0 10px 30px -12px rgba(0,0,0,.6);color:var(--cream)}
-.brand{display:flex;align-items:center;gap:10px;font:600 1.18rem/1 var(--sans);letter-spacing:-.02em;text-decoration:none}
+.brand{display:flex;align-items:center;gap:10px;min-height:44px;font:600 1.18rem/1 var(--sans);letter-spacing:-.02em;text-decoration:none}
 .brand i{width:22px;height:22px;border-radius:5px;background:var(--crimson);box-shadow:inset 0 0 0 4px var(--night),inset 0 0 0 5px var(--crimson)}
 .nav-links{display:flex;gap:4px}
 .nav-links a{padding:9px 12px;border-radius:var(--radius-md);text-decoration:none;font-size:.93rem;color:var(--cream-muted);transition:color .2s ease,background-color .2s ease}
@@ -232,7 +235,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 .ms-open{display:inline-flex;align-items:center;gap:2cqi;font-size:3.5cqi;font-weight:600;color:var(--m-acc)}
 .ms-open i{width:2cqi;height:2cqi;border-radius:50%;background:#2fbf71;box-shadow:0 0 0 0 rgba(47,191,113,.6);animation:ping 2s ease-out infinite}
 @keyframes ping{70%{box-shadow:0 0 0 2.4cqi rgba(47,191,113,0)}100%{box-shadow:0 0 0 0 rgba(47,191,113,0)}}
-.ms h4{font-size:6.8cqi;line-height:1.08;letter-spacing:-.025em;font-weight:700}
+.ms .mh{margin:0;font-size:6.8cqi;line-height:1.08;letter-spacing:-.025em;font-weight:700}
 .ms-rate{font-size:3.4cqi;opacity:.78}
 .ms-rate b{color:#f2b33d;letter-spacing:.06em}
 .ms-ctas{display:grid;grid-template-columns:1fr 1fr;gap:2.4cqi;margin-top:1cqi}
@@ -248,7 +251,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 .bs-nav nav{display:flex;gap:2.6cqi;font-weight:500;font-size:1.5cqi;opacity:.75;align-items:center}
 .bs-nav nav span:last-child{padding:1cqi 1.8cqi;border-radius:1cqi;background:var(--m-acc);color:#fff;opacity:1}
 .bs-hero{display:grid;grid-template-columns:1fr 1.02fr;gap:3cqi;align-items:center;padding:1.4cqi 4.4cqi 2.6cqi}
-.bs h4{font-size:4.5cqi;line-height:1.02;letter-spacing:-.035em;font-weight:700;margin:1cqi 0 1.6cqi}
+.bs .mh{font-size:4.5cqi;line-height:1.02;letter-spacing:-.035em;font-weight:700;margin:1cqi 0 1.6cqi}
 .bs p{opacity:.75;max-width:30ch}
 .bs .ms-open{font-size:1.4cqi;gap:.8cqi}.bs .ms-open i{width:.9cqi;height:.9cqi}
 .bs-ctas{display:flex;gap:1.2cqi;margin-top:2.2cqi}
@@ -550,6 +553,10 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 .qlines p,.qtot p{font-family:var(--sans);font-size:.95rem;font-variant-numeric:tabular-nums}
 .qtot .mono{font:700 1.1rem/1 var(--sans)}
 .plans-cot{margin-top:18px;max-width:560px}
+.hp{position:absolute!important;left:-10000px;width:1px;height:1px;overflow:hidden}
+.form-err{margin-top:16px;padding:12px 14px;border-radius:var(--radius-md);background:var(--crimson-wash);color:var(--crimson-deep);font-weight:600;font-size:.92rem;box-shadow:inset 3px 0 0 var(--crimson)}
+.form .count{display:block;margin-top:6px;text-align:right;font:500 .74rem/1 var(--mono);color:var(--ink-muted)}
+.form .count.near{color:var(--crimson)}
 .legal-links{display:flex;flex-wrap:wrap;gap:6px 18px}
 .legal-links a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 .legal-links a:hover{color:var(--cream)}
@@ -749,7 +756,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 .folio-foot span{font:500 .8rem/1.4 var(--mono);color:rgba(255,245,243,.75)}
 .btn-light{background:#fff;color:#7d0d0d;box-shadow:0 18px 30px -16px rgba(0,0,0,.6)}
 @media (hover:hover) and (pointer:fine){.btn-light:hover{background:#fff5f3}}
-.see-full{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font:500 .86rem/1.3 var(--sans);color:var(--cream);text-decoration:none;border-bottom:1px solid rgba(242,236,229,.35);padding-bottom:3px;transition:border-color .2s ease,color .2s ease}
+.see-full{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:16px;font:500 .86rem/1.3 var(--sans);color:var(--cream);text-decoration:none;border-bottom:1px solid rgba(242,236,229,.35);padding-bottom:3px;transition:border-color .2s ease,color .2s ease}
 @media (hover:hover) and (pointer:fine){.see-full:hover{color:#fff;border-color:var(--crimson-fresh)}}
 .folio-link{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:28px;padding:18px 20px;border-radius:var(--radius-md);background:var(--night);color:var(--cream-muted);font:500 .82rem/1.4 var(--mono);text-decoration:none;box-shadow:0 18px 30px -18px rgba(0,0,0,.5);transition:transform .4s var(--ease-out)}
 .folio-link b{display:block;font:600 1.02rem/1.3 var(--sans);color:var(--cream);margin-bottom:2px}
@@ -1259,24 +1266,26 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
     </div>
     <form class="form" id="form" novalidate data-reveal style="--i:1">
       <div class="fgrid">
-        <div class="field"><label for="f-name">Tu nombre</label><input id="f-name" name="name" autocomplete="name" required aria-describedby="e-name"><span class="err" id="e-name">Escribe tu nombre para saber cómo llamarte.</span></div>
-        <div class="field"><label for="f-biz">Nombre del negocio</label><input id="f-biz" name="biz" autocomplete="organization" required aria-describedby="e-biz"><span class="err" id="e-biz">¿Cómo se llama tu negocio?</span></div>
+        <div class="field"><label for="f-name">Tu nombre</label><input id="f-name" name="name" autocomplete="name" required maxlength="80" enterkeyhint="next" aria-describedby="e-name"><span class="err" id="e-name">Escribe tu nombre para saber cómo llamarte.</span></div>
+        <div class="field"><label for="f-biz">Nombre del negocio</label><input id="f-biz" name="biz" autocomplete="organization" required maxlength="100" enterkeyhint="next" aria-describedby="e-biz"><span class="err" id="e-biz">¿Cómo se llama tu negocio?</span></div>
         <div class="field"><label for="f-type">Tipo de negocio</label>
           <select id="f-type" name="type" required aria-describedby="e-type"><option value="">Elige una opción</option><option>Panadería o pastelería</option><option>Barbería o peluquería</option><option>Taller</option><option>Floristería</option><option>Restaurante o comidas</option><option>Tienda o almacén</option><option>Servicios profesionales</option><option>Otro</option></select>
           <span class="err" id="e-type">Elige el tipo que más se parezca.</span></div>
-        <div class="field"><label for="f-city">Barrio y ciudad <span>(opcional)</span></label><input id="f-city" name="city" autocomplete="address-level2"></div>
+        <div class="field"><label for="f-city">Barrio y ciudad <span>(opcional)</span></label><input id="f-city" name="city" autocomplete="address-level2" maxlength="80" enterkeyhint="next"></div>
         <div class="field full"><label for="f-plan">Plan que te interesa</label>
           <select id="f-plan" name="plan"><option value="No sé todavía">No sé todavía</option><option value="Vitrina">Vitrina</option><option value="Local">Local</option><option value="Tienda">Tienda</option><option value="A medida">A medida</option></select></div>
-        <div class="field full"><label for="f-msg">Cuéntanos más <span>(opcional)</span></label><textarea id="f-msg" name="msg" placeholder="Ej.: Tengo una panadería y quiero que me hagan pedidos por WhatsApp."></textarea></div>
+        <div class="field full"><label for="f-msg">Cuéntanos más <span>(opcional)</span></label><textarea id="f-msg" name="msg" maxlength="600" aria-describedby="c-msg" placeholder="Ej.: Tengo una panadería y quiero que me hagan pedidos por WhatsApp."></textarea><span class="count" id="c-msg" aria-live="polite">0 / 600</span></div>
       </div>
+      <div class="hp" aria-hidden="true"><label for="f-web">No llenar este campo</label><input id="f-web" name="website" tabindex="-1" autocomplete="off"></div>
+      <p class="form-err" id="formErr" role="alert" hidden>Revisa los campos marcados en rojo para poder enviarte a WhatsApp.</p>
       <div class="send">
         <small>Se abrirá WhatsApp con tu mensaje listo para enviar. No guardamos tus datos en esta página. Al enviarlo, autorizas el tratamiento de tus datos según nuestra <a href="legal/privacidad/" style="color:var(--crimson);font-weight:600">política de datos personales</a>.</small>
-        <button class="btn btn-primary magnet" type="submit" id="fSubmit"><span class="btn-in"><span class="spin" aria-hidden="true"></span><span class="lbl">Enviar por WhatsApp</span> <span class="arw">→</span></span></button>
+        <button class="btn btn-primary magnet" type="submit" id="fSubmit" aria-live="polite"><span class="btn-in"><span class="spin" aria-hidden="true"></span><span class="lbl">Enviar por WhatsApp</span> <span class="arw">→</span></span></button>
       </div>
       <div class="done" id="done" role="status" aria-live="polite">
         <span class="big-stamp" aria-hidden="true">LISTO</span>
         <h3 style="font:600 1.4rem/1.2 var(--sans)">Abrimos WhatsApp con tu mensaje.</h3>
-        <p>Solo dale enviar y te respondemos. ¿No se abrió? <a id="doneLink" href="#" target="_blank" rel="noopener" style="color:var(--crimson);font-weight:600">Ábrelo aquí</a>.</p>
+        <p id="doneTxt">Solo dale enviar y te respondemos. ¿No se abrió? <a id="doneLink" href="#" target="_blank" rel="noopener" style="color:var(--crimson);font-weight:600">Ábrelo aquí</a>.</p>
         <button type="button" id="again">Escribir otro mensaje</button>
       </div>
     </form>
@@ -1291,7 +1300,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
       <nav aria-label="Pie de página"><a href="#top">Inicio</a><a href="#planes">Planes</a><a href="#portafolio">Portafolio</a><a href="#cotiza">Cotiza</a><a href="#preguntas">Preguntas</a><a href="#contacto">Contacto</a></nav>
     </div>
     <p class="word" id="word" aria-hidden="true"><span style="--i:0">P</span><span style="--i:1">a</span><span style="--i:2">i</span><span style="--i:3">r</span><span style="--i:4">X</span></p>
-    <div class="legal"><span>© <span id="year">2026</span> PairX</span><nav class="legal-links" aria-label="Legal"><a href="legal/privacidad/">Datos personales</a><a href="legal/terminos/">Términos y condiciones</a><a href="legal/cookies/">Cookies</a><a href="legal/">PQR</a></nav><span>Los negocios del portafolio son ejemplos ilustrativos</span></div>
+    <div class="legal"><span>© <span id="year">2026</span> PairX</span><nav class="legal-links" aria-label="Legal"><a href="legal/aviso-legal/">Aviso legal</a><a href="legal/privacidad/">Datos personales</a><a href="legal/terminos/">Términos y condiciones</a><a href="legal/cookies/">Cookies</a><a href="legal/">PQR</a><a href="#" data-consent hidden>Preferencias de cookies</a></nav><span>Los negocios del portafolio son ejemplos ilustrativos</span></div>
   </div>
 </footer>
 
@@ -1300,6 +1309,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
   <a class="btn btn-primary" href="#contacto"><span class="btn-in">Pedir mi página</span></a>
 </div>
 
+<script src="analytics.js" defer></script>
 <script src="silk.js" defer></script>
 <script src="portafolio/sitios.js"></script>
 <script>
@@ -1451,14 +1461,14 @@ const phoneHTML = b => `<div class="ms" style="${vars(b)}">
   <div class="ms-hero st" style="--d:1">${ART[b.id]("c" + uid++)}</div>
   <div class="ms-body">
     <span class="ms-open st" style="--d:2"><i></i>${b.hours}</span>
-    <h4 class="st" style="--d:3">${b.tag}</h4>
+    <p class="mh st" style="--d:3">${b.tag}</p>
     <span class="ms-rate st" style="--d:4"><b>★★★★★</b> ${b.rating} · ${b.reviews} reseñas</span>
     <div class="ms-ctas st" style="--d:5"><span class="wa">WhatsApp</span><span class="go">Cómo llegar</span></div>
     <ul class="ms-list st" style="--d:6">${b.items.map(([n, p]) => `<li><span>${n}</span><b>${p}</b></li>`).join("")}</ul>
   </div></div>`;
 const browserHTML = b => `<div class="bs" style="${vars(b)}">
   <div class="bs-nav st" style="--d:0"><span>${b.name}</span><nav><span>Productos</span><span>Horario</span><span>Ubicación</span><span>Pedir</span></nav></div>
-  <div class="bs-hero"><div><span class="ms-open st" style="--d:1"><i></i>${b.hours}</span><h4 class="st" style="--d:2">${b.tag}</h4><p class="st" style="--d:3">★★★★★ ${b.rating} · ${b.reviews} reseñas en Google</p><div class="bs-ctas st" style="--d:4"><span class="wa">Escríbenos por WhatsApp</span><span class="go">Cómo llegar</span></div></div><div class="bs-art st" style="--d:2">${ART[b.id]("c" + uid++)}</div></div>
+  <div class="bs-hero"><div><span class="ms-open st" style="--d:1"><i></i>${b.hours}</span><p class="mh st" style="--d:2">${b.tag}</p><p class="st" style="--d:3">★★★★★ ${b.rating} · ${b.reviews} reseñas en Google</p><div class="bs-ctas st" style="--d:4"><span class="wa">Escríbenos por WhatsApp</span><span class="go">Cómo llegar</span></div></div><div class="bs-art st" style="--d:2">${ART[b.id]("c" + uid++)}</div></div>
   <div class="bs-row st" style="--d:5">${b.items.map(([n, p]) => `<div><span>${n}</span><b>${p}</b></div>`).join("")}</div></div>`;
 
 const pscreen = $("#pscreen"), bscreen = $("#bscreen"), urlEl = $("#url"), chipsEl = $("#chips"), picked = $("#picked");
@@ -1806,7 +1816,12 @@ $$(".qa button").forEach(btn => btn.addEventListener("click", () => {
 
 /* ===================== Formulario → WhatsApp ===================== */
 const form = $("#form"), done = $("#done"), submit = $("#fSubmit");
-const rules = { name: v => v.trim().length > 1, biz: v => v.trim().length > 1, type: v => !!v };
+const clean = v => v.replace(/[<>]/g, "").replace(/\s+/g, " ").trim();
+const rules = { name: v => /[a-záéíóúñü]{2,}/i.test(clean(v)) && !/https?:|www\./i.test(v), biz: v => clean(v).length > 1 && !/https?:/i.test(v), type: v => !!v };
+let sending = false, firstTouch = 0;
+form.addEventListener("focusin", () => { if (!firstTouch) firstTouch = Date.now(); });
+const msgEl = form.elements.msg, msgCount = $("#c-msg");
+msgEl.addEventListener("input", () => { const n = msgEl.value.length; msgCount.textContent = n + " / 600"; msgCount.classList.toggle("near", n > 540); });
 function validate(field) {
   const el = form.elements[field], ok = rules[field](el.value);
   el.closest(".field").classList.toggle("bad", !ok);
@@ -1817,17 +1832,25 @@ Object.keys(rules).forEach(f => form.elements[f].addEventListener("blur", () => 
 Object.keys(rules).forEach(f => form.elements[f].addEventListener("input", () => { if (form.elements[f].closest(".field").classList.contains("bad")) validate(f); }));
 form.addEventListener("submit", e => {
   e.preventDefault();
+  if (sending) return;
+  const errBox = $("#formErr");
   const bad = Object.keys(rules).filter(f => !validate(f));
-  if (bad.length) { form.elements[bad[0]].focus(); return; }
+  if (bad.length) { errBox.hidden = false; form.elements[bad[0]].focus(); return; }
+  errBox.hidden = true;
   const f = form.elements;
-  const text = [`Hola PairX, soy ${f.name.value.trim()}.`, `Mi negocio: ${f.biz.value.trim()} (${f.type.value})${f.city.value.trim() ? " · " + f.city.value.trim() : ""}.`, `Plan que me interesa: ${f.plan.value}.`, f.msg.value.trim() ? `\n${f.msg.value.trim()}` : ""].join("\n");
+  // Bots: campo trampa lleno o envío instantáneo → se descarta en silencio
+  if (f.website.value || (firstTouch && Date.now() - firstTouch < 1200)) { done.classList.add("show"); return; }
+  const text = [`Hola PairX, soy ${clean(f.name.value)}.`, `Mi negocio: ${clean(f.biz.value)} (${f.type.value})${clean(f.city.value) ? " · " + clean(f.city.value) : ""}.`, `Plan que me interesa: ${f.plan.value}.`, clean(f.msg.value) ? `\n${f.msg.value.replace(/[<>]/g, "").trim().slice(0, 600)}` : ""].join("\n");
   const url = waLink(text);
-  submit.classList.add("loading"); submit.disabled = true;
+  sending = true;
+  const lbl = $(".lbl", submit), lblTxt = lbl.textContent;
+  submit.classList.add("loading"); submit.disabled = true; submit.setAttribute("aria-busy", "true"); lbl.textContent = "Abriendo WhatsApp…";
   setTimeout(() => {
-    window.open(url, "_blank", "noopener");
+    const win = window.open(url, "_blank", "noopener");
     $("#doneLink").href = url;
-    submit.classList.remove("loading"); submit.disabled = false;
-    done.classList.add("show");
+    if (!win) $("#doneTxt").firstChild.textContent = "Tu navegador bloqueó la ventana. ";
+    submit.classList.remove("loading"); submit.disabled = false; submit.removeAttribute("aria-busy"); lbl.textContent = lblTxt;
+    done.classList.add("show"); sending = false;
   }, reduce ? 0 : 650);
 });
 $("#again").addEventListener("click", () => { done.classList.remove("show"); form.reset(); form.elements.name.focus(); });
