@@ -10,7 +10,7 @@
 
   var CREAM = [244, 239, 230], CRIMSON = [224, 38, 63];
   var FONT = '700 100px "IBM Plex Sans", system-ui, sans-serif';
-  var CROP = 0.2, RADIUS = 80, STRIDE = 8; /* x, y, vx, vy, hx, hy, r, esX */
+  var RADIUS = 80, STRIDE = 8; /* x, y, vx, vy, hx, hy, r, esX */
   var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   var w = 0, h = 0, dpr = 1, px = -1e5, py = -1e5, raf = 0, visible = true, awake = true;
   var ring = { x: 0, y: 0, t: -1 }, dots = new Float32Array(0), count = 0;
@@ -29,10 +29,10 @@
     m.font = FONT;
     var fit = (w * 0.98 / m.measureText("PairX").width) * 100;
     m.font = FONT.replace("100px", fit + "px");
-    var box = m.measureText("PairX"), cap = box.actualBoundingBoxAscent || fit * 0.72;
+    var box = m.measureText("PairX");
     var left = (w - box.width) / 2, splitX = left + m.measureText("Pair").width;
     m.textBaseline = "alphabetic";
-    m.fillText("PairX", left, h + cap * CROP);
+    m.fillText("PairX", left, h - w * 0.02);
     var img = m.getImageData(0, 0, w, h).data;
 
     var gap = w < 720 ? 4 : 6, cols = Math.ceil(w / gap), rows = Math.ceil(h / gap), tmp = [];
