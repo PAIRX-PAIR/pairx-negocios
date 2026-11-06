@@ -676,18 +676,14 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 /* ==========================================================================
    PIE
    ========================================================================== */
-.foot{padding:72px 0 calc(28px + env(safe-area-inset-bottom,0px));overflow:hidden}
+.foot{padding:72px 0 0;overflow:hidden}
+.hwf{position:relative;width:100%;aspect-ratio:100/25;margin-top:32px;touch-action:pan-y}
+.hwf canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .foot-top{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;padding-bottom:40px;border-bottom:1px solid var(--ln)}
 .foot-top p{max-width:36ch;color:var(--muted)}
 .foot nav{display:grid;grid-template-columns:repeat(2,auto);gap:10px 40px}
 .foot nav a{text-decoration:none;color:var(--muted);transition:color .2s ease}
 @media (hover:hover) and (pointer:fine){.foot nav a:hover{color:var(--fg)}}
-.word{display:flex;justify-content:center;font:700 clamp(5rem,26vw,24rem)/.8 var(--sans);letter-spacing:-.065em;margin-top:40px;color:transparent;-webkit-text-stroke:1.5px var(--night-line-2)}
-.word span{display:inline-block;transition:color .6s var(--ease-out),transform .8s var(--ease-out);transition-delay:calc(var(--i) * 70ms)}
-.word.in span{color:var(--cream)}
-.word.in span:last-child{color:var(--crimson)}
-.js .word span{transform:translateY(30%)}
-.js .word.in span{transform:none}
 .legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:28px;font:500 .78rem/1.4 var(--mono);color:var(--muted)}
 
 /* Barra fija móvil */
@@ -824,7 +820,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 /* Movimiento reducido: menos y más suave, nunca contenido escondido */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .js [data-reveal],.js [data-split] .wi,.js .tag,.js .word span{transform:none!important;translate:none!important;transition:opacity .3s ease!important;opacity:1!important}
+  .js [data-reveal],.js [data-split] .wi,.js .tag{transform:none!important;translate:none!important;transition:opacity .3s ease!important;opacity:1!important}
   .js .slip{transform:none}
   .js .stamp,.js .seal .st-mark{opacity:1;transform:none;animation:none!important}
   .ms-open i,.v-map i,.v-tog::after,.chip.timing .t{animation:none}
@@ -1301,9 +1297,9 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
       <div><a class="brand" href="#top"><i aria-hidden="true" style="width:22px;height:22px;border-radius:5px;background:var(--crimson);box-shadow:inset 0 0 0 4px var(--night),inset 0 0 0 5px var(--crimson)"></i>PairX</a><p style="margin-top:14px">Páginas web a la medida para negocios y emprendedores. Tu negocio, abierto en internet todo el día.</p></div>
       <nav aria-label="Pie de página"><a href="#top">Inicio</a><a href="#planes">Planes</a><a href="#portafolio">Portafolio</a><a href="#cotiza">Cotiza</a><a href="#preguntas">Preguntas</a><a href="#contacto">Contacto</a></nav>
     </div>
-    <p class="word" id="word" aria-hidden="true"><span style="--i:0">P</span><span style="--i:1">a</span><span style="--i:2">i</span><span style="--i:3">r</span><span style="--i:4">X</span></p>
     <div class="legal"><span>© <span id="year">2026</span> PairX</span><nav class="legal-links" aria-label="Legal"><a href="legal/aviso-legal/">Aviso legal</a><a href="legal/privacidad/">Datos personales</a><a href="legal/terminos/">Términos y condiciones</a><a href="legal/cookies/">Cookies</a><a href="legal/">PQR</a><a href="#" data-consent hidden>Preferencias de cookies</a></nav><span>Los negocios del portafolio son ejemplos ilustrativos</span></div>
   </div>
+  <div class="hwf" id="hwf" role="img" aria-label="PairX"><canvas aria-hidden="true"></canvas></div>
 </footer>
 
 <div class="stick-bar" id="stick" aria-label="Accesos rápidos">
@@ -1313,6 +1309,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 
 <script src="analytics.js" defer></script>
 <script src="silk.js" defer></script>
+<script src="halftone.js" defer></script>
 <script src="portafolio/sitios.js"></script>
 <script>
 (() => {
@@ -1398,7 +1395,7 @@ $$("[data-split]").forEach(split);
 const revealIO = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); revealIO.unobserve(e.target); } });
 }, { threshold: 0.14, rootMargin: "0px 0px -6% 0px" });
-$$("[data-reveal],[data-split],.tags,.word,.seal").forEach(el => revealIO.observe(el));
+$$("[data-reveal],[data-split],.tags,.seal").forEach(el => revealIO.observe(el));
 
 /* ===================== Nav, progreso, barra móvil ===================== */
 const nav = $("#nav"), prog = $(".progress"), stick = $("#stick"), hero = $(".hero"), contact = $("#contacto");
