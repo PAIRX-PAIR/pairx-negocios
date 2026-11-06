@@ -1174,9 +1174,10 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
         <div class="qlines" id="qlines" aria-live="polite"></div>
         <hr>
         <div class="qtot">
-          <p><span>Precio</span><span class="big">COTIZACIÓN</span></p>
+          <p><span>Total desde</span><span class="big" id="qtotal">$0</span></p>
+          <p><span>Mensual desde</span><span id="qmes">$0</span></p>
         </div>
-        <p class="qnote" id="qnote">Te enviamos el precio según lo que necesites · sin compromiso · <a href="legal/terminos/" style="color:inherit;text-decoration:underline">términos</a></p>
+        <p class="qnote" id="qnote">Precio de entrada: confirmamos el final según lo que necesites · sin compromiso · <a href="legal/terminos/" style="color:inherit;text-decoration:underline">términos</a></p>
         <div class="barcode" aria-hidden="true"></div>
       </div>
       <div class="qactions">
@@ -1327,21 +1328,24 @@ const CONFIG = {
   currency: "COP",
   months: 12,
   plans: {
-    vitrina: { name: "Vitrina", desde: "$149.000", mant: "$12.000" },
-    local:   { name: "Local", desde: "$299.000", mant: "$19.000" },
-    tienda:  { name: "Tienda", desde: "$590.000", mant: "$29.000" }
+    vitrina: { name: "Vitrina", price: 149000, mant: 12000 },
+    local:   { name: "Local", price: 299000, mant: 19000 },
+    tienda:  { name: "Tienda", price: 590000, mant: 29000 }
   },
   addons: [
-    { id: "fotos",   name: "Fotos de tu local y productos", hint: "Una sesión en tu negocio" },
-    { id: "logo",    name: "Logo e identidad básica",       hint: "Si aún no tienes logo" },
-    { id: "textos",  name: "Textos escritos por nosotros",  hint: "Te entrevistamos y redactamos" },
-    { id: "google",  name: "Ficha de Google Maps",          hint: "Incluida en Local y Tienda", includedIn: ["local", "tienda"] },
-    { id: "reservas",name: "Reservas o citas en línea",     hint: "Agenda que se llena sola" },
-    { id: "ingles",  name: "Versión en inglés",             hint: "Para turistas y extranjeros" },
-    { id: "dominio", name: "Dominio propio",                hint: "tunegocio.co · opcional" },
-    { id: "correo",  name: "Correos con tu dominio",        hint: "hola@tunegocio.co", monthly: true }
+    { id: "fotos", price: 69000,   name: "Fotos de tu local y productos", hint: "Una sesión en tu negocio" },
+    { id: "logo", price: 89000,    name: "Logo e identidad básica",       hint: "Si aún no tienes logo" },
+    { id: "textos", price: 39000,  name: "Textos escritos por nosotros",  hint: "Te entrevistamos y redactamos" },
+    { id: "google", price: 29000,  name: "Ficha de Google Maps",          hint: "Incluida en Local y Tienda", includedIn: ["local", "tienda"] },
+    { id: "reservas", price: 79000,name: "Reservas o citas en línea",     hint: "Agenda que se llena sola" },
+    { id: "ingles", price: 69000,  name: "Versión en inglés",             hint: "Para turistas y extranjeros" },
+    { id: "dominio", price: 49000, per: "año", name: "Dominio propio",                hint: "tunegocio.co · opcional" },
+    { id: "correo", price: 5000, per: "mes",  name: "Correos con tu dominio",        hint: "hola@tunegocio.co", monthly: true }
   ]
 };
+
+const cop = n => "$" + n.toLocaleString("es-CO");
+const addonPrice = a => cop(a.price) + (a.per ? "/" + a.per : "");
 
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -1699,11 +1703,11 @@ if (!reduce) {
 const qState = { plan: "local", add: new Set() };
 const qplans = $("#qplans"), addonsEl = $("#addons"), qlines = $("#qlines");
 Object.entries(CONFIG.plans).forEach(([id, p]) => {
-  qplans.insertAdjacentHTML("beforeend", `<label class="qplan"><input type="radio" name="qplan" value="${id}" ${id === qState.plan ? "checked" : ""}><b>${p.name}</b><span>Desde ${p.desde}</span></label>`);
+  qplans.insertAdjacentHTML("beforeend", `<label class="qplan"><input type="radio" name="qplan" value="${id}" ${id === qState.plan ? "checked" : ""}><b>${p.name}</b><span>Desde ${cop(p.price)}</span></label>`);
 });
 const check = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg>`;
 CONFIG.addons.forEach(a => {
-  const price = "A cotizar";
+  const price = addonPrice(a);
   addonsEl.insertAdjacentHTML("beforeend", `<label class="addon" data-id="${a.id}"><input type="checkbox" value="${a.id}"><span class="box">${check}</span><span class="t"><b>${a.name}</b><small>${a.hint}</small></span><span class="p">${price}</span></label>`);
 });
 qplans.addEventListener("change", e => { qState.plan = e.target.value; renderQuote(); });
@@ -1713,11 +1717,11 @@ $("#qdate").textContent = today;
 
 function quoteLines() {
   const p = CONFIG.plans[qState.plan];
-  const lines = [{ key: "plan", label: `Plan ${p.name}`, val: `Desde ${p.desde}` }, { key: "mant", label: "Mantenimiento mensual", val: `Desde ${p.mant}`, m: true }];
+  const lines = [{ key: "plan", label: `Plan ${p.name}`, val: `Desde ${cop(p.price)}` }, { key: "mant", label: "Mantenimiento mensual", val: `Desde ${cop(p.mant)}/mes`, m: true }];
   CONFIG.addons.forEach(a => {
     if (!qState.add.has(a.id)) return;
     const inc = a.includedIn && a.includedIn.includes(qState.plan);
-    lines.push({ key: a.id, label: a.name, val: inc ? "Incluido" : "A cotizar", m: !!a.monthly || inc });
+    lines.push({ key: a.id, label: a.name, val: inc ? "Incluido" : addonPrice(a), m: !!a.monthly || inc });
   });
   return lines;
 }
@@ -1729,7 +1733,7 @@ function renderQuote() {
     if (inc) { inp.checked = true; qState.add.add(a.id); }
     else if (l.dataset.inc === "1") { inp.checked = false; qState.add.delete(a.id); }
     l.dataset.inc = inc ? "1" : "0";
-    $(".p", l).textContent = inc ? "Incluido" : "A cotizar";
+    $(".p", l).textContent = inc ? "Incluido" : addonPrice(a);
   });
   const want = quoteLines(), have = new Map($$(".qline", qlines).map(n => [n.dataset.key, n]));
   want.forEach((ln, i) => {
@@ -1742,12 +1746,23 @@ function renderQuote() {
     } else { n.innerHTML = html; n.classList.remove("leave"); have.delete(ln.key); }
   });
   have.forEach(n => { if (n.classList.contains("leave")) return; n.classList.add("leave"); setTimeout(() => n.remove(), reduce ? 0 : 360); });
+  const t = quoteTotals();
+  $("#qtotal").textContent = cop(t.once);
+  $("#qmes").textContent = cop(t.month) + "/mes";
   $("#qSend").href = waLink(quoteText());
+}
+function quoteTotals() {
+  const p = CONFIG.plans[qState.plan], extras = CONFIG.addons.filter(a => qState.add.has(a.id) && !(a.includedIn && a.includedIn.includes(qState.plan)));
+  return {
+    once: p.price + extras.filter(a => a.per !== "mes").reduce((n, a) => n + a.price, 0),
+    month: p.mant + extras.filter(a => a.per === "mes").reduce((n, a) => n + a.price, 0)
+  };
 }
 function quoteText() {
   const p = CONFIG.plans[qState.plan];
-  const extras = CONFIG.addons.filter(a => qState.add.has(a.id) && !(a.includedIn && a.includedIn.includes(qState.plan))).map(a => "· " + a.name);
-  return [`Hola PairX, quiero cotizar una página web.`, ``, `Plan: ${p.name}`, extras.length ? `Adicionales:\n${extras.join("\n")}` : `Sin adicionales`, ``, `¿Me pueden enviar la cotización?`].join("\n");
+  const extras = CONFIG.addons.filter(a => qState.add.has(a.id) && !(a.includedIn && a.includedIn.includes(qState.plan))).map(a => "· " + a.name + " (" + addonPrice(a) + ")");
+  const t = quoteTotals();
+  return [`Hola PairX, quiero cotizar una página web.`, ``, `Plan: ${p.name}`, extras.length ? `Adicionales:\n${extras.join("\n")}` : `Sin adicionales`, ``, `Total desde: ${cop(t.once)} + ${cop(t.month)}/mes`, ``, `¿Me pueden enviar la cotización?`].join("\n");
 }
 const waLink = text => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
 renderQuote();
