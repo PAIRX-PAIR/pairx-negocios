@@ -508,17 +508,51 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
    COTIZADOR (paper)
    ========================================================================== */
 .quote{padding:clamp(88px,12vw,160px) 0}
+.quote .folio-link{margin-top:24px}
 .quote-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,5vw,80px);align-items:start}
 .quote .h2{margin:20px 0 18px}
 .qlabel{margin:40px 0 14px;font:500 .78rem/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.qplans{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.qplan{position:relative;display:block;padding:16px;border-radius:var(--radius-md);background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;transition:box-shadow .2s ease,background-color .2s ease}
-.qplan input{position:absolute;opacity:0;pointer-events:none}
-.qplan b{display:block;font-weight:600;font-size:1.05rem}
-.qplan span{font:600 .95rem/1.3 var(--sans);color:var(--muted);font-variant-numeric:tabular-nums}
-.qplan:has(input:checked){box-shadow:inset 0 0 0 2px var(--crimson);background:var(--crimson-wash)}
-.qplan:has(input:focus-visible){box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--crimson)}
-.qplan:active{transform:scale(.98)}
+.quote{position:relative;isolation:isolate;overflow:clip}
+.quote::before{content:"";position:absolute;z-index:-1;top:0;left:0;right:0;height:min(1100px,70%);background:radial-gradient(ellipse 46% 48% at 50% 46%,rgba(176,18,44,.17),transparent);pointer-events:none}
+.qhead{max-width:640px;margin-inline:auto;text-align:center}
+.qhead .lead{margin-inline:auto}
+.pswitch{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;margin-top:28px;padding:4px;border-radius:999px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
+.pswitch button{position:relative;z-index:1;min-height:44px;padding:0 20px;border-radius:999px;font:600 .92rem/1 var(--sans);color:var(--muted);white-space:nowrap;transition:color .25s ease}
+.pswitch button[aria-pressed="true"]{color:var(--on-crimson)}
+.pswitch-thumb{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--crimson);box-shadow:0 6px 16px -8px var(--crimson);transition:transform .35s var(--ease-out)}
+.pswitch[data-period="anual"] .pswitch-thumb{transform:translateX(100%)}
+.pcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
+.pcard{position:relative;display:flex;flex-direction:column;padding:26px 24px;border-radius:var(--radius-md);background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;transition:box-shadow .2s ease,background-color .2s ease,transform .25s var(--ease-out)}
+.pcard:has(input:checked){background:var(--crimson-wash);box-shadow:inset 0 0 0 2px var(--crimson)}
+.pcard-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.pcard h3{font:600 1.6rem/1.1 var(--sans);letter-spacing:-.02em}
+.pcard-badge{padding:6px 10px;border-radius:999px;background:var(--crimson);color:var(--on-crimson);font:600 .72rem/1 var(--sans)}
+.pcard-for{min-height:3em;margin-top:10px;color:var(--muted);font-size:.92rem;line-height:1.5}
+.pcard-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;margin-top:18px;font:700 clamp(2rem,1.6rem + 1vw,2.5rem)/1 var(--sans);letter-spacing:-.02em;font-variant-numeric:tabular-nums lining-nums}
+.pcard-sign{margin-right:-5px}
+.pcard-price small{font:500 .86rem/1 var(--sans);letter-spacing:0;color:var(--muted)}
+.pcard-sub{min-height:1.5em;margin-top:8px;color:var(--muted);font-size:.86rem}
+.pcard-pick{position:relative;display:grid;place-items:center;min-height:50px;margin-top:18px;border-radius:var(--radius-md);background:var(--night);color:var(--cream);font:600 1rem/1 var(--sans);cursor:pointer;transition:background-color .2s ease}
+.pcard-pick input{position:absolute;inset:0;margin:0;opacity:0;cursor:pointer}
+.pcard-pick .on{display:none}
+.pcard-pick:has(input:checked){background:var(--crimson);color:var(--on-crimson)}
+.pcard-pick:has(input:checked) .on{display:inline}
+.pcard-pick:has(input:checked) .idle{display:none}
+.pcard-pick:has(input:focus-visible){box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--crimson)}
+.pcard-feat,.pcard-inc{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:.92rem}
+.pcard-feat{margin-top:22px;font-weight:600}
+.pcard-feat li,.pcard-inc li{display:flex;align-items:center;gap:10px}
+.pcard svg{flex:none;width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pcard-feat svg{color:var(--crimson)}
+.pcard-more{margin-top:auto;padding-top:20px}
+.pcard-more h4{margin-bottom:12px;padding-top:16px;border-top:1px solid var(--line);font:600 .92rem/1.3 var(--sans)}
+.pcard-inc li{color:var(--muted)}
+.pcard-inc i{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--crimson);color:var(--crimson)}
+.pcard-inc svg{width:13px;height:13px;stroke-width:2.6}
+@media (hover:hover) and (pointer:fine){.pcard:hover{transform:translateY(-3px)}.pcard:not(:has(input:checked)):hover{box-shadow:inset 0 0 0 1.5px var(--line-strong)}}
+@media (max-width:900px){.pcards{grid-template-columns:minmax(0,1fr);max-width:520px;margin-inline:auto}.pcard-for,.pcard-sub{min-height:0}}
+@media (max-width:420px){.pswitch button{padding:0 12px;font-size:.84rem}}
+@media (prefers-reduced-motion:reduce){.pswitch-thumb,.pcard{transition:none}.pcard:hover{transform:none}}
 .addons{display:grid;gap:8px}
 .addon{display:grid;grid-template-columns:24px 1fr auto;gap:14px;align-items:center;padding:14px 16px;border-radius:var(--radius-md);background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;transition:box-shadow .2s ease,opacity .2s ease}
 .addon input{position:absolute;opacity:0;pointer-events:none}
@@ -533,7 +567,7 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 .addon .t small{color:var(--muted);font-size:.86rem}
 .addon .p{font:700 .95rem/1 var(--sans);white-space:nowrap;font-variant-numeric:tabular-nums}
 .addon:active{transform:scale(.99)}
-@media (hover:hover) and (pointer:fine){.addon:not(:has(input:disabled)):hover,.qplan:hover{box-shadow:inset 0 0 0 1.5px var(--line-strong)}}
+@media (hover:hover) and (pointer:fine){.addon:not(:has(input:disabled)):hover{box-shadow:inset 0 0 0 1.5px var(--line-strong)}}
 
 .qreceipt{position:sticky;top:96px}
 .qslip{position:relative;padding:28px 26px 40px;background:#fbf8f2;color:#26211d;font:500 .86rem/1.55 var(--mono);box-shadow:0 34px 50px -30px rgba(29,25,22,.55),0 2px 4px rgba(29,25,22,.1);-webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50% / 14px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50% / 14px 100%;rotate:.8deg}
@@ -802,7 +836,6 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
   .tag,.tag:nth-child(n){--str:30px}
   .tag+.tag{margin-top:6px}
   .rail{margin-inline:auto;max-width:400px}
-  .qplans{grid-template-columns:1fr}
   .fgrid{grid-template-columns:1fr}
   .seals{grid-template-columns:1fr}
   .seal,.seal+.seal{padding:28px 0;border-right:0}
@@ -1148,18 +1181,25 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 
 <!-- ======================= COTIZADOR ======================= -->
 <section class="quote s-paper" id="cotiza" aria-labelledby="quote-title">
-  <div class="wrap quote-grid">
-    <div>
+  <div class="wrap">
+    <div class="qhead">
       <p class="eyebrow" data-reveal>Cotización sin compromiso</p>
       <h2 class="h2" id="quote-title" data-split>Arma tu <em>cotización</em>.</h2>
-      <p class="lead" data-reveal>Elige un plan y súmale lo que tu negocio necesite. Nos lo mandas por WhatsApp y te respondemos con el precio según lo que necesites.</p>
-      <a class="folio-link" href="#portafolio" data-reveal style="--i:2"><span><b>¿No sabes qué pedir?</b>Mira 13 páginas de ejemplo, una por giro</span><i aria-hidden="true">→</i></a>
-
-      <p class="qlabel" id="ql-plan">1 · Tu plan</p>
-      <div class="qplans" role="radiogroup" aria-labelledby="ql-plan" id="qplans"></div>
-
+      <p class="lead" data-reveal>Elige un plan, súmale lo que tu negocio necesite y mándanoslo por WhatsApp. Te confirmamos el precio final sin compromiso.</p>
+      <div class="pswitch" role="group" aria-label="Cómo ver los precios" id="pswitch" data-reveal style="--i:2" data-period="inicial">
+        <span class="pswitch-thumb" aria-hidden="true"></span>
+        <button type="button" data-period="inicial" aria-pressed="true">Pago inicial</button>
+        <button type="button" data-period="anual" aria-pressed="false">Primer año completo</button>
+      </div>
+    </div>
+    <p class="qlabel" id="ql-plan">1 · Tu plan</p>
+    <div class="pcards" role="radiogroup" aria-labelledby="ql-plan" id="qplans"></div>
+  </div>
+  <div class="wrap quote-grid">
+    <div>
       <p class="qlabel" id="ql-add">2 · Lo que le quieras sumar</p>
       <div class="addons" role="group" aria-labelledby="ql-add" id="addons"></div>
+      <a class="folio-link" href="#portafolio" data-reveal style="--i:2"><span><b>¿No sabes qué pedir?</b>Mira 13 páginas de ejemplo, una por giro</span><i aria-hidden="true">→</i></a>
     </div>
 
     <div class="qreceipt" data-reveal style="--i:2">
@@ -1325,9 +1365,18 @@ const CONFIG = {
   currency: "COP",
   months: 12,
   plans: {
-    vitrina: { name: "Vitrina", price: 149000, mant: 12000 },
-    local:   { name: "Local", price: 299000, mant: 19000 },
-    tienda:  { name: "Tienda", price: 590000, mant: 29000 }
+    vitrina: { name: "Vitrina", price: 149000, mant: 12000,
+      desc: "Para existir en internet: quién eres, dónde estás y cómo escribirte.",
+      feat: [["page", "Página única con tus secciones clave"], ["chat", "Botón de WhatsApp y llamada"], ["pin", "Mapa, dirección y horario"]],
+      incT: "También incluye:", inc: ["Lista para celular", "Candado de seguridad (https)"] },
+    local:   { name: "Local", price: 299000, mant: 19000, badge: "Recomendado",
+      desc: "Para el negocio que ya tiene clientela y quiere que lo recomienden más.",
+      feat: [["layers", "Hasta 5 secciones o páginas"], ["list", "Menú o catálogo con precios"], ["pin", "Ficha de Google Maps configurada"]],
+      incT: "Todo lo de Vitrina, más:", inc: ["Formulario de pedidos o citas", "Galería de fotos"] },
+    tienda:  { name: "Tienda", price: 590000, mant: 29000,
+      desc: "Para vender en internet, también mientras duermes.",
+      feat: [["cart", "Tienda en línea con carrito"], ["card", "Pagos en línea"], ["box", "Panel de pedidos e inventario"]],
+      incT: "Todo lo de Local, más:", inc: ["Envío a domicilio o recoger en tienda", "Capacitación para tu equipo"] }
   },
   addons: [
     { id: "fotos", price: 69000,   name: "Fotos de tu local y productos", hint: "Una sesión en tu negocio" },
@@ -1699,9 +1748,61 @@ if (!reduce) {
 /* ===================== Cotizador ===================== */
 const qState = { plan: "local", add: new Set() };
 const qplans = $("#qplans"), addonsEl = $("#addons"), qlines = $("#qlines");
+const ICONS = {
+  page: '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+  chat: '<path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.2-4.6A8 8 0 1 1 21 12z"/>',
+  pin: '<path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+  layers: '<path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/>',
+  list: '<path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/>',
+  cart: '<circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.2a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 7H6"/>',
+  card: '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>',
+  box: '<path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/>',
+  check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>'
+};
+const svg = name => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[name]}</svg>`;
 Object.entries(CONFIG.plans).forEach(([id, p]) => {
-  qplans.insertAdjacentHTML("beforeend", `<label class="qplan"><input type="radio" name="qplan" value="${id}" ${id === qState.plan ? "checked" : ""}><b>${p.name}</b><span>Desde ${cop(p.price)}</span></label>`);
+  qplans.insertAdjacentHTML("beforeend", `<article class="pcard" data-id="${id}">
+    <div class="pcard-top"><h3>${p.name}</h3>${p.badge ? `<span class="pcard-badge">${p.badge}</span>` : ""}</div>
+    <p class="pcard-for">${p.desc}</p>
+    <p class="pcard-price"><span class="pcard-sign">$</span><span class="pcard-n">${p.price.toLocaleString("es-CO")}</span><small class="pcard-per">desde · pago inicial</small></p>
+    <p class="pcard-sub"></p>
+    <label class="pcard-pick"><input type="radio" name="qplan" value="${id}" ${id === qState.plan ? "checked" : ""}><span class="idle">Elegir ${p.name}</span><span class="on">Plan elegido ✓</span></label>
+    <ul class="pcard-feat">${p.feat.map(([i, t]) => `<li>${svg(i)}<span>${t}</span></li>`).join("")}</ul>
+    <div class="pcard-more"><h4>${p.incT}</h4><ul class="pcard-inc">${p.inc.map(t => `<li><i>${svg("check")}</i><span>${t}</span></li>`).join("")}</ul></div>
+  </article>`);
 });
+$$(".pcard", qplans).forEach(card => card.addEventListener("click", e => {
+  if (!e.target.closest(".pcard-pick")) $("input", card).click();
+}));
+const pswitch = $("#pswitch");
+function rollPrice(el, to) {
+  const from = Number(el.dataset.v || to), start = performance.now();
+  el.dataset.v = to;
+  if (reduce || from === to) { el.textContent = to.toLocaleString("es-CO"); return; }
+  const step = now => {
+    if (Number(el.dataset.v) !== to) return;
+    const t = Math.min(1, (now - start) / 550), k = 1 - Math.pow(1 - t, 3);
+    el.textContent = Math.round(from + (to - from) * k).toLocaleString("es-CO");
+    if (t < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+function renderPrices(period) {
+  $$(".pcard", qplans).forEach(card => {
+    const p = CONFIG.plans[card.dataset.id], year = period === "anual";
+    rollPrice($(".pcard-n", card), year ? p.price + p.mant * CONFIG.months : p.price);
+    $(".pcard-per", card).textContent = year ? "desde · primer año" : "desde · pago inicial";
+    $(".pcard-sub", card).textContent = year ? `Pago inicial ${cop(p.price)} + 12 meses de ${cop(p.mant)}` : `+ mantenimiento desde ${cop(p.mant)}/mes`;
+  });
+}
+pswitch.addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if (!b) return;
+  pswitch.dataset.period = b.dataset.period;
+  $$("button", pswitch).forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  renderPrices(b.dataset.period);
+});
+renderPrices("inicial");
 const check = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg>`;
 CONFIG.addons.forEach(a => {
   const price = addonPrice(a);
