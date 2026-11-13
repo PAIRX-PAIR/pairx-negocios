@@ -9,7 +9,7 @@
   if (!ctx) return;
 
   var CREAM = [244, 239, 230], CRIMSON = [224, 38, 63];
-  var FONT = '700 100px "IBM Plex Sans", system-ui, sans-serif';
+  var FONT = '700 100px "Bricolage Grotesque", system-ui, sans-serif';
   var RADIUS = 80, STRIDE = 8; /* x, y, vx, vy, hx, hy, r, esX */
   var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   var w = 0, h = 0, dpr = 1, px = -1e5, py = -1e5, raf = 0, visible = true, awake = true;
