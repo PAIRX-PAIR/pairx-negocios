@@ -30,24 +30,29 @@
     var fit = (w * 0.98 / m.measureText("PairX").width) * 100;
     m.font = FONT.replace("100px", fit + "px");
     var box = m.measureText("PairX");
-    var left = (w - box.width) / 2, splitX = left + m.measureText("Pair").width;
+    var left = (w - box.width) / 2, xLeft = left + box.width - m.measureText("X").width;
     m.textBaseline = "alphabetic";
     m.fillText("PairX", left, h - w * 0.02);
     var img = m.getImageData(0, 0, w, h).data;
+    /* Máscara solo de la X: un punto es carmesí si cae sobre la X, aunque la X se meta bajo la "r" */
+    var xm = document.createElement("canvas"); xm.width = w; xm.height = h;
+    var xc = xm.getContext("2d", { willReadFrequently: true });
+    xc.font = m.font; xc.textBaseline = "alphabetic"; xc.fillText("X", xLeft, h - w * 0.02);
+    var ximg = xc.getImageData(0, 0, w, h).data;
 
     var gap = w < 720 ? 4 : 6, cols = Math.ceil(w / gap), rows = Math.ceil(h / gap), tmp = [];
     for (var gy = 0; gy < rows; gy++) {
       for (var gx = 0; gx < cols; gx++) {
-        var sum = 0;
+        var sum = 0, xs = 0;
         for (var sy = 0; sy < 3; sy++) for (var sx = 0; sx < 3; sx++) {
           var x = Math.min(w - 1, Math.floor(gx * gap + (sx + 0.5) * gap / 3));
           var y = Math.min(h - 1, Math.floor(gy * gap + (sy + 0.5) * gap / 3));
-          sum += img[(y * w + x) * 4 + 3];
+          sum += img[(y * w + x) * 4 + 3]; xs += ximg[(y * w + x) * 4 + 3];
         }
         var cov = sum / (9 * 255);
         if (cov < 0.06) continue;
         var hx = gx * gap + gap / 2, hy = gy * gap + gap / 2;
-        tmp.push(hx, hy, 0, 0, hx, hy, Math.sqrt(cov) * gap * 0.56, hx >= splitX ? 1 : 0);
+        tmp.push(hx, hy, 0, 0, hx, hy, Math.sqrt(cov) * gap * 0.56, xs > sum * 0.5 ? 1 : 0);
       }
     }
     dots = new Float32Array(tmp);

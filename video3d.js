@@ -8,7 +8,7 @@ export function start({ works = [], state = {} }) {
   const shotsEl = [...document.querySelectorAll(".film .shot")];
   if (!canvas || shotsEl.length < 6) throw new Error("faltan elementos de la escena");
   const mobile = matchMedia("(max-width: 860px), (pointer: coarse)").matches;
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: !mobile, alpha: false, powerPreference: "high-performance" });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: "high-performance" });
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, mobile ? 1.5 : 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.15;
   const scene = new THREE.Scene();
@@ -52,8 +52,17 @@ export function start({ works = [], state = {} }) {
   /* ---------- la X de PairX ---------- */
   const X = new THREE.Group(); scene.add(X);
   const xMat = new THREE.MeshPhysicalMaterial({ color: C.crimson, metalness: 0.35, roughness: 0.2, clearcoat: 1, clearcoatRoughness: 0.12, emissive: 0x3a0510, emissiveIntensity: 0.6 });
-  const barGeo = new THREE.ExtrudeGeometry(rrect(4.0, 0.92, 0.2), { depth: 0.8, bevelEnabled: true, bevelThickness: 0.07, bevelSize: 0.07, bevelSegments: mobile ? 2 : 4, curveSegments: mobile ? 5 : 10 });
+  const barGeo = new THREE.ExtrudeGeometry(rrect(4.0, 0.92, 0.2), { depth: 0.8, bevelEnabled: true, bevelThickness: 0.07, bevelSize: 0.07, bevelSegments: mobile ? 3 : 6, curveSegments: mobile ? 6 : 12 });
   barGeo.translate(0, 0, -0.4);
+  /* X de una sola pieza: evita que las dos barras se peleen en el cruce (se veía de dos colores) */
+  const xShape = (() => { const h = 0.46, L = 2.0, r = 0.2, p = new THREE.Shape();
+    p.moveTo(-h, h); p.lineTo(-h, L - r); p.quadraticCurveTo(-h, L, -h + r, L); p.lineTo(h - r, L); p.quadraticCurveTo(h, L, h, L - r);
+    p.lineTo(h, h); p.lineTo(L - r, h); p.quadraticCurveTo(L, h, L, h - r); p.lineTo(L, -h + r); p.quadraticCurveTo(L, -h, L - r, -h);
+    p.lineTo(h, -h); p.lineTo(h, -L + r); p.quadraticCurveTo(h, -L, h - r, -L); p.lineTo(-h + r, -L); p.quadraticCurveTo(-h, -L, -h, -L + r);
+    p.lineTo(-h, -h); p.lineTo(-L + r, -h); p.quadraticCurveTo(-L, -h, -L, -h + r); p.lineTo(-L, h - r); p.quadraticCurveTo(-L, h, -L + r, h); p.lineTo(-h, h); return p; })();
+  const xGeo = new THREE.ExtrudeGeometry(xShape, { depth: 0.8, bevelEnabled: true, bevelThickness: 0.07, bevelSize: 0.07, bevelSegments: mobile ? 3 : 6, curveSegments: mobile ? 6 : 12 });
+  xGeo.translate(0, 0, -0.4); xGeo.rotateZ(Math.PI / 4);
+  const xSolid = new THREE.Mesh(xGeo, xMat); xSolid.visible = false; X.add(xSolid);
   const bars = [1, -1].map(s => { const pivot = new THREE.Group(), m = new THREE.Mesh(barGeo, xMat); pivot.rotation.z = s * Math.PI / 4; pivot.add(m); X.add(pivot); return { pivot, m, s }; });
   const xGlow = glow(C.fresh, 11, 0.4); const xGlow2 = glow(0xff8a98, 4.5, 0.25);
 
@@ -67,7 +76,7 @@ export function start({ works = [], state = {} }) {
   }
   function loadTex(slug, file, done) {
     loader.load("assets/3d/" + (file || slug) + ".jpg", t => {
-      t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy()); tex[slug] = t;
+      t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = renderer.capabilities.getMaxAnisotropy(); tex[slug] = t;
       (waiting[slug] || []).forEach(m => { if (m.userData.slug === slug) { m.map = t; m.color.set(0xffffff); m.needsUpdate = true; } }); waiting[slug] = [];
       done && done();
     }, undefined, () => done && done());
@@ -277,6 +286,7 @@ export function start({ works = [], state = {} }) {
     X.rotateY(Math.sin(t * 0.4) * 0.18 * (1 - turn) + spin * turn + ptr.sx * 0.25); X.rotateX(-ptr.sy * 0.2);
     X.position.y += Math.sin(t * 0.7) * 0.07;
     bars.forEach(b => { b.m.position.set(b.s * (1 - ik) * 9, 0, b.s * (1 - ik) * -3); b.pivot.rotation.z = b.s * (Math.PI / 4 + (1 - ik) * 2.6); b.m.rotation.x = (1 - ik) * 3 * b.s; });
+    { const whole = ik > 0.999; xSolid.visible = whole; bars.forEach(b => { b.m.visible = !whole; }); }
     xGlow.position.copy(X.position); xGlow2.position.copy(X.position);
     const xs = X.scale.x; xGlow.scale.setScalar(11 * xs + 2); xGlow2.scale.setScalar(4.5 * xs);
     xGlow.material.opacity = (0.3 + 0.08 * Math.sin(t * 1.3)) * ik; xGlow2.material.opacity = 0.2 * ik;
