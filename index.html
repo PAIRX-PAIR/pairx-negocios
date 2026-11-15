@@ -43,7 +43,7 @@
 <meta name="twitter:title" content="PairX — La vitrina que nunca cierra">
 <meta name="twitter:description" content="Páginas web para negocios y emprendedores. Cotiza según lo que necesites.">
 <meta name="twitter:image" content="https://pairx-web.vercel.app/og-image.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://pairx-web.vercel.app/#pairx","name":"PairX","url":"https://pairx-web.vercel.app/","image":"https://pairx-web.vercel.app/og-image.png","logo":"https://pairx-web.vercel.app/og-image.png","description":"Diseño y desarrollo de páginas web para negocios y emprendedores en Colombia, con pedidos por WhatsApp. Cotización según lo que necesites.","telephone":"+57 318 756 5105","areaServed":{"@type":"Country","name":"Colombia"},"availableLanguage":"es","contactPoint":{"@type":"ContactPoint","telephone":"+57 318 756 5105","contactType":"customer service","availableLanguage":"es"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Planes de páginas web","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web Vitrina","description":"Página web para empezar: quién eres, dónde estás y cómo escribirte."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web Local","description":"Página con catálogo o menú, varias secciones y ficha de Google Maps."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web Tienda","description":"Tienda en línea con carrito, pagos y panel de pedidos."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web A medida","description":"Proyecto web a la medida para necesidades especiales."}}]}},{"@type":"WebSite","@id":"https://pairx-web.vercel.app/#web","url":"https://pairx-web.vercel.app/","name":"PairX","inLanguage":"es-CO","publisher":{"@id":"https://pairx-web.vercel.app/#pairx"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://pairx-web.vercel.app/#pairx","sameAs":["https://www.tiktok.com/@pairxweb"],"name":"PairX","url":"https://pairx-web.vercel.app/","image":"https://pairx-web.vercel.app/og-image.png","logo":"https://pairx-web.vercel.app/og-image.png","description":"Diseño y desarrollo de páginas web para negocios y emprendedores en Colombia, con pedidos por WhatsApp. Cotización según lo que necesites.","telephone":"+57 318 756 5105","areaServed":{"@type":"Country","name":"Colombia"},"availableLanguage":"es","contactPoint":{"@type":"ContactPoint","telephone":"+57 318 756 5105","contactType":"customer service","availableLanguage":"es"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Planes de páginas web","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web Vitrina","description":"Página web para empezar: quién eres, dónde estás y cómo escribirte."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web Local","description":"Página con catálogo o menú, varias secciones y ficha de Google Maps."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web Tienda","description":"Tienda en línea con carrito, pagos y panel de pedidos."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web A medida","description":"Proyecto web a la medida para necesidades especiales."}}]}},{"@type":"WebSite","@id":"https://pairx-web.vercel.app/#web","url":"https://pairx-web.vercel.app/","name":"PairX","inLanguage":"es-CO","publisher":{"@id":"https://pairx-web.vercel.app/#pairx"}}]}</script>
 <meta property="og:title" content="PairX — La vitrina que nunca cierra">
 <meta property="og:description" content="Páginas web para negocios y emprendedores. Planes que se ajustan a lo que vendes.">
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -803,6 +803,22 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
   .ptag b{font-size:1.05rem}
   .ptag small{font-size:.62rem}
 }
+/* ===== Redes y videos de TikTok ===== */
+.social{display:inline-flex;align-items:center;gap:10px;min-height:44px;margin-top:14px;color:var(--fg);font:500 .9rem/1 var(--mono);text-decoration:none}
+.social svg,.tt-ico svg{width:18px;height:18px;fill:currentColor}
+.tt-ico{display:inline-grid;place-items:center}
+.reels{padding:clamp(80px,10vw,140px) 0}
+.reels-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px 32px;margin-bottom:clamp(28px,4vw,48px)}
+.reels-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.reel-card{position:relative;margin:0;aspect-ratio:9/16;border-radius:22px;overflow:hidden;background:var(--night-3);box-shadow:0 0 0 1px var(--night-line),0 30px 60px -30px rgba(0,0,0,.9)}
+.reel-card video{display:block;width:100%;height:100%;object-fit:cover}
+.reel-card figcaption{position:absolute;left:0;right:0;bottom:0;padding:48px 14px 14px;background:linear-gradient(transparent,rgba(0,0,0,.8));color:#fff;font:700 .95rem/1.25 var(--display);pointer-events:none}
+.reel-snd{position:absolute;top:10px;right:10px;z-index:1;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.55);color:#fff;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.reel-snd svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.reel-snd .on,.reel-snd[aria-pressed="true"] .off{display:none}
+.reel-snd[aria-pressed="true"] .on{display:block}
+.reel-snd:focus-visible{outline:2px solid var(--crimson-fresh);outline-offset:2px}
+@media (max-width:900px){.reels-row{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:min(62%,260px);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;padding-bottom:6px}.reel-card{scroll-snap-align:center}}
 </style>
 </head>
 <body>
@@ -1046,6 +1062,25 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
   </div>
 </section>
 
+<!-- ======================= VIDEOS (TikTok) ======================= -->
+<section class="reels s-dark" id="videos" aria-labelledby="reels-title" hidden>
+  <div class="wrap">
+    <div class="reels-head">
+      <div>
+        <p class="eyebrow" data-reveal>En TikTok · @pairxweb</p>
+        <h2 class="h2" id="reels-title" data-split>Míranos en <em>acción</em>.</h2>
+      </div>
+      <a class="btn btn-primary magnet" href="https://www.tiktok.com/@pairxweb" target="_blank" rel="noopener"><span class="btn-in"><span class="tt-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg></span> Seguir en TikTok <span class="arw">→</span></span></a>
+    </div>
+    <div class="reels-row" role="list">
+      <figure class="reel-card" role="listitem"><video src="media/tiktok/1-nunca-cierra.mp4" poster="media/tiktok/1-nunca-cierra.jpg" muted loop playsinline preload="none" aria-label="Video de PairX: Tu negocio cierra. Tu página no."></video><button type="button" class="reel-snd" aria-pressed="false" aria-label="Activar sonido"><svg class="off" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m23 9-6 6M17 9l6 6"/></svg><svg class="on" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg></button><figcaption>Tu negocio cierra. Tu página no.</figcaption></figure>
+      <figure class="reel-card" role="listitem"><video src="media/tiktok/2-te-buscaron.mp4" poster="media/tiktok/2-te-buscaron.jpg" muted loop playsinline preload="none" aria-label="Video de PairX: Te buscaron en Google… y encontraron a otro."></video><button type="button" class="reel-snd" aria-pressed="false" aria-label="Activar sonido"><svg class="off" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m23 9-6 6M17 9l6 6"/></svg><svg class="on" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg></button><figcaption>Te buscaron en Google… y encontraron a otro.</figcaption></figure>
+      <figure class="reel-card" role="listitem"><video src="media/tiktok/3-portafolio-3d.mp4" poster="media/tiktok/3-portafolio-3d.jpg" muted loop playsinline preload="none" aria-label="Video de PairX: Así se ve una página hecha por PairX."></video><button type="button" class="reel-snd" aria-pressed="false" aria-label="Activar sonido"><svg class="off" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m23 9-6 6M17 9l6 6"/></svg><svg class="on" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg></button><figcaption>Así se ve una página hecha por PairX.</figcaption></figure>
+      <figure class="reel-card" role="listitem"><video src="media/tiktok/4-cuanto-cuesta.mp4" poster="media/tiktok/4-cuanto-cuesta.jpg" muted loop playsinline preload="none" aria-label="Video de PairX: ¿Cuánto cuesta una página web?"></video><button type="button" class="reel-snd" aria-pressed="false" aria-label="Activar sonido"><svg class="off" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m23 9-6 6M17 9l6 6"/></svg><svg class="on" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg></button><figcaption>¿Cuánto cuesta una página web?</figcaption></figure>
+    </div>
+  </div>
+</section>
+
 <!-- ======================= PREGUNTAS ======================= -->
 <section class="faq s-dark" id="preguntas" aria-labelledby="faq-title">
   <div class="wrap faq-grid">
@@ -1070,6 +1105,7 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
       <p class="lead" data-reveal>Llena esto y se abre WhatsApp con tu mensaje listo. Sin bots.</p>
       <div class="alt" data-reveal style="--i:2">
         <a class="btn btn-ghost" href="portafolio/"><span class="btn-in">Ver ejemplos por giro <span class="arw">→</span></span></a>
+        <a class="btn btn-ghost" href="https://www.tiktok.com/@pairxweb" target="_blank" rel="noopener"><span class="btn-in"><span class="tt-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg></span> TikTok</span></a>
       </div>
     </div>
     <form class="form" id="form" novalidate data-reveal style="--i:1">
@@ -1104,7 +1140,7 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
 <footer class="foot s-dark">
   <div class="wrap">
     <div class="foot-top">
-      <div><a class="brand" href="#top"><i aria-hidden="true" style="width:22px;height:22px;border-radius:5px;background:var(--crimson);box-shadow:inset 0 0 0 4px var(--night),inset 0 0 0 5px var(--crimson)"></i>PairX</a><p style="margin-top:14px">Páginas web a la medida para negocios y emprendedores. Tu negocio, abierto en internet todo el día.</p></div>
+      <div><a class="brand" href="#top"><i aria-hidden="true" style="width:22px;height:22px;border-radius:5px;background:var(--crimson);box-shadow:inset 0 0 0 4px var(--night),inset 0 0 0 5px var(--crimson)"></i>PairX</a><p style="margin-top:14px">Páginas web a la medida para negocios y emprendedores. Tu negocio, abierto en internet todo el día.</p><a class="social" href="https://www.tiktok.com/@pairxweb" target="_blank" rel="noopener me" aria-label="PairX en TikTok (@pairxweb)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg>TikTok · @pairxweb</a></div>
       <nav aria-label="Pie de página"><a href="#top">Inicio</a><a href="#cotiza">Planes</a><a href="#portafolio">Portafolio</a><a href="#preguntas">Preguntas</a><a href="#contacto">Contacto</a></nav>
     </div>
     <div class="legal"><span>© <span id="year">2026</span> PairX</span><nav class="legal-links" aria-label="Legal"><a href="legal/aviso-legal/">Aviso legal</a><a href="legal/privacidad/">Datos personales</a><a href="legal/terminos/">Términos y condiciones</a><a href="legal/cookies/">Cookies</a><a href="legal/">PQR</a><a href="#" data-consent hidden>Preferencias de cookies</a></nav><span>Los negocios del portafolio son ejemplos ilustrativos</span></div>
@@ -1699,6 +1735,25 @@ if (has3d) {
 } else { initReel(); loadSilk(); }
 
 onScroll();
+})();
+</script>
+<script>
+(() => {
+  const vids = [...document.querySelectorAll(".reel-card video")];
+  if (!vids.length) return;
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) vids.forEach(v => { v.controls = true; });
+  else {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      const v = e.target;
+      if (e.isIntersecting) { v.preload = "auto"; v.play().catch(() => {}); } else v.pause();
+    }), { threshold: 0.55 });
+    vids.forEach(v => io.observe(v));
+  }
+  document.querySelectorAll(".reel-snd").forEach(b => b.addEventListener("click", () => {
+    const v = b.parentElement.querySelector("video"), turnOn = v.muted;
+    vids.forEach(o => { o.muted = true; const ob = o.parentElement.querySelector(".reel-snd"); ob.setAttribute("aria-pressed", "false"); ob.setAttribute("aria-label", "Activar sonido"); });
+    if (turnOn) { v.muted = false; v.play().catch(() => {}); b.setAttribute("aria-pressed", "true"); b.setAttribute("aria-label", "Silenciar"); }
+  }));
 })();
 </script>
 </body>
