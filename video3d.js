@@ -227,7 +227,8 @@ export function start({ works = [], state = {} }) {
     for (let i = 0; i < shots.length; i++) {
       const s = shots[i], r = s.el.getBoundingClientRect();
       /* El tramo animado es el que el hijo sticky permanece fijado, no el alto total del plano. */
-      const travel = Math.max(1, r.height - vh), local = clamp(-r.top / travel, 0, 1);
+      /* Planos fijados (inicio y cierre) animan mientras están pegados; los demás, mientras pasan de largo. */
+      const pinned = r.height - vh > vh * 0.15, travel = Math.max(1, pinned ? r.height - vh : r.height), local = clamp(-r.top / travel, 0, 1);
       if (r.top <= 0 && (r.bottom > 0 || i === shots.length - 1)) T = i + local;
       const oin = i === 0 ? 1 : sstep(0, 1, 1 - r.top / (vh * 0.3)), oout = sstep(0, 1, (r.bottom - vh * 0.7) / (vh * 0.3));
       const o = Math.round(oin * oout * 100) / 100;
