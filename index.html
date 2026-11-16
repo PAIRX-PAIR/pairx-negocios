@@ -14,17 +14,6 @@
   window.addEventListener("pageshow", function (e) { if (e.persisted) top(); });
 })();
 </script>
-<script>
-/* 3D solo con WebGL2 y sin "reducir movimiento"; si no, queda la versión estática. */
-(function () {
-  try {
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (/[?&]static/.test(location.search)) return; /* ?static fuerza la versión sin 3D */
-    var c = document.createElement("canvas");
-    if (c.getContext("webgl2")) document.documentElement.classList.add("has-3d");
-  } catch (e) {}
-})();
-</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PairX — Páginas web para negocios y emprendedores</title>
 <meta name="description" content="PairX hace la página web de tu negocio o emprendimiento: con tus precios, tu horario y un botón directo a WhatsApp. Cotiza sin compromiso, a tu medida.">
@@ -43,7 +32,7 @@
 <meta name="twitter:title" content="PairX — La vitrina que nunca cierra">
 <meta name="twitter:description" content="Páginas web para negocios y emprendedores. Cotiza según lo que necesites.">
 <meta name="twitter:image" content="https://pairx-web.vercel.app/og-image.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://pairx-web.vercel.app/#pairx","sameAs":["https://www.tiktok.com/@pairxweb"],"name":"PairX","url":"https://pairx-web.vercel.app/","image":"https://pairx-web.vercel.app/og-image.png","logo":"https://pairx-web.vercel.app/og-image.png","description":"Diseño y desarrollo de páginas web para negocios y emprendedores en Colombia, con pedidos por WhatsApp. Cotización según lo que necesites.","telephone":"+57 318 756 5105","areaServed":{"@type":"Country","name":"Colombia"},"availableLanguage":"es","contactPoint":{"@type":"ContactPoint","telephone":"+57 318 756 5105","contactType":"customer service","availableLanguage":"es"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Planes de páginas web","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web Vitrina","description":"Página web para empezar: quién eres, dónde estás y cómo escribirte."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web Local","description":"Página con catálogo o menú, varias secciones y ficha de Google Maps."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web Tienda","description":"Tienda en línea con carrito, pagos y panel de pedidos."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web A medida","description":"Proyecto web a la medida para necesidades especiales."}}]}},{"@type":"WebSite","@id":"https://pairx-web.vercel.app/#web","url":"https://pairx-web.vercel.app/","name":"PairX","inLanguage":"es-CO","publisher":{"@id":"https://pairx-web.vercel.app/#pairx"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://pairx-web.vercel.app/#pairx","sameAs":["https://www.tiktok.com/@pairx00"],"name":"PairX","url":"https://pairx-web.vercel.app/","image":"https://pairx-web.vercel.app/og-image.png","logo":"https://pairx-web.vercel.app/og-image.png","description":"Diseño y desarrollo de páginas web para negocios y emprendedores en Colombia, con pedidos por WhatsApp. Cotización según lo que necesites.","telephone":"+57 318 756 5105","areaServed":{"@type":"Country","name":"Colombia"},"availableLanguage":"es","contactPoint":{"@type":"ContactPoint","telephone":"+57 318 756 5105","contactType":"customer service","availableLanguage":"es"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Planes de páginas web","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web Vitrina","description":"Página web para empezar: quién eres, dónde estás y cómo escribirte."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web Local","description":"Página con catálogo o menú, varias secciones y ficha de Google Maps."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web Tienda","description":"Tienda en línea con carrito, pagos y panel de pedidos."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Página web A medida","description":"Proyecto web a la medida para necesidades especiales."}}]}},{"@type":"WebSite","@id":"https://pairx-web.vercel.app/#web","url":"https://pairx-web.vercel.app/","name":"PairX","inLanguage":"es-CO","publisher":{"@id":"https://pairx-web.vercel.app/#pairx"}}]}</script>
 <meta property="og:title" content="PairX — La vitrina que nunca cierra">
 <meta property="og:description" content="Páginas web para negocios y emprendedores. Planes que se ajustan a lo que vendes.">
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -721,88 +710,6 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
 @keyframes hero-out{to{opacity:.1;transform:translateY(-10vh) scale(.94)}}
 @keyframes sec-in{from{opacity:.35;transform:translateY(72px) scale(.97)}}
 @keyframes row-in{from{opacity:.25;transform:translateX(-4%)}}
-/* ===== Video 3D: lienzo fijo + planos fijados (el scroll es la línea de tiempo) ===== */
-#gl{position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh;z-index:-1;display:none;pointer-events:none}
-.has-3d #gl{display:block}
-.has-3d #silk-bg{display:none}
-.has-3d section.s-dark,.has-3d footer.s-dark{background:transparent}
-.has-3d section.faq,.has-3d footer.foot{background:linear-gradient(rgba(12,10,10,.72),rgba(12,10,10,.72))}
-.shot{padding:clamp(72px,10vw,130px) 0}
-.shot.hero{padding:132px 0 56px}
-.cap{max-width:620px}
-.cap .h2{margin-top:18px}
-.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
-.pills li{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 16px 0 12px;border-radius:999px;background:rgba(12,10,10,.55);box-shadow:inset 0 0 0 1px var(--ln);font:500 .94rem/1 var(--sans);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:transform .3s var(--ease-out),box-shadow .2s ease}
-.pills svg{flex:none;width:18px;height:18px;fill:none;stroke:var(--crimson-fresh);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-@media (hover:hover) and (pointer:fine){.pills li:hover{transform:translateY(-2px);box-shadow:inset 0 0 0 1px var(--crimson-fresh)}}
-.steps3{display:grid;gap:10px;margin-top:26px}
-.steps3 li{display:grid;grid-template-columns:46px minmax(0,1fr);gap:14px;align-items:center;padding:12px 18px 12px 12px;border-radius:14px;background:rgba(12,10,10,.55);box-shadow:inset 0 0 0 1px var(--ln);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-.steps3 b{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--crimson);color:var(--on-crimson);font:600 .9rem/1 var(--mono)}
-.steps3 strong{display:block;font:700 1.18rem/1.2 var(--display);letter-spacing:-.02em;color:var(--fg)}
-.steps3 span{color:var(--muted);font-size:.94rem;line-height:1.4}
-.ptags{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:26px}
-.ptag{display:grid;gap:4px;justify-items:start;text-align:left;padding:14px 14px 13px;border-radius:14px;background:rgba(12,10,10,.6);box-shadow:inset 0 0 0 1px var(--ln);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:transform .3s var(--ease-out),box-shadow .2s ease,background-color .2s ease}
-.ptag b{font:700 1.2rem/1.1 var(--display);letter-spacing:-.02em}
-.ptag small{font:500 .7rem/1.2 var(--mono);letter-spacing:.04em;color:var(--muted);text-transform:uppercase}
-.ptag .pr{font:600 clamp(.95rem,.8rem + .7vw,1.3rem)/1.1 var(--mono);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
-.ptag[aria-pressed="true"]{background:rgba(176,18,44,.3);box-shadow:inset 0 0 0 1.5px var(--crimson-fresh)}
-.ptag:active{transform:scale(.97)}
-@media (hover:hover) and (pointer:fine){.ptag:hover{transform:translateY(-3px)}}
-.cap-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-.scroll-hint{display:none}
-.ring-hit,.ring-acts{display:none}
-.wa-fab{position:fixed;right:20px;bottom:20px;z-index:94;display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:var(--wa);color:#06371b;box-shadow:0 14px 30px -10px rgba(0,0,0,.7);transition:transform .3s var(--ease-out)}
-.wa-fab svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.wa-fab::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 0 rgba(37,211,102,.5);animation:fab-pulse 2.6s ease-out infinite}
-@keyframes fab-pulse{70%,100%{box-shadow:0 0 0 16px rgba(37,211,102,0)}}
-@media (hover:hover) and (pointer:fine){.wa-fab:hover{transform:scale(1.08)}}
-@media (max-width:640px){.wa-fab{display:none}}
-@media (prefers-reduced-motion:reduce){.wa-fab::after{animation:none}}
-
-.has-3d .shot{height:100vh;height:100lvh;min-height:0;padding:0;overflow:visible;background:transparent;isolation:auto}
-.has-3d .shot.hero,.has-3d #hablemos{height:130vh;height:130lvh}
-.has-3d .shot.folio::before,.has-3d .hero::before,.has-3d .hero .awning,.has-3d .hero .light{display:none}
-.has-3d .shot-in{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;overflow:hidden}
-.has-3d .shot-in::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:var(--o,1);background:linear-gradient(90deg,rgba(8,6,6,.94),rgba(8,6,6,.78) 42%,rgba(8,6,6,.28) 62%,transparent 80%)}
-.has-3d .cap-fade{opacity:var(--o,1);transform:translate3d(0,var(--ty,0px),0);pointer-events:none}
-.has-3d .cap-fade :is(a,button){pointer-events:auto}
-.has-3d .shot-in.off .cap-fade :is(a,button){pointer-events:none}
-.has-3d .hero-grid{animation:none}
-.has-3d .picker,.has-3d .reel,.has-3d .folio-foot{display:none}
-.has-3d .stage{visibility:hidden}
-.has-3d .hero h1{font-size:clamp(3rem,1rem + 5.6vw,7.2rem);text-shadow:0 2px 30px rgba(0,0,0,.6)}
-.has-3d .cap .h2,.has-3d .folio .h2{text-shadow:0 2px 30px rgba(0,0,0,.6)}
-.has-3d .folio-head{display:block}
-.has-3d .folio-head>div{max-width:560px}
-.has-3d .folio-head .lead{margin-top:16px}
-.has-3d .ring-hit{display:block;position:absolute;inset:0;cursor:grab;touch-action:pan-y}
-.has-3d .ring-hit.dragging{cursor:grabbing}
-.has-3d .ring-acts{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:20px}
-.ring-all{font:500 .86rem/1 var(--mono);color:#fff;text-underline-offset:4px}
-.has-3d .scroll-hint{display:flex;align-items:center;gap:10px;position:absolute;left:50%;bottom:22px;transform:translateX(-50%);font:500 .74rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--cream-muted);opacity:var(--o,1);white-space:nowrap}
-.has-3d .scroll-hint i{font-style:normal;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--night-line-2);animation:hint 1.8s var(--ease-in-out) infinite}
-@keyframes hint{50%{transform:translateY(5px)}}
-@media (max-width:960px), (pointer:coarse){
-  .has-3d .shot-in{align-items:flex-end;padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
-  .has-3d .shot-in::before{background:linear-gradient(0deg,rgba(8,6,6,.98) 0%,rgba(8,6,6,.94) 36%,rgba(8,6,6,.66) 58%,rgba(8,6,6,.18) 78%,transparent 100%)}
-  .has-3d .stage{display:none}
-  .has-3d .hero h1{font-size:clamp(2.5rem,11.5vw,4.6rem);margin:16px 0 16px}
-  .has-3d .hero-ctas{margin-top:20px}
-  .has-3d .hero-meta{display:none}
-  .has-3d .scroll-hint{bottom:calc(30px + env(safe-area-inset-bottom,0px))}
-  .has-3d .cap .h2,.has-3d .folio .h2{font-size:clamp(2.1rem,9.5vw,3.6rem)}
-  .has-3d .folio-head .lead{font-size:.98rem}
-  .has-3d .rail-ctl{margin-top:14px}
-  .has-3d .rail-ctl button{width:46px;height:46px}
-  .pills{gap:6px;margin-top:18px}
-  .pills li{min-height:38px;font-size:.86rem;padding:0 12px 0 10px}
-  .steps3{margin-top:18px;gap:8px}
-  .steps3 li{padding:9px 14px 9px 9px}
-  .ptags{margin-top:18px;gap:6px}
-  .ptag{padding:11px 9px 10px}
-  .ptag b{font-size:1.05rem}
-  .ptag small{font-size:.62rem}
-}
 /* ===== Redes y videos de TikTok ===== */
 .social{display:inline-flex;align-items:center;gap:10px;min-height:44px;margin-top:14px;color:var(--fg);font:500 .9rem/1 var(--mono);text-decoration:none}
 .social svg,.tt-ico svg{width:18px;height:18px;fill:currentColor}
@@ -823,7 +730,6 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
 </head>
 <body>
 <canvas id="silk-bg" aria-hidden="true"></canvas>
-<canvas id="gl" aria-hidden="true"></canvas>
 <a class="skip" href="#main">Saltar al contenido</a>
 <div class="progress" aria-hidden="true"></div>
 
@@ -831,9 +737,9 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
   <div class="nav-in">
     <a class="brand" href="#top" aria-label="PairX, inicio"><i aria-hidden="true"></i>PairX</a>
     <nav class="nav-links" aria-label="Principal">
-      <a href="#incluye">Qué hacemos</a>
+      <a href="#incluye">Qué incluye</a>
       <a href="#proceso">Cómo trabajamos</a>
-      <a href="#planes">Planes</a>
+      <a href="#cotiza">Planes</a>
       <a href="#portafolio">Portafolio</a>
       <a href="#preguntas">Preguntas</a>
     </nav>
@@ -843,7 +749,7 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
     </div>
   </div>
   <div class="sheet" id="sheet">
-    <a href="#incluye">Qué hacemos <span>→</span></a>
+    <a href="#incluye">Qué incluye <span>→</span></a>
     <a href="#proceso">Cómo trabajamos <span>→</span></a>
     <a href="#cotiza">Planes <span>→</span></a>
     <a href="#portafolio">Portafolio <span>→</span></a>
@@ -853,146 +759,166 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
 </header>
 
 <main id="main">
-<div class="film" id="film">
-<!-- ======================= PLANO 0 · HERO ======================= -->
-<section class="shot hero s-dark" id="top" data-shot="0" aria-labelledby="hero-title">
+<!-- ======================= HERO ======================= -->
+<section class="hero s-dark" id="top" aria-labelledby="hero-title">
   <div class="awning" aria-hidden="true"><i></i></div>
   <div class="light" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-  <div class="shot-in">
-    <div class="wrap hero-grid cap-fade">
-      <div>
-        <p class="eyebrow" data-reveal>PairX · Páginas web para negocios</p>
-        <h1 id="hero-title" data-split>La vitrina que nunca <span class="nw"><em>cierra</em>.</span></h1>
-        <p class="lead" data-reveal style="--i:2">Hacemos tu página web con botón directo a WhatsApp, lista para celular y Google.</p>
-        <div class="hero-ctas" data-reveal style="--i:3">
-          <a class="btn btn-primary magnet" href="#cotiza"><span class="btn-in">Cotizar mi página <span class="arw">→</span></span></a>
-          <a class="btn btn-ghost" href="portafolio/"><span class="btn-in">Ver ejemplos</span></a>
-        </div>
-        <div class="picker" data-reveal style="--i:4">
-          <p class="picker-label" id="picker-label">Mira cómo se vería tu negocio <b aria-live="polite" id="picked"></b></p>
-          <div class="chips" role="group" aria-labelledby="picker-label" id="chips"></div>
-          <a class="see-full" id="seeFull" href="portafolio/panaderia/">Ver la página completa de La Espiga →</a>
-        </div>
-        <div class="hero-meta" data-reveal style="--i:5"><span>Desde <b id="heroFrom" style="font-weight:inherit"></b></span><span>Hecha desde cero</span><span>Lista para celular</span></div>
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow" data-reveal>PairX · Páginas web para negocios y emprendedores</p>
+      <h1 id="hero-title" data-split>La vitrina que nunca <span class="nw"><em>cierra</em>.</span></h1>
+      <p class="lead" data-reveal style="--i:2">Hacemos la página de tu negocio con tus productos, tu horario y un botón directo a tu WhatsApp. Tú nos cuentas; nosotros nos encargamos de lo técnico.</p>
+      <div class="hero-ctas" data-reveal style="--i:3">
+        <a class="btn btn-primary magnet" href="#cotiza"><span class="btn-in">Cotizar mi página <span class="arw">→</span></span></a>
+        <a class="btn btn-ghost" href="portafolio/"><span class="btn-in">Ver ejemplos por giro</span></a>
       </div>
+      <div class="picker" data-reveal style="--i:4">
+        <p class="picker-label" id="picker-label">Mira cómo se vería tu negocio <b aria-live="polite" id="picked"></b></p>
+        <div class="chips" role="group" aria-labelledby="picker-label" id="chips"></div>
+        <a class="see-full" id="seeFull" href="portafolio/panaderia/">Ver la página completa de La Espiga →</a>
+      </div>
+      <div class="hero-meta" data-reveal style="--i:5"><span>Desde $149.000</span><span>Hecha desde cero</span><span>Lista para celular</span></div>
+    </div>
 
-      <div class="stage" id="stage" data-reveal style="--i:2" aria-label="Ejemplo de página web de un negocio en computador y celular" role="img">
-        <div class="ground" aria-hidden="true"></div>
-        <div class="rig" id="rig" aria-hidden="true">
-          <div class="browser">
-            <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="url" id="url">laespiga.co</span></div>
-            <div class="bscreen" id="bscreen"></div>
+    <div class="stage" id="stage" data-reveal style="--i:2" aria-label="Ejemplo de página web de un negocio en computador y celular" role="img">
+      <div class="ground" aria-hidden="true"></div>
+      <div class="rig" id="rig" aria-hidden="true">
+        <div class="browser">
+          <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span class="url" id="url">laespiga.co</span></div>
+          <div class="bscreen" id="bscreen"></div>
+        </div>
+        <div class="phone">
+          <div class="phone-back"></div>
+          <div class="phone-body">
+            <div class="pscreen" id="pscreen"></div>
+            <div class="island"></div>
           </div>
-          <div class="phone">
-            <div class="phone-back"></div>
-            <div class="phone-body">
-              <div class="pscreen" id="pscreen"></div>
-              <div class="island"></div>
-            </div>
-            <div class="glare" id="glare"></div>
-          </div>
-        </div>
-        <div class="toasts" id="toasts" aria-hidden="true"></div>
-        <p class="stage-note">Ejemplo ilustrativo · negocios ficticios</p>
-      </div>
-    </div>
-    <p class="scroll-hint" aria-hidden="true"><i>↓</i> Desliza: el scroll es el play</p>
-  </div>
-</section>
-
-<!-- ======================= PLANO 1 · QUÉ HACEMOS ======================= -->
-<section class="shot s-dark" id="incluye" data-shot="1" aria-labelledby="feats-title">
-  <div class="shot-in"><div class="wrap cap-fade"><div class="cap">
-    <p class="eyebrow">Qué hacemos</p>
-    <h2 class="h2" id="feats-title">Tu página, directo a tu <em>WhatsApp</em>.</h2>
-    <ul class="pills" aria-label="Qué incluye tu página">
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>WhatsApp y llamada</li>
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg>Lista para celular</li>
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg>Aparece en Google</li>
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.800 7 11 7 11z"/><circle cx="12" cy="10" r="2.500"/></svg>Mapa y horario</li>
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4-1L19 8l-3-3L5 16z"/><path d="M14 7l3 3"/></svg>Diseño a tu medida</li>
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.300-5.600"/><path d="M20 4v4h-4"/></svg>Fácil de actualizar</li>
-    </ul>
-  </div></div></div>
-</section>
-
-<!-- ======================= PLANO 2 · 3 PASOS ======================= -->
-<section class="shot s-dark" id="proceso" data-shot="2" aria-labelledby="proc-title">
-  <div class="shot-in"><div class="wrap cap-fade"><div class="cap">
-    <p class="eyebrow">Cómo trabajamos</p>
-    <h2 class="h2" id="proc-title">Tres pasos y <em>listo</em>.</h2>
-    <ol class="steps3">
-      <li><b>01</b><span><strong>Nos cuentas</strong>Por WhatsApp y sin costo.</span></li>
-      <li><b>02</b><span><strong>La diseñamos</strong>La ves completa antes de publicarla.</span></li>
-      <li><b>03</b><span><strong>La publicamos</strong>Con WhatsApp y Google conectados.</span></li>
-    </ol>
-  </div></div></div>
-</section>
-
-<!-- ======================= PLANO 3 · PLANES ======================= -->
-<section class="shot s-dark" id="planes" data-shot="3" aria-labelledby="planes-title">
-  <div class="shot-in"><div class="wrap cap-fade"><div class="cap">
-    <p class="eyebrow">Planes · precios desde</p>
-    <h2 class="h2" id="planes-title">Precios claros, sin <em>sorpresas</em>.</h2>
-    <div class="ptags" id="ptags" role="group" aria-label="Planes, precios desde"></div>
-    <div class="cap-ctas">
-      <a class="btn btn-primary magnet" href="#cotiza"><span class="btn-in">Armar mi cotización <span class="arw">→</span></span></a>
-      <a class="btn btn-ghost" href="#contacto" data-pick="medida"><span class="btn-in">¿Algo especial? A medida</span></a>
-    </div>
-  </div></div></div>
-</section>
-
-<!-- ======================= PLANO 4 · PORTAFOLIO ======================= -->
-<section class="shot folio s-crimson" id="portafolio" data-shot="4" aria-labelledby="folio-title">
-  <div class="shot-in">
-    <div class="ring-hit" id="ringHit" aria-hidden="true"></div>
-    <div class="wrap folio-head cap-fade">
-      <div>
-        <p class="eyebrow">Portafolio · 13 giros</p>
-        <h2 class="h2" id="folio-title">13 páginas de <em>ejemplo</em>.</h2>
-      </div>
-      <div>
-        <p class="lead">Elige la tuya y dinos “quiero una así”. Los negocios son ficticios; el diseño y las funciones, no.</p>
-        <div class="rail-ctl"><button type="button" id="reelPrev" aria-label="Ejemplo anterior">←</button><span class="mono" id="reelCount" aria-live="polite">01 / 13</span><button type="button" id="reelNext" aria-label="Ejemplo siguiente">→</button></div>
-        <div class="ring-acts">
-          <a class="btn btn-light" id="ringLink" href="portafolio/panaderia/"><span class="btn-in"><span id="ringName">Ver La Espiga</span> <span class="arw">→</span></span></a>
-          <a class="ring-all" href="portafolio/">Ver los 13 →</a>
+          <div class="glare" id="glare"></div>
         </div>
       </div>
-    </div>
-    <div class="reel" id="reel" tabindex="0" role="region" aria-label="Trabajos del portafolio; desliza para ver más"></div>
-    <div class="wrap folio-foot">
-      <a class="btn btn-light magnet" href="portafolio/"><span class="btn-in">Ver el portafolio completo <span class="arw">→</span></span></a>
-      <span>Pedidos por WhatsApp en todos · listos para celular</span>
+      <div class="toasts" id="toasts" aria-hidden="true"></div>
+      <p class="stage-note">Ejemplo ilustrativo · negocios ficticios</p>
     </div>
   </div>
 </section>
-
-<!-- ======================= PLANO 5 · CIERRE ======================= -->
-<section class="shot s-dark" id="hablemos" data-shot="5" aria-labelledby="copa-title">
-  <div class="shot-in"><div class="wrap cap-fade"><div class="cap">
-    <p class="eyebrow">Empecemos</p>
-    <h2 class="h2" id="copa-title">¿Abrimos tu <em>vitrina</em>?</h2>
-    <div class="cap-ctas">
-      <a class="btn btn-wa magnet" href="#contacto" data-wa target="_blank" rel="noopener"><span class="btn-in">Escríbenos por WhatsApp <span class="arw">→</span></span></a>
-      <a class="btn btn-ghost" href="#cotiza"><span class="btn-in">Cotizar mi página</span></a>
-    </div>
-  </div></div></div>
-</section>
-</div>
 
 <!-- ======================= MARQUESINA ======================= -->
 <div class="band" role="img" aria-label="Hacemos páginas para panaderías, barberías, talleres, floristerías, restaurantes, ferreterías, peluquerías, veterinarias, papelerías, tiendas de barrio, consultorios, gimnasios, tiendas de ropa y emprendimientos">
   <div class="band-track" id="band" aria-hidden="true"></div>
 </div>
 
+<!-- ======================= TIQUETE ======================= -->
+<section class="loss s-paper" id="problema" aria-labelledby="loss-title">
+  <div class="wrap loss-grid">
+    <div>
+      <p class="eyebrow" data-reveal>El problema</p>
+      <h2 class="h2" id="loss-title" data-split>Tus clientes te buscan <em>primero</em> en internet.</h2>
+      <p class="lead" data-reveal>Antes de ir, tu próximo cliente te busca en el celular. Si no te encuentra, le compra a otro. El tiquete muestra lo que se va en un día normal, y cómo lo resuelve tu página.</p>
+    </div>
+    <div class="printer" id="printer" aria-label="Tiquete ilustrativo de lo que pierde un negocio sin página web">
+      <div class="printer-mouth" aria-hidden="true"><i></i></div>
+      <div class="slip-clip">
+        <div class="slip">
+          <h3>LO QUE PIERDES SIN PÁGINA</h3>
+          <p class="sub" id="slip-date">Tu negocio · hoy</p>
+          <hr>
+          <p class="cols"><span>LO QUE PASÓ</span><span>CLIENTES</span></p>
+          <ul>
+            <li><span>Buscó “panadería cerca” y llegó a otra<small>Con página: apareces en Google y en Maps.</small></span><b>−1</b></li>
+            <li><span>Preguntó el horario a las 11:40 p. m. y nadie respondió<small>Con página: el horario está siempre visible.</small></span><b>−1</b></li>
+            <li><span>No vio el menú ni los precios y no pidió<small>Con página: ve tu catálogo y pide por WhatsApp.</small></span><b>−1</b></li>
+            <li><span>Quiso recomendarte y no tenía qué enlace mandar<small>Con página: comparte tu enlace en un toque.</small></span><b>−1</b></li>
+          </ul>
+          <hr>
+          <div class="tot"><span>TOTAL</span><span><b>−4</b> clientes que no supieron que existías</span></div>
+          <p class="foot">Ejemplo de un día cualquiera · Con tu página, cada línea es una venta</p>
+          <div class="barcode" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= QUÉ INCLUYE ======================= -->
+<section class="feats s-dark" id="incluye" aria-labelledby="feats-title">
+  <div class="wrap">
+    <div class="feats-head">
+      <div>
+        <p class="eyebrow" data-reveal>Qué incluye</p>
+        <h2 class="h2" id="feats-title" data-split>Todo lo que <em>incluye</em> tu página.</h2>
+      </div>
+      <p class="lead" data-reveal style="--i:2">Lo que hace que te encuentren, te entiendan y te escriban.</p>
+    </div>
+    <div class="rows" id="rows">
+      <article class="row" data-reveal>
+        <span class="n">01</span><h3>Diseño a tu medida</h3><p>Tus colores, tus fotos y tu forma de hablar. Nada de plantillas repetidas.</p><span class="ar" aria-hidden="true">→</span>
+        <div class="vig" aria-hidden="true"><div class="v-sw"><i style="background:#B0122C"></i><i style="background:#f3e3c3"></i><i style="background:#2b3038"></i><b>Aa</b></div></div>
+      </article>
+      <article class="row" data-reveal>
+        <span class="n">02</span><h3>WhatsApp y llamada</h3><p>Un toque y te escriben con el pedido listo.</p><span class="ar" aria-hidden="true">→</span>
+        <div class="vig" aria-hidden="true"><div class="v-chat"><span>Hola, ¿tienen almojábanas?</span><span class="me">Sí, recién salidas ✓</span><span>Apártame 6, paso a las 4</span></div></div>
+      </article>
+      <article class="row" data-reveal>
+        <span class="n">03</span><h3>Mapa, dirección y horario</h3><p>Que lleguen sin preguntar cómo, con el horario siempre al día.</p><span class="ar" aria-hidden="true">→</span>
+        <div class="vig" aria-hidden="true"><div class="v-map"><i></i></div></div>
+      </article>
+      <article class="row" data-reveal>
+        <span class="n">04</span><h3>Primero el celular</h3><p>Ahí es donde te buscan: letra clara, botones grandes y carga liviana.</p><span class="ar" aria-hidden="true">→</span>
+        <div class="vig" aria-hidden="true"><div class="v-phone"><i></i><i></i><i></i></div></div>
+      </article>
+      <article class="row" data-reveal>
+        <span class="n">05</span><h3>Lista para Google</h3><p>Para que Google sepa qué vendes y dónde estás.</p><span class="ar" aria-hidden="true">→</span>
+        <div class="vig" aria-hidden="true"><div class="v-search"><span class="q">panadería cerca de mí</span><span class="res"><b>La Espiga · Panadería</b><small>Abierto · Cra. 7 # 45-12</small></span></div></div>
+      </article>
+      <article class="row" data-reveal>
+        <span class="n">06</span><h3>Tú la actualizas, o nosotros</h3><p>Cambia precios u horario desde el celular, o escríbenos y lo hacemos.</p><span class="ar" aria-hidden="true">→</span>
+        <div class="vig" aria-hidden="true"><div class="v-edit"><div><span>Abierto hoy</span><span class="v-tog"></span></div><div><span>Pan de bono</span><span class="mono">$1.500</span></div></div></div>
+      </article>
+    </div>
+  </div>
+  <div class="preview" id="preview" aria-hidden="true"><div class="preview-in" id="preview-in"></div></div>
+</section>
+
+<!-- ======================= PROCESO ======================= -->
+<section class="process s-paper" id="proceso" aria-labelledby="proc-title">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal>Cómo trabajamos</p>
+    <h2 class="h2" id="proc-title" data-split>Tres pasos y <em>listo</em>.</h2>
+    <ol class="steps" id="steps">
+      <li class="track" aria-hidden="true"><i id="track"></i></li>
+      <li class="step"><span class="dot">01</span><h3>Nos cuentas</h3><p>Por WhatsApp: qué vendes, a quién y qué quieres lograr. Te damos el precio final y una fecha de entrega.</p><small>Sin costo</small></li>
+      <li class="step"><span class="dot">02</span><h3>La diseñamos</h3><p>Con tus fotos, colores y textos. La ves completa antes de publicarla y ajustamos lo que no te convenza.</p><small>Tú apruebas</small></li>
+      <li class="step"><span class="dot">03</span><h3>La publicamos</h3><p>Conectamos WhatsApp y Google, y te enseñamos a usarla en palabras normales.</p><small>Tu vitrina abierta</small></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ======================= PORTAFOLIO ======================= -->
+<section class="folio s-crimson" id="portafolio" aria-labelledby="folio-title">
+  <div class="wrap folio-head">
+    <div>
+      <p class="eyebrow" data-reveal>Portafolio · 13 giros</p>
+      <h2 class="h2" id="folio-title" data-split>¿No sabes qué pedir? <em>Mira nuestro</em> <span class="nw"><em>portafolio</em>.</span></h2>
+    </div>
+    <div data-reveal style="--i:2">
+      <p class="lead">Trece páginas completas, una por tipo de negocio. Encuentra la tuya y dinos “quiero una así”. Los negocios son ficticios; el diseño y las funciones, no.</p>
+      <div class="rail-ctl"><button type="button" id="reelPrev" aria-label="Trabajo anterior">←</button><span class="mono" id="reelCount" aria-live="polite">01 / 13</span><button type="button" id="reelNext" aria-label="Trabajo siguiente">→</button></div>
+    </div>
+  </div>
+  <div class="reel" id="reel" tabindex="0" role="region" aria-label="Trabajos del portafolio; desliza para ver más"></div>
+  <div class="wrap folio-foot" data-reveal>
+    <a class="btn btn-light magnet" href="portafolio/"><span class="btn-in">Ver el portafolio completo <span class="arw">→</span></span></a>
+    <span>6 estilos de diseño · pedidos por WhatsApp en todos · listos para celular</span>
+  </div>
+</section>
+
 <!-- ======================= COTIZADOR ======================= -->
 <section class="quote s-paper" id="cotiza" aria-labelledby="quote-title">
   <div class="wrap">
-    <div class="qhead">
+    <div class="qhead" id="planes">
       <p class="eyebrow" data-reveal>Planes y cotización</p>
       <h2 class="h2" id="quote-title" data-split>Precios claros, <em>sin</em> <span class="nw"><em>sorpresas</em>.</span></h2>
-      <p class="lead" data-reveal>Elige tu plan, súmale lo que necesites y mándanos la cotización por WhatsApp. Sin compromiso.</p>
+      <p class="lead" data-reveal>Elige tu plan, súmale lo que necesites y mándanos la cotización por WhatsApp. El precio final te lo confirmamos antes de empezar, sin compromiso.</p>
       <div class="pswitch" role="group" aria-label="Cómo ver los precios" id="pswitch" data-reveal style="--i:2" data-period="inicial">
         <span class="pswitch-thumb" aria-hidden="true"></span>
         <button type="button" data-period="inicial" aria-pressed="true">Pago inicial</button>
@@ -1001,7 +927,7 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
     </div>
     <p class="qlabel" id="ql-plan">1 · Tu plan</p>
     <div class="pcards" role="radiogroup" aria-labelledby="ql-plan" id="qplans"></div>
-    <div class="qmedida" data-reveal><p><b>¿Varias sedes, reservas o algo especial?</b> Lo armamos a tu medida.</p><a class="btn btn-ghost" href="#contacto" data-pick="medida"><span class="btn-in">Hablemos <span class="arw">→</span></span></a></div>
+    <div class="qmedida" data-reveal><p><b>¿Varias sedes, reservas o algo especial?</b> Lo armamos a tu medida y te lo cotizamos aparte.</p><a class="btn btn-ghost" href="#contacto" data-pick="medida"><span class="btn-in">Hablemos <span class="arw">→</span></span></a></div>
   </div>
   <div class="wrap quote-grid">
     <div>
@@ -1067,10 +993,10 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
   <div class="wrap">
     <div class="reels-head">
       <div>
-        <p class="eyebrow" data-reveal>En TikTok · @pairxweb</p>
+        <p class="eyebrow" data-reveal>En TikTok · @pairx00</p>
         <h2 class="h2" id="reels-title" data-split>Míranos en <em>acción</em>.</h2>
       </div>
-      <a class="btn btn-primary magnet" href="https://www.tiktok.com/@pairxweb" target="_blank" rel="noopener"><span class="btn-in"><span class="tt-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg></span> Seguir en TikTok <span class="arw">→</span></span></a>
+      <a class="btn btn-primary magnet" href="https://www.tiktok.com/@pairx00" target="_blank" rel="noopener"><span class="btn-in"><span class="tt-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg></span> Seguir en TikTok <span class="arw">→</span></span></a>
     </div>
     <div class="reels-row" role="list">
       <figure class="reel-card" role="listitem"><video src="media/tiktok/1-nunca-cierra.mp4" poster="media/tiktok/1-nunca-cierra.jpg" muted loop playsinline preload="none" aria-label="Video de PairX: Tu negocio cierra. Tu página no."></video><button type="button" class="reel-snd" aria-pressed="false" aria-label="Activar sonido"><svg class="off" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m23 9-6 6M17 9l6 6"/></svg><svg class="on" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg></button><figcaption>Tu negocio cierra. Tu página no.</figcaption></figure>
@@ -1102,10 +1028,10 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
     <div class="side">
       <p class="eyebrow" data-reveal>Empecemos</p>
       <h2 class="h2" id="contact-title" data-split>Cuéntanos de <em>tu</em> <span class="nw"><em>negocio</em>.</span></h2>
-      <p class="lead" data-reveal>Llena esto y se abre WhatsApp con tu mensaje listo. Sin bots.</p>
+      <p class="lead" data-reveal>Llena esto y se abre WhatsApp con tu mensaje listo. Te respondemos personalmente, sin bots.</p>
       <div class="alt" data-reveal style="--i:2">
         <a class="btn btn-ghost" href="portafolio/"><span class="btn-in">Ver ejemplos por giro <span class="arw">→</span></span></a>
-        <a class="btn btn-ghost" href="https://www.tiktok.com/@pairxweb" target="_blank" rel="noopener"><span class="btn-in"><span class="tt-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg></span> TikTok</span></a>
+        <a class="btn btn-ghost" href="https://www.tiktok.com/@pairx00" target="_blank" rel="noopener"><span class="btn-in"><span class="tt-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg></span> TikTok</span></a>
       </div>
     </div>
     <form class="form" id="form" novalidate data-reveal style="--i:1">
@@ -1140,7 +1066,7 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
 <footer class="foot s-dark">
   <div class="wrap">
     <div class="foot-top">
-      <div><a class="brand" href="#top"><i aria-hidden="true" style="width:22px;height:22px;border-radius:5px;background:var(--crimson);box-shadow:inset 0 0 0 4px var(--night),inset 0 0 0 5px var(--crimson)"></i>PairX</a><p style="margin-top:14px">Páginas web a la medida para negocios y emprendedores. Tu negocio, abierto en internet todo el día.</p><a class="social" href="https://www.tiktok.com/@pairxweb" target="_blank" rel="noopener me" aria-label="PairX en TikTok (@pairxweb)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg>TikTok · @pairxweb</a></div>
+      <div><a class="brand" href="#top"><i aria-hidden="true" style="width:22px;height:22px;border-radius:5px;background:var(--crimson);box-shadow:inset 0 0 0 4px var(--night),inset 0 0 0 5px var(--crimson)"></i>PairX</a><p style="margin-top:14px">Páginas web a la medida para negocios y emprendedores. Tu negocio, abierto en internet todo el día.</p><a class="social" href="https://www.tiktok.com/@pairx00" target="_blank" rel="noopener me" aria-label="PairX en TikTok (@pairx00)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg>TikTok · @pairx00</a></div>
       <nav aria-label="Pie de página"><a href="#top">Inicio</a><a href="#cotiza">Planes</a><a href="#portafolio">Portafolio</a><a href="#videos">Videos</a><a href="#preguntas">Preguntas</a><a href="#contacto">Contacto</a></nav>
     </div>
     <div class="legal"><span>© <span id="year">2026</span> PairX</span><nav class="legal-links" aria-label="Legal"><a href="legal/aviso-legal/">Aviso legal</a><a href="legal/privacidad/">Datos personales</a><a href="legal/terminos/">Términos y condiciones</a><a href="legal/cookies/">Cookies</a><a href="legal/">PQR</a><a href="#" data-consent hidden>Preferencias de cookies</a></nav><span>Los negocios del portafolio son ejemplos ilustrativos</span></div>
@@ -1149,20 +1075,18 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
 </footer>
 
 <div class="stick-bar" id="stick" aria-label="Accesos rápidos">
-  <a class="btn btn-ghost" href="#cotiza" style="--fg:var(--cream);--ln-2:var(--night-line-2)"><span class="btn-in">Cotizar</span></a>
-  <a class="btn btn-wa" href="#contacto" data-wa target="_blank" rel="noopener"><span class="btn-in">WhatsApp <span class="arw">→</span></span></a>
+  <a class="btn btn-ghost" href="#cotiza" style="--fg:var(--cream);--ln-2:var(--night-line-2)"><span class="btn-in">Ver planes</span></a>
+  <a class="btn btn-primary" href="#contacto"><span class="btn-in">Pedir mi página</span></a>
 </div>
-<a class="wa-fab" href="#contacto" data-wa target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.400-4.200A8 8 0 1 1 8.300 19z"/><path d="M9 9.500c0 3 2.500 5.500 5.500 5.500"/></svg></a>
 
 <script src="analytics.js" defer></script>
+<script src="silk.js" defer></script>
 <script src="halftone.js" defer></script>
 <script src="portafolio/sitios.js"></script>
 <script>
 (() => {
 "use strict";
 document.documentElement.classList.add("js");
-const has3d = document.documentElement.classList.contains("has-3d");
-window.PAIRX_STATE = { biz: "panaderia", plan: "local" };
 
 /* ===================== CONFIG =====================
    Precios de entrada ("desde"): el precio final se confirma en la cotización.
@@ -1270,6 +1194,7 @@ function onScroll() {
   const nearContact = contact.getBoundingClientRect().top < innerHeight * 0.8;
   stick.classList.toggle("show", pastHero && !nearContact);
   lastY = y;
+  process();
 }
 addEventListener("scroll", onScroll, { passive: true });
 
@@ -1338,7 +1263,6 @@ function renderBiz(i, animate = true) {
     pscreen.classList.remove("swap-out"); bscreen.classList.remove("swap-out");
   };
   picked.textContent = "· " + b.label;
-  window.PAIRX_STATE.biz = b.slug; dispatchEvent(new CustomEvent("pairx:biz", { detail: b.slug }));
   const sf = $("#seeFull"); if (sf) { sf.href = "portafolio/" + b.slug + "/"; sf.textContent = "Ver la página completa de " + b.name + " →"; }
   $$(".chip", chipsEl).forEach((c, k) => c.setAttribute("aria-pressed", k === i));
   if (!animate || reduce || !pscreen.firstChild) { apply(); return; }
@@ -1399,7 +1323,6 @@ if (fine) hero.addEventListener("pointermove", e => {
   light.style.setProperty("--lx", (nx * -24) + "px"); light.style.setProperty("--ly", (ny * -16) + "px");
 });
 tilt.tick = (dt, t) => {
-  if (document.documentElement.classList.contains("has-3d")) return;
   if (t - tilt.lastMove > 1.6) { tilt.ty = Math.sin(t * .55) * 7 - 4; tilt.tx = Math.cos(t * .42) * 3 + 2; }
   const k = 70, c = 2 * Math.sqrt(k) * .9;
   for (let s = 0; s < 2; s++) {
@@ -1430,6 +1353,46 @@ mq.tick = dt => {
 };
 addEventListener("resize", () => { mq.half = 0; });
 if (!reduce) watch(band, mq);
+
+/* ===================== Tiquete que se imprime ===================== */
+$("#slip-date").textContent = "Tu negocio · " + today;
+new IntersectionObserver(([e], o) => { if (e.isIntersecting) { $("#printer").classList.add("printing"); o.disconnect(); } }, { threshold: .35 }).observe($("#printer"));
+
+/* ===================== Vista previa que sigue al cursor ===================== */
+const preview = $("#preview"), previewIn = $("#preview-in");
+const pv = { x: 0, y: 0, tx: 0, ty: 0, r: 0, active: false, shown: false };
+pv.tick = dt => {
+  const a = 1 - Math.exp(-12 * dt);
+  const px = pv.x; pv.x += (pv.tx - pv.x) * a; pv.y += (pv.ty - pv.y) * a;
+  pv.r += (clamp((pv.x - px) * .9, -10, 10) - pv.r) * (1 - Math.exp(-10 * dt));
+  preview.style.transform = `translate3d(${pv.x.toFixed(1)}px,${pv.y.toFixed(1)}px,0) rotate(${pv.r.toFixed(2)}deg)`;
+};
+if (fine) {
+  systems.add(pv);
+  $$(".row").forEach(row => {
+    row.addEventListener("pointerenter", e => {
+      previewIn.innerHTML = $(".vig", row).outerHTML;
+      if (!pv.shown) { pv.x = pv.tx = e.clientX + 28; pv.y = pv.ty = e.clientY - 250; }
+      pv.shown = true; pv.active = !reduce; preview.classList.add("on");
+      if (reduce) preview.style.transform = `translate3d(${e.clientX + 28}px,${e.clientY - 250}px,0)`;
+    });
+    row.addEventListener("pointermove", e => { pv.tx = Math.min(e.clientX + 28, innerWidth - 320); pv.ty = Math.max(12, e.clientY - 250); });
+  addEventListener("scroll", () => { if (pv.shown) { preview.classList.remove("on"); pv.shown = false; } }, { passive: true });
+  });
+  $("#rows").addEventListener("pointerleave", () => { preview.classList.remove("on"); pv.shown = false; setTimeout(() => { if (!pv.shown) pv.active = false; }, 300); });
+}
+
+/* ===================== Proceso: línea ligada al scroll ===================== */
+const stepsEl = $("#steps"), trackEl = $("#track"), stepEls = $$(".step", stepsEl);
+function process() {
+  const r = stepsEl.getBoundingClientRect();
+  if (r.bottom < -200 || r.top > innerHeight + 200) return;
+  const vertical = innerWidth <= 960;
+  const p = clamp((innerHeight * .62 - r.top) / (r.height * (vertical ? 1 : .9)), 0, 1);
+  trackEl.style.transform = vertical ? `scaleY(${p})` : `scaleX(${p})`;
+  stepEls.forEach((s, i) => s.classList.toggle("on", reduce ? true : p >= (vertical ? (s.offsetTop - 10) / r.height : i / 2.4)));
+}
+process();
 
 /* ===================== Cotizador ===================== */
 const qState = { plan: "local", add: new Set() };
@@ -1535,8 +1498,6 @@ function renderQuote() {
   $("#qtotal").textContent = cop(t.once);
   $("#qmes").textContent = cop(t.month) + "/mes";
   $("#qSend").href = waLink(quoteText());
-  $$(".ptag").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.plan === qState.plan)));
-  window.PAIRX_STATE.plan = qState.plan; dispatchEvent(new CustomEvent("pairx:plan", { detail: qState.plan }));
 }
 function quoteTotals() {
   const p = CONFIG.plans[qState.plan], extras = CONFIG.addons.filter(a => qState.add.has(a.id) && !(a.includedIn && a.includedIn.includes(qState.plan)));
@@ -1552,16 +1513,6 @@ function quoteText() {
   return [`Hola PairX, quiero cotizar una página web.`, ``, `Plan: ${p.name}`, extras.length ? `Adicionales:\n${extras.join("\n")}` : `Sin adicionales`, ``, `Total desde: ${cop(t.once)} + ${cop(t.month)}/mes`, ``, `¿Me pueden enviar la cotización?`].join("\n");
 }
 const waLink = text => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
-/* Planes resumidos (plano de las tres ramas) y accesos directos a WhatsApp */
-Object.entries(CONFIG.plans).forEach(([id, p]) => {
-  $("#ptags").insertAdjacentHTML("beforeend", `<button type="button" class="ptag" data-plan="${id}" aria-pressed="false"><b>${p.name}</b><small>desde</small><span class="pr">${cop(p.price)}</span><small>+ ${cop(p.mant)}/mes</small></button>`);
-});
-$("#ptags").addEventListener("click", e => {
-  const b = e.target.closest(".ptag"); if (!b) return;
-  qState.plan = b.dataset.plan; const r = $(`input[value="${qState.plan}"]`, qplans); if (r) r.checked = true; renderQuote();
-});
-$("#heroFrom").textContent = cop(Math.min(...Object.values(CONFIG.plans).map(p => p.price)));
-$$("[data-wa]").forEach(a => { a.href = waLink("Hola PairX, quiero una página web para mi negocio."); });
 renderQuote();
 $("#qForm").addEventListener("click", () => {
   const name = CONFIG.plans[qState.plan].name;
@@ -1626,9 +1577,7 @@ $("#again").addEventListener("click", () => { done.classList.remove("show"); for
 /* ===================== Portafolio: teléfonos con los sitios en vivo ===================== */
 const WORKS = window.PAIRX_WORKS || [];
 const reel = $("#reel");
-function initReel() {
-  if (!reel || !WORKS.length || reel.dataset.on) return;
-  reel.dataset.on = "1";
+if (reel && WORKS.length) {
   reel.innerHTML = WORKS.map((w, i) => `<article class="work" style="--c0:${w.colors[0]};--c1:${w.colors[1]};--c2:${w.colors[2]}">
     <a class="dev" href="portafolio/${w.slug}/" aria-label="${w.niche} ${w.name}: abrir la página de ejemplo">
       <span class="scr"><span class="ph" aria-hidden="true"><small>${w.niche}</small><b>${w.name}</b></span><iframe data-src="portafolio/${w.slug}/?preview" title="Vista previa de ${w.name}" tabindex="-1" aria-hidden="true"></iframe></span>
@@ -1721,18 +1670,6 @@ function initReel() {
     setTimeout(() => form.elements.name.focus({ preventScroll: true }), reduce ? 0 : 700);
   });
 }
-
-/* ===================== 3D (carga diferida) o versión estática ===================== */
-function loadSilk() { const s = document.createElement("script"); s.src = "silk.js"; document.body.appendChild(s); }
-function fallback(err) {
-  if (err) console.warn("PairX 3D no disponible:", err && err.message || err);
-  document.documentElement.classList.remove("has-3d");
-  initReel(); loadSilk();
-}
-if (has3d) {
-  const go = () => import("./video3d.js").then(m => m.start({ works: WORKS, state: window.PAIRX_STATE })).catch(fallback);
-  setTimeout(go, 150); /* después del primer pintado */
-} else { initReel(); loadSilk(); }
 
 onScroll();
 })();
