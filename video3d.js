@@ -196,6 +196,7 @@ export function start({ works = [], state = {} }) {
     L: [[-2.0, -1.7, 0.9, 0.1, 0.5, 0, 0.72], [-0.9, -1.4, -1.4, 0, 0.9, 0, 0.7], [0.4, -0.95, 2.4, 0.06, 0, 0, 0.74], [PX[2], PBASE + PHt[2], 0, 0, -0.5, 0, 0.56], OUT, OUT, OUT]
   };
   const SPREAD = { 2: 0.5, 3: 0.56 };                    /* en vertical las filas se juntan */
+  const MOBILE_DEVICES = [["A", "B"], ["A", "B"], ["A", "L"], ["B", "L"], [], [], []];
   const OBJ = { X, A: phA, B: phB, C: phC, L: laptop };
   const q = k => new THREE.Quaternion().setFromEuler(new THREE.Euler(k[3], k[4], k[5]));
   const Q = {}; for (const n in P) Q[n] = P[n].map(q);
@@ -214,7 +215,7 @@ export function start({ works = [], state = {} }) {
   function resize() {
     W = canvas.clientWidth || innerWidth; H = canvas.clientHeight || innerHeight; portrait = W / H < 0.9;
     renderer.setSize(W, H, false); camera.aspect = W / H;
-    if (portrait) camera.setViewOffset(W, H, 0, Math.round(H * 0.19), W, H); else camera.setViewOffset(W, H, -Math.round(W * 0.23), 0, W, H);
+    if (mobile) camera.setViewOffset(W, H, 0, Math.round(H * 0.2), W, H); else camera.setViewOffset(W, H, -Math.round(W * 0.32), 0, W, H);
     camera.updateProjectionMatrix();
   }
   resize(); let rsT = 0; addEventListener("resize", () => { clearTimeout(rsT); rsT = setTimeout(resize, 120); });
@@ -224,8 +225,10 @@ export function start({ works = [], state = {} }) {
   function timeline() {
     const vh = innerHeight; let T = 0;
     for (let i = 0; i < shots.length; i++) {
-      const s = shots[i], r = s.el.getBoundingClientRect(), local = (vh / 2 - r.top) / r.height;
-      if (local >= 0 && (local < 1 || i === shots.length - 1)) T = i + Math.min(local, 1) + (local > 1 ? clamp((local - 1) * r.height / vh, 0, 1) * 0.5 : 0);
+      const s = shots[i], r = s.el.getBoundingClientRect();
+      /* El tramo animado es el que el hijo sticky permanece fijado, no el alto total del plano. */
+      const travel = Math.max(1, r.height - vh), local = clamp(-r.top / travel, 0, 1);
+      if (r.top <= 0 && (r.bottom > 0 || i === shots.length - 1)) T = i + local;
       const oin = i === 0 ? 1 : sstep(0, 1, 1 - r.top / (vh * 0.3)), oout = sstep(0, 1, (r.bottom - vh * 0.7) / (vh * 0.3));
       const o = Math.round(oin * oout * 100) / 100;
       if (o !== s.o) {
@@ -268,15 +271,20 @@ export function start({ works = [], state = {} }) {
     /* objetos: cada uno viaja entre sus poses */
     planX += (PX[planIdx] - planX) * (1 - Math.exp(-dt * 5));
     const sa = portrait && SPREAD[i] ? SPREAD[i] : 1, sb = portrait && SPREAD[j] ? SPREAD[j] : 1;
+    const stageX = mobile ? 0 : 1.35;
+    const mobileShot = Math.min(MOBILE_DEVICES.length - 1, Math.round(i + f));
+    const mobileDevices = MOBILE_DEVICES[mobileShot];
     const grow = sstep(0.35, 1, intro);
     for (const n in OBJ) {
       const o = OBJ[n], a = P[n][i], b = P[n][j];
       let ax = a[0] * sa, bx = b[0] * sb;
       if (n === "X") { if (i === 3) ax = planX * sa; if (j === 3) bx = planX * sb; }
-      o.position.set(mix(ax, bx, f), mix(a[1], b[1], f), mix(a[2], b[2], f));
+      const stageY = mobile ? (n === "X" ? 0.3 : 0.55) : 0;
+      o.position.set(mix(ax, bx, f) + stageX, mix(a[1], b[1], f) + stageY, mix(a[2], b[2], f));
       o.quaternion.copy(Q[n][i]).slerp(Q[n][j], f);
-      const s = mix(a[6], b[6], f) * (n === "X" ? 1 : grow) * (portrait && n !== "X" && (i < 2 || j < 2) ? mix(i < 2 ? 0.8 : 1, j < 2 ? 0.8 : 1, f) : 1);
-      o.scale.setScalar(s); o.visible = s > 0.004;
+      const mobileScale = mobile ? (n === "X" ? 0.72 : 0.58) : 1;
+      const s = mix(a[6], b[6], f) * (n === "X" ? 1 : grow) * mobileScale * (portrait && n !== "X" && (i < 2 || j < 2) ? mix(i < 2 ? 0.8 : 1, j < 2 ? 0.8 : 1, f) : 1);
+      o.scale.setScalar(s); o.visible = s > 0.004 && (!mobile || n === "X" || mobileDevices.includes(n));
       if (n !== "X") { o.position.y += Math.sin(t * 0.8 + o.id) * 0.06; o.rotateY(Math.sin(t * 0.5 + o.id) * 0.05 + ptr.sx * 0.12); }
     }
     /* la X: gira con el tiempo y con la velocidad del scroll; al cargar, sus dos barras se encuentran */
@@ -296,12 +304,14 @@ export function start({ works = [], state = {} }) {
     key.position.set(ct.x + 4, ct.y + 7, ct.z + 8); key.target.position.copy(ct); key.target.updateMatrixWorld();
 
     /* podios: suben en el plano de planes; el elegido se enciende */
-    pods.position.y = mix(PODY[i], PODY[j], f); pods.visible = pods.position.y > -8.5;
+    const podY = mix(PODY[i], PODY[j], f);
+    pods.position.set(stageX, podY + (mobile ? 0.25 : 0), 0); pods.visible = podY > -8.5;
     const ps = mix(sa, sb, f);
     podMats.forEach((p, k) => {
       p.lit += ((k === planIdx ? 1 : 0) - p.lit) * (1 - Math.exp(-dt * 5));
       p.m.emissiveIntensity = 0.04 + 0.7 * p.lit; p.b.position.x = p.ring.position.x = PX[k] * ps;
       p.b.scale.set(ps < 1 ? 0.78 : 1, 1, ps < 1 ? 0.78 : 1); p.ring.scale.setScalar((ps < 1 ? 0.78 : 1) * (1 + 0.04 * p.lit * Math.sin(t * 3)));
+      p.b.visible = p.ring.visible = !mobile || k === planIdx;
     });
     dust.rotation.z = Math.sin(t * 0.05) * 0.05; dust.position.y = Math.sin(t * 0.11) * 0.5;
 
@@ -311,9 +321,14 @@ export function start({ works = [], state = {} }) {
     ring.rotation.y = -rs.idx * STEP;
     setCur(((Math.round(rs.idx) % N) + N) % N);
     const show = sstep(3.3, 3.95, Tsm), away = sstep(4.55, 5.3, Tsm);
-    ring.scale.setScalar(0.25 + 0.75 * show); ring.visible = show > 0.01 && away < 0.995;
-    ring.position.y = RC.y + (1 - show) * -3 - away * away * 12;
-    panels.forEach((p, k) => { p.g.position.y = Math.sin(t * 0.7 + k * 1.7) * 0.07 + (k % 2 ? 0.14 : -0.14); p.g.scale.setScalar(k === rs.cur ? 1.08 : 0.92); });
+    ring.scale.setScalar((mobile ? 0.64 : 1) * (0.25 + 0.75 * show)); ring.visible = show > 0.01 && away < 0.995;
+    ring.position.set(stageX, RC.y + (mobile ? 0.45 : 0) + (1 - show) * -3 - away * away * 12, RC.z);
+    panels.forEach((p, k) => {
+      const distance = Math.abs(k - rs.cur), wrapped = Math.min(distance, N - distance);
+      p.g.position.y = Math.sin(t * 0.7 + k * 1.7) * 0.07 + (k % 2 ? 0.14 : -0.14);
+      p.g.scale.setScalar((mobile ? 0.68 : 1) * (k === rs.cur ? 1.08 : 0.92));
+      p.g.visible = !mobile || wrapped <= 1;
+    });
 
     renderer.render(scene, camera);
     if (!shown) { shown = true; canvas.style.opacity = 1; setTimeout(loadAll, 300); }

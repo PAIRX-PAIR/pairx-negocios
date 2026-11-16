@@ -759,11 +759,11 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
 @media (max-width:640px){.wa-fab{display:none}}
 @media (prefers-reduced-motion:reduce){.wa-fab::after{animation:none}}
 
-.has-3d .shot{height:165vh;height:165lvh;min-height:0;padding:0;overflow:visible;background:transparent;isolation:auto}
-.has-3d .shot.folio{height:300vh;height:300lvh}
+.has-3d .shot{height:125vh;height:125lvh;min-height:0;padding:0;overflow:visible;background:transparent;isolation:auto}
+.has-3d .shot.folio{height:180vh;height:180lvh}
 .has-3d .shot.folio::before,.has-3d .hero::before,.has-3d .hero .awning,.has-3d .hero .light{display:none}
 .has-3d .shot-in{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;overflow:hidden}
-.has-3d .shot-in::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:var(--o,1);background:linear-gradient(90deg,rgba(8,6,6,.78),rgba(8,6,6,.42) 38%,transparent 62%)}
+.has-3d .shot-in::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:var(--o,1);background:linear-gradient(90deg,rgba(8,6,6,.94),rgba(8,6,6,.78) 42%,rgba(8,6,6,.28) 62%,transparent 80%)}
 .has-3d .cap-fade{opacity:var(--o,1);transform:translate3d(0,var(--ty,0px),0);pointer-events:none}
 .has-3d .cap-fade :is(a,button){pointer-events:auto}
 .has-3d .shot-in.off .cap-fade :is(a,button){pointer-events:none}
@@ -782,9 +782,9 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
 .has-3d .scroll-hint{display:flex;align-items:center;gap:10px;position:absolute;left:50%;bottom:22px;transform:translateX(-50%);font:500 .74rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--cream-muted);opacity:var(--o,1);white-space:nowrap}
 .has-3d .scroll-hint i{font-style:normal;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--night-line-2);animation:hint 1.8s var(--ease-in-out) infinite}
 @keyframes hint{50%{transform:translateY(5px)}}
-@media (max-width:960px){
+@media (max-width:960px), (pointer:coarse){
   .has-3d .shot-in{align-items:flex-end;padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
-  .has-3d .shot-in::before{background:linear-gradient(0deg,rgba(8,6,6,.9),rgba(8,6,6,.55) 42%,transparent 68%)}
+  .has-3d .shot-in::before{background:linear-gradient(0deg,rgba(8,6,6,.98) 0%,rgba(8,6,6,.94) 36%,rgba(8,6,6,.66) 58%,rgba(8,6,6,.18) 78%,transparent 100%)}
   .has-3d .stage{display:none}
   .has-3d .hero h1{font-size:clamp(2.5rem,11.5vw,4.6rem);margin:16px 0 16px}
   .has-3d .hero-ctas{margin-top:20px}
