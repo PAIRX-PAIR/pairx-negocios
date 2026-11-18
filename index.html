@@ -418,6 +418,12 @@ section,footer{position:relative;background:var(--bg);color:var(--fg)}
 .pcard:has(input:checked){background:var(--crimson-wash);box-shadow:inset 0 0 0 2px var(--crimson)}
 .pcard-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .pcard h3{font:700 1.7rem/1.1 var(--display);letter-spacing:-.02em}
+.combo-tag{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:18px;padding:10px 16px;border-radius:999px;background:var(--crimson);color:var(--on-crimson);font:500 .92rem/1.3 var(--sans);text-align:left;cursor:pointer;box-shadow:0 8px 24px rgba(176,18,44,.25);transition:transform .2s var(--ease-out)}
+.combo-tag b{font-weight:700}.combo-tag em{font:italic 400 1.25em/1 var(--serif)}
+.combo-tag:active{transform:scale(.97)}
+.apps-combo{display:block;margin:-8px 0 22px;padding:12px 16px;border-radius:14px;background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1px var(--ln-2);color:inherit;text-decoration:none;font-size:.92rem;line-height:1.4;max-width:46ch}
+.pcard.is-combo .pcard-n{color:var(--crimson)}
+.pcard.is-combo .pcard-per{color:var(--crimson);font-weight:600}
 .pcard-badge{padding:6px 10px;border-radius:999px;background:var(--crimson);color:var(--on-crimson);font:600 .72rem/1 var(--sans)}
 .pcard-for{min-height:3em;margin-top:10px;color:var(--muted);font-size:.92rem;line-height:1.5}
 .pcard-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;margin-top:18px;font:700 clamp(2rem,1.6rem + 1vw,2.5rem)/1 var(--sans);letter-spacing:-.02em;font-variant-numeric:tabular-nums lining-nums}
@@ -964,6 +970,7 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
         <ul class="apps-tags"><li>Pedidos y caja</li><li>Inventario</li><li>Citas y turnos</li><li>Órdenes de trabajo</li><li>Clientes y cobros</li></ul>
         <div class="apps-price"><p><b>Desde $1.200.000</b><span>pago único</span></p><p><b>Desde $59.000</b><span>al mes · servidor, copias y soporte</span></p></div>
         <p class="apps-inc">Incluye diseño con tu marca, instalación en tus celulares y computadores, capacitación para tu equipo y un mes de ajustes.</p>
+        <a class="apps-combo" href="#cotiza" data-combo><b>Combo:</b> con tu app, la página Vitrina o Local va al <b>50%</b>. Ármalo en el cotizador →</a>
         <div class="apps-ctas">
           <button type="button" class="apps-play" id="appsPlay" aria-haspopup="dialog"><span class="pl" aria-hidden="true"><img src="media/apps/faena.jpg" alt="" width="54" height="96" loading="lazy"><i></i></span><span><b>¿Quieres ver una app real?</b>Mira Faena en video · 20 s</span></button>
           <a class="btn btn-light magnet" href="#contacto" data-pick="medida"><span class="btn-in">Cuéntanos qué app necesitas <span class="arw">→</span></span></a>
@@ -988,6 +995,7 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
       <p class="eyebrow" data-reveal>Planes y cotización</p>
       <h2 class="h2" id="quote-title" data-split>Precios claros, <em>sin</em> <span class="nw"><em>sorpresas</em>.</span></h2>
       <p class="lead" data-reveal>Elige tu plan, súmale lo que necesites y mándanos la cotización por WhatsApp. El precio final te lo confirmamos antes de empezar, sin compromiso.</p>
+      <button type="button" class="combo-tag" data-reveal data-combo><b>Combo app + página</b> Si compras una app, tu página Vitrina o Local va al <em>50%</em> <span aria-hidden="true">→</span></button>
       <div class="pswitch" role="group" aria-label="Cómo ver los precios" id="pswitch" data-reveal style="--i:2" data-period="inicial">
         <span class="pswitch-thumb" aria-hidden="true"></span>
         <button type="button" data-period="inicial" aria-pressed="true">Pago inicial</button>
@@ -1191,6 +1199,7 @@ const CONFIG = {
       incT: "Todo lo de Local, más:", inc: ["Envío a domicilio o recoger en tienda", "Capacitación para tu equipo", "Identidad y fotos básicas gratis"] }
   },
   addons: [
+    { id: "app", price: 1200000, mes: 59000, from: true, name: "App para tu negocio", hint: "Con app, Vitrina o Local van al 50%" },
     { id: "fotos", price: 69000,   name: "Sesión de fotos profesional",   hint: "Las fotos básicas ya van gratis" },
     { id: "logo", price: 89000,    name: "Logo profesional",              hint: "La identidad básica ya va gratis" },
     { id: "textos", price: 39000,  name: "Textos escritos por nosotros",  hint: "Te entrevistamos y redactamos" },
@@ -1203,7 +1212,11 @@ const CONFIG = {
 };
 
 const cop = n => "$" + n.toLocaleString("es-CO");
-const addonPrice = a => cop(a.price) + (a.per ? "/" + a.per : "");
+const addonPrice = a => (a.from ? "Desde " : "") + cop(a.price) + (a.per ? "/" + a.per : "");
+/* Combo: con una app, Vitrina o Local salen al 50% (solo el pago inicial) */
+const COMBO_PLANS = ["vitrina", "local"];
+const comboOn = () => qState.add.has("app") && COMBO_PLANS.includes(qState.plan);
+const planPrice = id => qState.add.has("app") && COMBO_PLANS.includes(id) ? Math.round(CONFIG.plans[id].price / 2) : CONFIG.plans[id].price;
 
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -1521,9 +1534,11 @@ function rollPrice(el, to) {
 function renderPrices(period) {
   $$(".pcard", qplans).forEach(card => {
     const p = CONFIG.plans[card.dataset.id], year = period === "anual";
-    rollPrice($(".pcard-n", card), year ? p.price + p.mant * CONFIG.months : p.price);
-    $(".pcard-per", card).textContent = year ? "desde · primer año" : "desde · pago inicial";
-    $(".pcard-sub", card).textContent = year ? `Pago inicial ${cop(p.price)} + 12 meses de ${cop(p.mant)}` : `+ mantenimiento desde ${cop(p.mant)}/mes`;
+    const pp = planPrice(card.dataset.id), combo = pp !== p.price;
+    rollPrice($(".pcard-n", card), year ? pp + p.mant * CONFIG.months : pp);
+    $(".pcard-per", card).textContent = (year ? "desde · primer año" : "desde · pago inicial") + (combo ? " · 50% con app" : "");
+    $(".pcard-sub", card).textContent = year ? `Pago inicial ${cop(pp)} + 12 meses de ${cop(p.mant)}` : `+ mantenimiento desde ${cop(p.mant)}/mes`;
+    card.classList.toggle("is-combo", combo);
   });
 }
 pswitch.addEventListener("click", e => {
@@ -1546,11 +1561,12 @@ $("#qdate").textContent = today;
 
 function quoteLines() {
   const p = CONFIG.plans[qState.plan];
-  const lines = [{ key: "plan", label: `Plan ${p.name}`, val: `Desde ${cop(p.price)}` }, { key: "basico", label: "Identidad y fotos básicas", val: "Gratis", m: true }, { key: "mant", label: "Mantenimiento mensual", val: `Desde ${cop(p.mant)}/mes`, m: true }];
+  const lines = [{ key: "plan", label: `Plan ${p.name}`, val: `Desde ${cop(p.price)}` }, ...(comboOn() ? [{ key: "combo", label: "Combo con app · 50% en tu página", val: `−${cop(p.price - planPrice(qState.plan))}` }] : []), { key: "basico", label: "Identidad y fotos básicas", val: "Gratis", m: true }, { key: "mant", label: "Mantenimiento mensual", val: `Desde ${cop(p.mant)}/mes`, m: true }];
   CONFIG.addons.forEach(a => {
     if (!qState.add.has(a.id)) return;
     const inc = a.includedIn && a.includedIn.includes(qState.plan);
     lines.push({ key: a.id, label: a.name, val: inc ? "Incluido" : addonPrice(a), m: !!a.monthly || inc });
+    if (a.mes) lines.push({ key: a.id + "-mes", label: a.name + " · mensual", val: `Desde ${cop(a.mes)}/mes`, m: true });
   });
   return lines;
 }
@@ -1574,7 +1590,10 @@ function renderQuote() {
       if (!reduce) requestAnimationFrame(() => requestAnimationFrame(() => n.classList.remove("enter")));
     } else { n.innerHTML = html; n.classList.remove("leave"); have.delete(ln.key); }
   });
-  have.forEach(n => { if (n.classList.contains("leave")) return; n.classList.add("leave"); setTimeout(() => n.remove(), reduce ? 0 : 360); });
+  have.forEach(n => { if (n.classList.contains("leave")) return; n.classList.add("leave"); setTimeout(() => { if (n.classList.contains("leave")) n.remove(); }, reduce ? 0 : 360); });
+  // mantener el orden del recibo igual al de las líneas
+  want.forEach(ln => { const n = qlines.querySelector(`.qline[data-key="${ln.key}"]`); if (n) qlines.appendChild(n); });
+  renderPrices(pswitch.dataset.period);
   const t = quoteTotals();
   $("#qtotal").textContent = cop(t.once);
   $("#qmes").textContent = cop(t.month) + "/mes";
@@ -1583,15 +1602,15 @@ function renderQuote() {
 function quoteTotals() {
   const p = CONFIG.plans[qState.plan], extras = CONFIG.addons.filter(a => qState.add.has(a.id) && !(a.includedIn && a.includedIn.includes(qState.plan)));
   return {
-    once: p.price + extras.filter(a => a.per !== "mes").reduce((n, a) => n + a.price, 0),
-    month: p.mant + extras.filter(a => a.per === "mes").reduce((n, a) => n + a.price, 0)
+    once: planPrice(qState.plan) + extras.filter(a => a.per !== "mes").reduce((n, a) => n + a.price, 0),
+    month: p.mant + extras.filter(a => a.per === "mes").reduce((n, a) => n + a.price, 0) + extras.reduce((n, a) => n + (a.mes || 0), 0)
   };
 }
 function quoteText() {
   const p = CONFIG.plans[qState.plan];
   const extras = CONFIG.addons.filter(a => qState.add.has(a.id) && !(a.includedIn && a.includedIn.includes(qState.plan))).map(a => "· " + a.name + " (" + addonPrice(a) + ")");
   const t = quoteTotals();
-  return [`Hola PairX, quiero cotizar una página web.`, ``, `Plan: ${p.name}`, extras.length ? `Adicionales:\n${extras.join("\n")}` : `Sin adicionales`, ``, `Total desde: ${cop(t.once)} + ${cop(t.month)}/mes`, ``, `¿Me pueden enviar la cotización?`].join("\n");
+  return [`Hola PairX, quiero cotizar ${qState.add.has("app") ? "una app y una página web" : "una página web"}.`, ``, `Plan: ${p.name}${comboOn() ? ` (combo con app: 50% → ${cop(planPrice(qState.plan))})` : ""}`, extras.length ? `Adicionales:\n${extras.join("\n")}` : `Sin adicionales`, ``, `Total desde: ${cop(t.once)} + ${cop(t.month)}/mes`, ``, `¿Me pueden enviar la cotización?`].join("\n");
 }
 const waLink = text => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
 renderQuote();
@@ -1784,6 +1803,18 @@ onScroll();
   document.getElementById("appVidX").addEventListener("click", close);
   d.addEventListener("click", e => { if (e.target === d) close(); });
   d.addEventListener("close", () => v.pause());
+})();
+</script>
+<script>
+(() => {
+  document.querySelectorAll("[data-combo]").forEach(b => b.addEventListener("click", () => {
+    const i = document.querySelector('#addons input[value="app"]');
+    if (i && !i.checked) i.click();
+    const plan = document.querySelector('#qplans input[value="local"]');
+    const cur = document.querySelector('#qplans input:checked');
+    if (plan && cur && !["vitrina", "local"].includes(cur.value)) plan.click();
+    if (b.tagName === "BUTTON") document.getElementById("ql-add").scrollIntoView({ behavior: "smooth", block: "start" });
+  }));
 })();
 </script>
 </body>
