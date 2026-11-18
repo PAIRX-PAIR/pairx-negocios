@@ -765,6 +765,8 @@ $("#drFoot").addEventListener("click", e => {
 });
 $("#cartBtn").addEventListener("click", () => { lastFocus = $("#cartBtn"); if (step === 4) { step = 1; renderCart(); } ov.classList.add("on"); drawer.classList.add("on"); lockScroll(true); setTimeout(() => $("#drClose").focus(), 60); });
 $("#drClose").addEventListener("click", closeSheet);
+/* al pasar con Tab o tocar un campo, que no quede tapado por los botones de abajo */
+drawer.addEventListener("focusin", e => { const el = e.target; if (!el.closest("#drBody")) return; const f = $("#drFoot").getBoundingClientRect(), r = el.getBoundingClientRect(); if (r.bottom > f.top - 8 || r.top < 70) el.scrollIntoView({ block: "center" }); });
 renderCart();
 
 let tt;
