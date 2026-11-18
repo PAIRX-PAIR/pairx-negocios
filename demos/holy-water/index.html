@@ -175,9 +175,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;
 .by b{color:#E0263F}
 
 /* hoja de producto */
-.ov{position:fixed;inset:0;background:rgba(5,3,2,.66);z-index:60;opacity:0;pointer-events:none;transition:opacity .3s}
+.ov{position:fixed;inset:0;touch-action:none;background:rgba(5,3,2,.66);z-index:60;opacity:0;pointer-events:none;transition:opacity .3s}
 .ov.on{opacity:1;pointer-events:auto}
-.sheet{position:fixed;z-index:61;left:50%;bottom:0;width:min(860px,100%);transform:translate(-50%,105%);background:var(--bg-2);border:1px solid var(--line);border-radius:22px 22px 0 0;transition:transform .45s var(--ease);max-height:92svh;overflow:auto}
+.sheet{position:fixed;z-index:61;overscroll-behavior:contain;left:50%;bottom:0;width:min(860px,100%);transform:translate(-50%,105%);background:var(--bg-2);border:1px solid var(--line);border-radius:22px 22px 0 0;transition:transform .45s var(--ease);max-height:92svh;overflow:auto}
 .sheet.on{transform:translate(-50%,0)}
 @media (min-width:861px){.sheet{bottom:auto;top:50%;border-radius:22px;transform:translate(-50%,-40%) scale(.96);opacity:0;pointer-events:none;transition:transform .4s var(--ease),opacity .3s}.sheet.on{transform:translate(-50%,-50%);opacity:1;pointer-events:auto}}
 .pd{display:grid;grid-template-columns:1fr 1fr}
@@ -204,7 +204,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;
 .drawer.on{transform:none}
 .dr-h{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}
 .dr-h h3{font-family:var(--display);font-weight:400;font-size:1.4rem}
-.dr-b{flex:1;overflow:auto;padding:14px 20px;display:grid;align-content:start;gap:12px}
+.dr-b{flex:1;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:14px 20px;display:grid;align-content:start;gap:12px}
 .ci{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center}
 .ci img,.ci .ph-none{width:56px;height:56px;border-radius:10px;object-fit:cover}
 .ci .ph-none i{font-size:1.4rem}
@@ -630,7 +630,7 @@ function openItem(id) {
       <div class="pd-foot"><div class="qty"><button data-q="-1" aria-label="Quitar uno">−</button><output id="pdQ">1</output><button data-q="1" aria-label="Sumar uno">+</button></div><button class="btn btn-a" id="pdAdd"></button></div>
     </div></div>`;
   updAdd();
-  ov.classList.add("on"); sheet.classList.add("on");
+  ov.classList.add("on"); sheet.classList.add("on"); lockScroll(true);
   setTimeout(() => $("#pdAdd").focus(), 60);
 }
 function updAdd() {
@@ -638,7 +638,14 @@ function updAdd() {
   $("#pdAdd").textContent = "Agregar" + (p ? " · " + cop(p) : "");
   $("#pdQ").textContent = curQty;
 }
-function closeSheet() { ov.classList.remove("on"); sheet.classList.remove("on"); drawer.classList.remove("on"); if (lastFocus) lastFocus.focus(); }
+/* bloquear el scroll de la página mientras hay un panel abierto */
+let lockY = 0, locked = false;
+function lockScroll(on) {
+  if (on === locked) return; locked = on; const b = document.body;
+  if (on) { lockY = scrollY; b.style.position = "fixed"; b.style.top = -lockY + "px"; b.style.left = "0"; b.style.right = "0"; document.documentElement.style.scrollBehavior = "auto"; }
+  else { b.style.position = b.style.top = b.style.left = b.style.right = ""; scrollTo(0, lockY); document.documentElement.style.scrollBehavior = ""; }
+}
+function closeSheet() { ov.classList.remove("on"); sheet.classList.remove("on"); drawer.classList.remove("on"); lockScroll(false); if (lastFocus) lastFocus.focus({ preventScroll: true }); }
 sheet.addEventListener("click", e => {
   if (e.target.closest("#pdX")) return closeSheet();
   const s = e.target.closest(".size");
@@ -753,7 +760,7 @@ $("#drFoot").addEventListener("click", e => {
   }
   if (e.target.closest("#waSend")) { step = 4; setTimeout(renderCart, 300); }
 });
-$("#cartBtn").addEventListener("click", () => { lastFocus = $("#cartBtn"); if (step === 4) { step = 1; renderCart(); } ov.classList.add("on"); drawer.classList.add("on"); setTimeout(() => $("#drClose").focus(), 60); });
+$("#cartBtn").addEventListener("click", () => { lastFocus = $("#cartBtn"); if (step === 4) { step = 1; renderCart(); } ov.classList.add("on"); drawer.classList.add("on"); lockScroll(true); setTimeout(() => $("#drClose").focus(), 60); });
 $("#drClose").addEventListener("click", closeSheet);
 renderCart();
 
