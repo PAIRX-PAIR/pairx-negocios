@@ -219,6 +219,35 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;
 .mode button{padding:10px;border:1.5px solid var(--line);border-radius:10px;font-size:.88rem}
 .mode button[aria-pressed=true]{border-color:var(--amber);background:rgba(227,165,54,.08)}
 .dr-f .btn{justify-content:center}
+.steps{display:flex;gap:6px;list-style:none;padding:0;margin:0 0 4px;font-size:.78rem;color:var(--muted)}
+.steps li{flex:1;display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:999px;background:var(--bg)}
+.steps span{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--line);font-weight:700;font-size:.72rem;flex:none}
+.steps li.on{color:var(--cream)}.steps li.on span{background:var(--amber);color:#1b120a}
+.steps li.done span{background:var(--green);color:#fff}
+.ck{display:grid;gap:12px}
+.fld{display:grid;gap:6px;border:0;padding:0;margin:0;min-width:0}
+.fld>span,.fld legend{font-size:.84rem;font-weight:700;color:var(--cream);padding:0;margin-bottom:6px}
+.fld input,.fld select,.fld textarea{font:inherit;font-size:16px;color:var(--cream);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:11px 12px;width:100%;resize:vertical}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--amber)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}.opts.three{grid-template-columns:repeat(3,1fr)}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;inset:0;margin:0}
+.opt span{display:block;text-align:center;padding:11px 6px;border:1.5px solid var(--line);border-radius:10px;font-size:.86rem;cursor:pointer;transition:border-color .2s,background .2s}
+.opt input:checked+span{border-color:var(--amber);background:rgba(227,165,54,.1);color:var(--cream)}
+.opt input:focus-visible+span{outline:2px solid var(--amber-2);outline-offset:2px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hide{display:none!important}
+.err{color:#ff9a84;font-size:.86rem;font-weight:700;min-height:1em}
+.two{display:grid;grid-template-columns:auto 1fr;gap:8px}
+.two .btn{justify-content:center}
+.ticket{background:#f6efe0;color:#1d1611;border-radius:6px 6px 0 0;padding:18px 16px 26px;box-shadow:0 10px 30px rgba(0,0,0,.35);-webkit-mask:linear-gradient(#000,#000) top/100% calc(100% - 8px) no-repeat,radial-gradient(circle 7px at 50% 100%,transparent 96%,#000) bottom/16px 8px repeat-x;mask:linear-gradient(#000,#000) top/100% calc(100% - 8px) no-repeat,radial-gradient(circle 7px at 50% 100%,transparent 96%,#000) bottom/16px 8px repeat-x}
+.ticket pre{margin:0;white-space:pre-wrap;word-break:break-word;font:500 .8rem/1.5 ui-monospace,"Cascadia Mono",Consolas,monospace}
+.btn-wa{background:#25d366;color:#08331a;justify-content:center}
+.btn-wa:hover{background:#3ee07a}
+.done-msg{text-align:center;padding:30px 6px}
+.done-msg .big{font-size:3rem}
+.done-msg h4{font-family:var(--display);font-weight:400;font-size:1.6rem;margin:8px 0}
+.done-msg p{color:var(--muted)}
 .wa-prev{white-space:pre-wrap;background:var(--bg);border:1px dashed var(--wood-2);border-radius:12px;padding:12px;font-size:.84rem;color:#e3d4b8;max-height:180px;overflow:auto}
 
 .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,140%);background:var(--cream);color:#1b120a;font-weight:700;padding:12px 20px;border-radius:999px;z-index:70;transition:transform .4s var(--ease);box-shadow:0 10px 30px rgba(0,0,0,.4)}
@@ -626,37 +655,105 @@ document.addEventListener("click", e => { const b = e.target.closest(".item,.bee
 const drawer = $("#drawer");
 let cart = [];
 try { cart = JSON.parse(localStorage.getItem("hw-cart") || "[]").filter(l => ALL.has(l.id)); } catch (e) {}
-let mode = "recoger";
+let step = 1, orderNo = null;
+const F = { nombre: "", cel: "", modo: "", mesa: "", personas: "", hora: "Lo antes posible", pago: "", notas: "" };
+try { const m = JSON.parse(localStorage.getItem("hw-cliente") || "{}"); F.nombre = m.nombre || ""; F.cel = m.cel || ""; } catch (e) {}
 const save = () => { try { localStorage.setItem("hw-cart", JSON.stringify(cart)); } catch (e) {} };
+const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 function addToCart(id, size, qty) {
   const l = cart.find(x => x.id === id && x.size === size);
   l ? l.qty += qty : cart.push({ id, size, qty });
-  save(); renderCart();
+  save(); step = 1; renderCart();
   const b = $("#cartBtn"); b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump");
   toast(`${ALL.get(id).name} agregado ✓`);
 }
 const lineInfo = l => { const i = ALL.get(l.id); const s = i.sizes ? i.sizes[l.size] : null; return { i, label: s ? s[0].split(" · ")[0] : "", unit: s ? s[1] : null }; };
+const total = () => cart.reduce((a, l) => a + (lineInfo(l).unit || 0) * l.qty, 0);
+const tbd = () => cart.some(l => lineInfo(l).unit == null);
+const now = () => new Date(new Date().toLocaleString("en-US", { timeZone: "America/Bogota" }));
+const hhmm = d => { let h = d.getHours(), m = String(d.getMinutes()).padStart(2, "0"); const pm = h >= 12; h = h % 12 || 12; return `${h}:${m} ${pm ? "p. m." : "a. m."}`; };
+function horas() {
+  const out = ["Lo antes posible"], d = now();
+  d.setMinutes(Math.ceil((d.getMinutes() + 25) / 15) * 15, 0, 0);
+  if (d.getHours() < 12) d.setHours(12, 0, 0, 0);
+  const fin = new Date(d); fin.setHours(23, 45, 0, 0);
+  while (d <= fin && out.length < 48) { out.push(hhmm(d)); d.setMinutes(d.getMinutes() + 15); }
+  return out;
+}
+const STEPS = ["Pedido", "Tus datos", "Ticket"];
+const stepper = () => `<ol class="steps" aria-label="Pasos">${STEPS.map((t, k) => `<li class="${k + 1 === step ? "on" : k + 1 < step ? "done" : ""}"><span>${k + 1 < step ? "✓" : k + 1}</span>${t}</li>`).join("")}</ol>`;
+const WA_ICON = `<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .3-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.6-.1 1.1z"/></svg>`;
 function renderCart() {
   const n = cart.reduce((a, l) => a + l.qty, 0);
   $("#cartN").textContent = n;
-  if (!cart.length) { $("#drBody").innerHTML = `<p class="empty">Tu pedido está vacío.<br>Toca un plato de la carta o gira la ruleta.</p>`; $("#drFoot").innerHTML = ""; return; }
-  $("#drBody").innerHTML = cart.map((l, k) => { const { i, label, unit } = lineInfo(l); return `<div class="ci">${imgSrc(i) ? `<img src="${imgSrc(i)}" alt="">` : `<div class="ph-draw" style="width:56px;height:56px;border-radius:10px;overflow:hidden">${drawOf(i)}</div>`}<div><b>${i.name}</b><small>${label ? label + " · " : ""}${unit ? cop(unit * l.qty) : "precio en barra"}</small></div><div class="qty"><button data-k="${k}" data-d="-1" aria-label="Quitar uno">−</button><output>${l.qty}</output><button data-k="${k}" data-d="1" aria-label="Sumar uno">+</button></div></div>`; }).join("");
-  const tot = cart.reduce((a, l) => a + (lineInfo(l).unit || 0) * l.qty, 0);
-  const tbd = cart.some(l => lineInfo(l).unit == null);
-  $("#drFoot").innerHTML = `<div class="mode" role="group" aria-label="Cómo lo quieres"><button aria-pressed="${mode === "recoger"}" data-m="recoger">Paso a recoger</button><button aria-pressed="${mode === "mesa"}" data-m="mesa">Para la mesa</button></div>
-    <div class="tot"><span>Total</span><span>${cop(tot)}${tbd ? " +" : ""}</span></div>
-    ${tbd ? `<p class="note">+ cervezas o bebidas con precio por confirmar.</p>` : ""}
-    <details><summary class="note" style="cursor:pointer">Ver el mensaje que le llega a Holy Water</summary><div class="wa-prev">${waText().replace(/</g, "&lt;")}</div></details>
-    <a class="btn btn-a" id="waSend" href="https://wa.me/${WA}?text=${encodeURIComponent(waText())}" target="_blank" rel="noopener">Enviar pedido por WhatsApp →</a>
-    <p class="note">Demo: en la versión final el pedido llega directo al WhatsApp del local.</p>`;
+  $("#drT").textContent = ["", "Tu pedido", "Tus datos", "Tu ticket", "¡Pedido listo!"][step];
+  if (!cart.length && step < 4) { step = 1; $("#drT").textContent = "Tu pedido"; $("#drBody").innerHTML = `<p class="empty">Tu pedido está vacío.<br>Toca un plato de la carta o gira la ruleta.</p>`; $("#drFoot").innerHTML = ""; return; }
+  const totHTML = `<div class="tot"><span>Total</span><span>${cop(total())}${tbd() ? " +" : ""}</span></div>${tbd() ? `<p class="note">+ cervezas o bebidas con precio por confirmar.</p>` : ""}`;
+  if (step === 1) {
+    $("#drBody").innerHTML = stepper() + cart.map((l, k) => { const { i, label, unit } = lineInfo(l); return `<div class="ci">${imgSrc(i) ? `<img src="${imgSrc(i)}" alt="">` : `<div class="ph-draw" style="width:56px;height:56px;border-radius:10px;overflow:hidden">${drawOf(i)}</div>`}<div><b>${i.name}</b><small>${label ? label + " · " : ""}${unit ? cop(unit * l.qty) : "precio en barra"}</small></div><div class="qty"><button data-k="${k}" data-d="-1" aria-label="Quitar uno">−</button><output>${l.qty}</output><button data-k="${k}" data-d="1" aria-label="Sumar uno">+</button></div></div>`; }).join("");
+    $("#drFoot").innerHTML = `${totHTML}<button class="btn btn-a" data-go="2">Continuar con mis datos →</button>`;
+  } else if (step === 2) {
+    const opt = (name, val, label) => `<label class="opt"><input type="radio" name="${name}" value="${val}" ${F[name] === val ? "checked" : ""}><span>${label}</span></label>`;
+    $("#drBody").innerHTML = stepper() + `<form class="ck" id="ck" novalidate>
+      <label class="fld"><span>Nombre *</span><input name="nombre" autocomplete="name" value="${esc(F.nombre)}" placeholder="¿A nombre de quién?"></label>
+      <label class="fld"><span>Celular *</span><input name="cel" type="tel" inputmode="tel" autocomplete="tel" value="${esc(F.cel)}" placeholder="300 123 4567"></label>
+      <fieldset class="fld"><legend>¿Cómo lo quieres? *</legend><div class="opts">${opt("modo", "mesa", "🍽️ Comer aquí")}${opt("modo", "recoger", "🛍️ Paso a recoger")}</div></fieldset>
+      <div class="row2 ${F.modo === "mesa" ? "" : "hide"}" data-show="mesa"><label class="fld"><span>Mesa</span><input name="mesa" inputmode="numeric" value="${esc(F.mesa)}" placeholder="Si ya estás aquí"></label><label class="fld"><span>Personas</span><input name="personas" inputmode="numeric" value="${esc(F.personas)}" placeholder="2"></label></div>
+      <label class="fld ${F.modo === "recoger" ? "" : "hide"}" data-show="recoger"><span>¿A qué hora pasas?</span><select name="hora">${horas().map(h => `<option ${F.hora === h ? "selected" : ""}>${h}</option>`).join("")}</select></label>
+      <fieldset class="fld"><legend>¿Cómo vas a pagar? *</legend><div class="opts three">${opt("pago", "Efectivo", "💵 Efectivo")}${opt("pago", "Transferencia", "📲 Transferencia")}${opt("pago", "Tarjeta", "💳 Tarjeta")}</div></fieldset>
+      <label class="fld"><span>Notas para la cocina</span><textarea name="notas" rows="2" placeholder="Sin cebolla, extra queso, alergias…">${esc(F.notas)}</textarea></label>
+      <p class="err" id="ckErr" role="alert"></p></form>`;
+    $("#drFoot").innerHTML = `${totHTML}<div class="two"><button class="btn btn-g" data-go="1">← Pedido</button><button class="btn btn-a" data-go="3">Ver mi ticket →</button></div>`;
+  } else if (step === 3) {
+    $("#drBody").innerHTML = stepper() + `<div class="ticket" aria-label="Vista previa del ticket"><pre>${esc(ticketText(false))}</pre></div><p class="note" style="text-align:center">Así le llega tu pedido al WhatsApp de Holy Water.</p>`;
+    $("#drFoot").innerHTML = `<a class="btn btn-wa" id="waSend" href="https://wa.me/${WA}?text=${encodeURIComponent(ticketText(true))}" target="_blank" rel="noopener">${WA_ICON} Enviar ticket por WhatsApp</a><button class="btn btn-g" data-go="2">← Corregir datos</button><p class="note">Demo: en la versión final el ticket llega directo al WhatsApp del local.</p>`;
+  } else {
+    $("#drBody").innerHTML = `<div class="done-msg"><p class="big">🍻</p><h4>¡Listo, ${esc(F.nombre.split(" ")[0])}!</h4><p>Tu pedido <b>${orderNo}</b> se abrió en WhatsApp con todo el ticket. Solo dale enviar y Holy Water te confirma.</p></div>`;
+    $("#drFoot").innerHTML = `<button class="btn btn-a" data-go="new">Hacer otro pedido</button>`;
+  }
 }
-function waText() {
-  const tot = cart.reduce((a, l) => a + (lineInfo(l).unit || 0) * l.qty, 0);
-  return "Hola Holy Water 👋 quiero pedir:\n" + cart.map(l => { const { i, label, unit } = lineInfo(l); return `• ${l.qty} × ${i.name}${label ? " (" + label + ")" : ""}${unit ? " — " + cop(unit * l.qty) : ""}`; }).join("\n") + `\n\nTotal: ${cop(tot)}${cart.some(l => lineInfo(l).unit == null) ? " + cervezas/bebidas" : ""}\n${mode === "recoger" ? "Paso a recogerlo." : "Es para la mesa."}`;
+function readForm() {
+  const f = $("#ck"); if (!f) return;
+  const d = new FormData(f);
+  ["nombre", "cel", "mesa", "personas", "hora", "notas", "modo", "pago"].forEach(k => { if (d.has(k)) F[k] = String(d.get(k)).trim(); });
+}
+function validar() {
+  readForm();
+  const cel = F.cel.replace(/\D/g, "");
+  const err = !F.nombre ? ["nombre", "Escribe tu nombre."] : cel.length < 10 ? ["cel", "Escribe un celular de 10 dígitos."] : !F.modo ? ["modo", "Elige si comes aquí o pasas a recoger."] : !F.pago ? ["pago", "Elige cómo vas a pagar."] : null;
+  if (err) { $("#ckErr").textContent = err[1]; const el = $(`#ck [name=${err[0]}]`); if (el) el.focus(); return false; }
+  try { localStorage.setItem("hw-cliente", JSON.stringify({ nombre: F.nombre, cel: F.cel })); } catch (e) {}
+  return true;
+}
+function ticketText(wa) {
+  const b = t => wa ? `*${t}*` : t, line = "━━━━━━━━━━━━━━━━", d = now();
+  if (!orderNo) orderNo = "HW-" + String(Math.floor(Math.random() * 9000) + 1000);
+  const items = cart.map(l => { const { i, label, unit } = lineInfo(l); return `• ${l.qty} × ${i.name}${label ? " (" + label + ")" : ""}\n   ${unit ? cop(unit * l.qty) : "precio en barra"}`; }).join("\n");
+  const cel = F.cel.replace(/\D/g, "").replace(/^57(?=\d{10}$)/, "").replace(/^(\d{3})(\d{3})(\d{4})$/, "$1 $2 $3");
+  const entrega = F.modo === "mesa" ? `Comer aquí${F.mesa ? " · Mesa " + F.mesa : ""}${F.personas ? " · " + F.personas + " personas" : ""}` : `Paso a recoger · ${F.hora}`;
+  return [`🧾 ${b("PEDIDO " + orderNo)}`, `${b("Holy Water Ale Café")} · Buga`, `${d.toLocaleDateString("es-CO")} · ${hhmm(d)}`, line, items, line,
+    `${b("TOTAL: " + cop(total()))}${tbd() ? "\n+ cervezas/bebidas por confirmar" : ""}`, line,
+    `👤 ${b("Cliente:")} ${F.nombre}`, `📱 ${b("Celular:")} ${cel}`, `${F.modo === "mesa" ? "🍽️" : "🛍️"} ${b("Entrega:")} ${entrega}`, `💳 ${b("Pago:")} ${F.pago}`,
+    ...(F.notas ? [`📝 ${b("Notas:")} ${F.notas}`] : []), line, "Pedido hecho desde la página web"].join("\n");
 }
 $("#drBody").addEventListener("click", e => { const b = e.target.closest("[data-d]"); if (!b) return; const l = cart[+b.dataset.k]; l.qty += +b.dataset.d; if (l.qty < 1) cart.splice(+b.dataset.k, 1); save(); renderCart(); });
-$("#drFoot").addEventListener("click", e => { const m = e.target.closest("[data-m]"); if (m) { mode = m.dataset.m; renderCart(); } });
-$("#cartBtn").addEventListener("click", () => { lastFocus = $("#cartBtn"); ov.classList.add("on"); drawer.classList.add("on"); setTimeout(() => $("#drClose").focus(), 60); });
+$("#drBody").addEventListener("change", e => {
+  if (e.target.name === "modo") { readForm(); drawer.querySelectorAll("[data-show]").forEach(x => x.classList.toggle("hide", x.dataset.show !== F.modo)); }
+  const er = $("#ckErr"); if (er) er.textContent = "";
+});
+$("#drFoot").addEventListener("click", e => {
+  const g = e.target.closest("[data-go]");
+  if (g) {
+    const to = g.dataset.go;
+    if (to === "new") { cart = []; save(); orderNo = null; step = 1; F.notas = ""; F.mesa = ""; F.personas = ""; renderCart(); return; }
+    if (step === 2 && to === "3" && !validar()) return;
+    if (step === 2) readForm();
+    if (to === "2") orderNo = null;
+    step = +to; renderCart(); $("#drBody").scrollTop = 0; return;
+  }
+  if (e.target.closest("#waSend")) { step = 4; setTimeout(renderCart, 300); }
+});
+$("#cartBtn").addEventListener("click", () => { lastFocus = $("#cartBtn"); if (step === 4) { step = 1; renderCart(); } ov.classList.add("on"); drawer.classList.add("on"); setTimeout(() => $("#drClose").focus(), 60); });
 $("#drClose").addEventListener("click", closeSheet);
 renderCart();
 
