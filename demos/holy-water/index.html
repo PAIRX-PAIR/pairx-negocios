@@ -224,6 +224,31 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;
 .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,140%);background:var(--cream);color:#1b120a;font-weight:700;padding:12px 20px;border-radius:999px;z-index:70;transition:transform .4s var(--ease);box-shadow:0 10px 30px rgba(0,0,0,.4)}
 .toast.on{transform:translate(-50%,0)}
 
+/* banderines alemanes */
+.bunting{position:absolute;left:0;right:0;top:0;height:46px;z-index:1;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='46'%3E%3Cpath d='M0 4Q60 16 120 4' fill='none' stroke='%23d9c7a6' stroke-width='1.5'/%3E%3Cpath d='M8 7.3H32L20 34Z' fill='%23111'/%3E%3Cpath d='M48 10H72L60 38Z' fill='%23c8312b'/%3E%3Cpath d='M88 7.3H112L100 34Z' fill='%23e8b322'/%3E%3C/svg%3E") 0 0/120px 46px repeat-x;transform-origin:50% 0;animation:sway 6s ease-in-out infinite;filter:drop-shadow(0 4px 4px rgba(0,0,0,.35))}
+@keyframes sway{50%{transform:rotate(.25deg) translateY(1px)}}
+/* sellos */
+.seal{display:block;width:120px;aspect-ratio:1;flex:none}
+.seal svg{width:100%;height:100%;display:block}
+.hero .wrap{position:relative}
+.seal-hero{position:absolute;right:0;top:70px;width:clamp(96px,14vw,150px);transform:rotate(12deg);filter:drop-shadow(0 8px 20px rgba(0,0,0,.5))}
+@media (max-width:640px){.seal-hero{top:24px;right:0;width:80px}}
+.seal-beer{transform:rotate(-10deg);width:104px}
+@media (max-width:640px){.seal-beer{display:none}}
+.seal-place{position:absolute;right:-14px;top:-14px;width:116px;transform:rotate(14deg);filter:drop-shadow(0 8px 16px rgba(0,0,0,.5))}
+.place-ph{overflow:visible}
+.place-ph img{border-radius:20px}
+/* ilustraciones */
+.ph-draw{background:radial-gradient(circle at 30% 25%,var(--wood-2),var(--wood) 72%);display:grid;place-items:center}
+.ph-draw svg{width:100%;height:100%;display:block}
+.pd-ph .ph-draw{width:100%;height:100%}
+/* marca de agua */
+footer{position:relative;overflow:hidden}
+.wm{font-family:var(--display);font-size:clamp(2rem,8.4vw,8rem);line-height:.9;text-align:center;color:rgba(243,231,207,.05);white-space:nowrap;margin-top:28px;user-select:none;pointer-events:none}
+.wm-badge{position:fixed;left:14px;bottom:14px;z-index:30;display:inline-flex;align-items:center;gap:7px;background:rgba(21,16,12,.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);color:var(--muted);text-decoration:none;font-size:.75rem;padding:6px 12px 6px 8px;border-radius:999px;opacity:.85}
+.wm-badge b{color:#fff}
+.wm-badge i{width:14px;height:14px;border-radius:4px;background:#E0263F;box-shadow:inset 0 0 0 3px #15100c,inset 0 0 0 4px #E0263F}
+
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .reveal.in{opacity:1;transform:none}
 </style>
@@ -243,8 +268,10 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;
 <main id="inicio">
   <section class="hero" aria-labelledby="h1">
     <div class="hero-bg" role="img" aria-label="Interior de Holy Water Ale Café"></div>
+    <div class="bunting" aria-hidden="true"></div>
     <div class="wrap">
-      <p class="eyebrow">Cervecería artesanal · Buga, Valle</p>
+      <span class="seal seal-hero" data-seal="HAUSGEBRAUT · CERVEZA PROPIA · |HW|Buga"></span>
+      <p class="eyebrow">Cervecería de tradición alemana · Buga</p>
       <h1 class="h-d" id="h1">Cerveza de la casa, <em>pizza</em> y pasta.</h1>
       <p class="lead">Cerveza artesanal, pizza y pasta italiana, café expreso, sándwiches y postres, en la Cra. 13 #4-83 de Buga. Mira la carta con fotos, arma tu pedido y envíalo por WhatsApp.</p>
       <div class="cta">
@@ -264,8 +291,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;
   <section id="cervezas" aria-labelledby="beer-t">
     <div class="wrap">
       <div class="sec-h reveal">
-        <div><p class="eyebrow">De la casa</p><h2 class="h-d" id="beer-t">Nuestras cervezas</h2></div>
-        <p>Las favoritas de quienes nos visitan. Toca una para agregarla a tu pedido.</p>
+        <div><p class="eyebrow">Hecha en casa</p><h2 class="h-d" id="beer-t">Nuestras cervezas</h2></div>
+        <span class="seal seal-beer" data-seal="DEUTSCHE TRADITION · BIER · |Prost!|Holy Water"></span>
+        <p>Cerveza propia, con receta de la casa. Toca una para agregarla a tu pedido.</p>
       </div>
       <div class="beers" id="beers"></div>
     </div>
@@ -302,11 +330,11 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;
 
   <section id="lugar" aria-labelledby="place-t">
     <div class="wrap place-grid">
-      <figure class="place-ph reveal"><img src="img/local.jpg" alt="Sala de Holy Water con sofás, cuadros y luces" loading="lazy"><figcaption>El rincón de la casa</figcaption></figure>
+      <figure class="place-ph reveal"><img src="img/local.jpg" alt="Sala de Holy Water con sofás, cuadros y luces" loading="lazy"><figcaption>Nuestra casa en Buga</figcaption><span class="seal seal-place" data-seal="TRADICIÓN ALEMANA · BUGA · |★|Willkommen"></span></figure>
       <div class="place-tx reveal">
-        <p class="eyebrow">El lugar</p>
-        <h2 class="h-d" id="place-t">Una casa vieja de Buga con cerveza propia.</h2>
-        <p>Sofás, cuadros, vigas de madera y una barra con cerveza artesanal. Ven por una pinta, quédate por la pizza y cierra con un volcán de chocolate.</p>
+        <p class="eyebrow">Tradición alemana</p>
+        <h2 class="h-d" id="place-t">Tradición alemana, cerveza propia.</h2>
+        <p>Cocina de tradición alemana como el bratwurst, el pfannkuchen y el pan hecho con cerveza stout, junto a pizza y pasta italiana. En la barra, nuestra propia cerveza artesanal. Ven por una pinta y quédate a comer.</p>
         <div class="stats">
           <div class="stat"><b>4,6</b><span>en Google · 1.227 reseñas</span></div>
           <div class="stat"><b>4,8</b><span>en Tripadvisor</span></div>
@@ -346,10 +374,12 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;
 
 <footer>
   <div class="wrap">
-    <span>© Holy Water Ale Café · Cra. 13 #4-83, Buga · Fotos: clientes en Google Maps</span>
+    <span>© Holy Water Ale Café · Cra. 13 #4-83, Buga · Fotos: clientes en Google Maps · Ilustraciones: PairX</span>
     <a class="by" href="https://pairx-web.vercel.app" target="_blank" rel="noopener">Página de ejemplo hecha por <b>PairX</b></a>
   </div>
+  <p class="wm" aria-hidden="true">Hecha por PairX</p>
 </footer>
+<a class="wm-badge" href="https://pairx-web.vercel.app" target="_blank" rel="noopener" aria-label="Página hecha por PairX"><i></i>Hecha por <b>PairX</b></a>
 
 <!-- hoja de producto -->
 <div class="ov" id="ov"></div>
@@ -448,7 +478,89 @@ const ALL = new Map();
 CARTA.forEach(c => c.items.forEach(i => { i.cat = c.id; ALL.set(i.id, i); }));
 const TAG = { veg: ["t-veg", "Vegetariano"], hot: ["t-hot", "Picante"], new: ["t-new", "Nuevo"], pop: ["t-pop", "Lo más pedido"] };
 const imgSrc = i => i.img ? `img/${i.img}.jpg` : null;
-const phHTML = (i, cls = "ph") => imgSrc(i) ? `<div class="${cls}"><img src="${imgSrc(i)}" alt="${i.name}" loading="lazy"></div>` : `<div class="${cls} ph-none" aria-hidden="true"><i>H</i></div>`;
+
+/* ---------- ilustraciones para los platos sin foto ---------- */
+const rng = s => { let h = 1779033703; for (const c of s) h = Math.imul(h ^ c.charCodeAt(0), 3432918353); return () => { h = Math.imul(h ^ (h >>> 15), 2246822507); h = Math.imul(h ^ (h >>> 13), 3266489909); return ((h ^= h >>> 16) >>> 0) / 4294967296; }; };
+const ING = [[/tomate cherry/, "cherry"], [/tomate/, "tomate"], [/albahaca/, "albahaca"], [/champi/, "champ"], [/jam[oó]n serrano/, "jamon"], [/jam[oó]n/, "jamon"], [/piña/, "pina"], [/salami|chorizo/, "salami"], [/tocineta/, "tocino"], [/pollo/, "pollo"], [/piment[oó]n/, "pimenton"], [/cebolla (roja|blanca)/, "cebolla"], [/caramelizada/, "caramelo"], [/cilantro/, "cilantro"], [/berenjena/, "berenjena"], [/aceitunas? negras|aceitunas/, "aceituna"], [/camarones/, "camaron"], [/\baj[ií]\b|ají/, "aji"], [/salchicha/, "salchicha"], [/calabac/, "calabacin"]];
+const ingOf = d => { const t = d.toLowerCase(), out = []; ING.forEach(([re, k]) => { if (re.test(t) && !out.includes(k) && !(k === "tomate" && out.includes("cherry"))) out.push(k); }); return out; };
+const G = {
+  tomate: (x, y, r) => `<circle cx="${x}" cy="${y}" r="6.2" fill="#e0533d" stroke="#9e2a1c" stroke-width="1.2"/><circle cx="${x}" cy="${y}" r="3" fill="none" stroke="#f6a08a" stroke-width=".9"/>`,
+  cherry: (x, y) => `<circle cx="${x}" cy="${y}" r="4.4" fill="#e8442e" stroke="#9e2a1c" stroke-width="1"/><circle cx="${x - 1.4}" cy="${y - 1.4}" r="1.1" fill="#ffb8a8"/>`,
+  albahaca: (x, y, r) => `<ellipse cx="${x}" cy="${y}" rx="5.6" ry="2.8" transform="rotate(${r} ${x} ${y})" fill="#3f8f3a" stroke="#235e22" stroke-width=".8"/>`,
+  cilantro: (x, y, r) => `<g transform="rotate(${r} ${x} ${y})" fill="#4fa443"><circle cx="${x}" cy="${y}" r="1.8"/><circle cx="${x + 2.6}" cy="${y + .6}" r="1.6"/><circle cx="${x + 1.2}" cy="${y - 2.2}" r="1.5"/></g>`,
+  champ: (x, y, r) => `<g transform="rotate(${r} ${x} ${y})"><path d="M${x - 5.5} ${y}a5.5 4.6 0 0 1 11 0z" fill="#efe2cb" stroke="#8a6a4a" stroke-width="1"/><rect x="${x - 1.8}" y="${y}" width="3.6" height="4.2" rx="1" fill="#efe2cb" stroke="#8a6a4a" stroke-width="1"/></g>`,
+  jamon: (x, y, r) => `<rect x="${x - 5}" y="${y - 4}" width="10" height="8" rx="2.4" transform="rotate(${r} ${x} ${y})" fill="#f2a6a0" stroke="#c76e69" stroke-width="1"/>`,
+  pina: (x, y, r) => `<path d="M${x - 4} ${y + 3}l4-7 4 7z" transform="rotate(${r} ${x} ${y})" fill="#f7d34c" stroke="#c99a18" stroke-width="1" stroke-linejoin="round"/>`,
+  salami: (x, y) => `<circle cx="${x}" cy="${y}" r="6" fill="#b3322b" stroke="#7a1b16" stroke-width="1.2"/><circle cx="${x - 2}" cy="${y - 1.5}" r="1" fill="#f0b9a6"/><circle cx="${x + 2}" cy="${y + 1.6}" r="1" fill="#f0b9a6"/><circle cx="${x + 1.5}" cy="${y - 2.4}" r=".8" fill="#f0b9a6"/>`,
+  tocino: (x, y, r) => `<path d="M${x - 7} ${y}q2.3-3 4.6 0t4.6 0 4.6 0" transform="rotate(${r} ${x} ${y})" fill="none" stroke="#b5452f" stroke-width="3.4" stroke-linecap="round"/><path d="M${x - 7} ${y}q2.3-3 4.6 0t4.6 0 4.6 0" transform="rotate(${r} ${x} ${y})" fill="none" stroke="#f3c2a8" stroke-width="1" stroke-linecap="round"/>`,
+  pollo: (x, y, r) => `<path d="M${x - 5} ${y - 2}q3-4 8-1q2 4-2 6q-5 1-6-5z" transform="rotate(${r} ${x} ${y})" fill="#f0d39b" stroke="#b58a4a" stroke-width="1"/>`,
+  pimenton: (x, y, r, k) => `<path d="M${x - 5} ${y + 2}q5-8 10 0" transform="rotate(${r} ${x} ${y})" fill="none" stroke="${k % 2 ? "#3e9a3a" : "#d8392b"}" stroke-width="2.6" stroke-linecap="round"/>`,
+  cebolla: (x, y, r) => `<ellipse cx="${x}" cy="${y}" rx="5.5" ry="4.2" transform="rotate(${r} ${x} ${y})" fill="none" stroke="#b25ea6" stroke-width="1.6"/>`,
+  caramelo: (x, y, r) => `<path d="M${x - 5} ${y}c2-3 3 3 5 0s3 3 5 0" transform="rotate(${r} ${x} ${y})" fill="none" stroke="#9a5a22" stroke-width="2" stroke-linecap="round"/>`,
+  berenjena: (x, y) => `<circle cx="${x}" cy="${y}" r="6" fill="#5b3a6b" stroke="#3a2245" stroke-width="1"/><circle cx="${x}" cy="${y}" r="3.8" fill="#e9dfc4"/>`,
+  aceituna: (x, y) => `<circle cx="${x}" cy="${y}" r="3.4" fill="none" stroke="#1d1814" stroke-width="2.2"/>`,
+  camaron: (x, y, r) => `<path d="M${x + 4} ${y - 3}a5 5 0 1 1-6 7" transform="rotate(${r} ${x} ${y})" fill="none" stroke="#f08a5b" stroke-width="3.4" stroke-linecap="round"/>`,
+  aji: (x, y, r) => `<path d="M${x - 5} ${y - 2}q6 0 10 5q-7 1-10-5z" transform="rotate(${r} ${x} ${y})" fill="#d7261e" stroke="#8a1410" stroke-width=".8"/><path d="M${x - 5} ${y - 2}l-2-2" stroke="#3e8a2e" stroke-width="1.4" transform="rotate(${r} ${x} ${y})"/>`,
+  salchicha: (x, y, r) => `<rect x="${x - 6}" y="${y - 2.6}" width="12" height="5.2" rx="2.6" transform="rotate(${r} ${x} ${y})" fill="#a8532e" stroke="#6e3016" stroke-width="1"/>`,
+  calabacin: (x, y) => `<circle cx="${x}" cy="${y}" r="5" fill="#cfe3a2" stroke="#3f7a2a" stroke-width="1.6"/>`
+};
+const scatter = (rand, n, R, minD) => { const pts = []; let tries = 0; while (pts.length < n && tries++ < 900) { const a = rand() * Math.PI * 2, d = Math.sqrt(rand()) * R, x = 60 + Math.cos(a) * d, y = 60 + Math.sin(a) * d; if (pts.every(p => (p[0] - x) ** 2 + (p[1] - y) ** 2 > minD * minD)) pts.push([x, y]); } return pts; };
+const tops = (rand, ings, pts) => pts.map(([x, y], k) => { const g = ings[k % ings.length]; return G[g] ? G[g](+x.toFixed(1), +y.toFixed(1), Math.round(rand() * 360), k) : ""; }).join("");
+function drawPizza(i) {
+  const rand = rng(i.id), ings = ingOf(i.desc).filter(k => k !== "queso"), sauce = /ranchera/i.test(i.desc) ? "#b8652c" : "#c8452f";
+  const cheese = scatter(rand, 9, 30, 10).map(([x, y]) => `<circle cx="${x}" cy="${y}" r="${7 + rand() * 4}" fill="#f6d987" opacity=".9"/>`).join("");
+  return `<svg viewBox="0 0 120 120" role="img" aria-label="Ilustración: ${i.name}"><circle cx="61" cy="63" r="50" fill="rgba(0,0,0,.28)"/><circle cx="60" cy="60" r="50" fill="#dca45a" stroke="#8a5a2b" stroke-width="2"/><circle cx="60" cy="60" r="43" fill="${sauce}"/><circle cx="60" cy="60" r="40" fill="#f2cf72" opacity=".55"/>${cheese}${tops(rand, ings.length ? ings : ["albahaca"], scatter(rand, Math.min(22, 10 + ings.length * 3), 34, 9))}<g stroke="rgba(110,60,20,.45)" stroke-width="1.2"><path d="M60 10v100M10 60h100M25 25l70 70M95 25l-70 70"/></g></svg>`;
+}
+function drawCalzone(i) {
+  const rand = rng(i.id), ings = ingOf(i.desc);
+  const bits = scatter(rand, 5, 9, 6).map(([x, y], k) => G[ings[k % ings.length]] ? G[ings[k % ings.length]](48 + (x - 60) * 2.2, 79 + (y - 60) * .5, Math.round(rand() * 360), k) : "").join("");
+  const crimp = Array.from({ length: 13 }, (_, k) => { const a = Math.PI * (k / 12); return `<circle cx="${(60 - Math.cos(a) * 46).toFixed(1)}" cy="${(80 - Math.sin(a) * 46).toFixed(1)}" r="3.4" fill="#c98c45"/>`; }).join("");
+  return `<svg viewBox="0 0 120 120" role="img" aria-label="Ilustración: ${i.name}"><ellipse cx="60" cy="86" rx="52" ry="8" fill="rgba(0,0,0,.3)"/>${crimp}<path d="M14 80a46 46 0 0 1 92 0z" fill="#e3ad62" stroke="#8a5a2b" stroke-width="2"/><g fill="#a86b2f" opacity=".6"><circle cx="45" cy="55" r="2"/><circle cx="70" cy="48" r="1.6"/><circle cx="82" cy="62" r="2.2"/><circle cx="56" cy="66" r="1.5"/></g><path d="M18 80h84" stroke="#8a5a2b" stroke-width="2"/>${bits}<g fill="none" stroke="rgba(243,231,207,.55)" stroke-width="2" stroke-linecap="round"><path d="M48 26q-4-6 0-12"/><path d="M60 22q-4-6 0-12"/><path d="M72 26q-4-6 0-12"/></g></svg>`;
+}
+function drawSandwich(i) {
+  const t = i.desc.toLowerCase(), burger = /burger/i.test(i.name), L = [];
+  if (/lechuga|cilantro|pesto/.test(t)) L.push(`<path d="M18 62q6-5 12 0t12 0 12 0 12 0 12 0 12 0 12 0" fill="none" stroke="#5aa845" stroke-width="5" stroke-linecap="round"/>`);
+  if (/tomate/.test(t)) L.push(`<rect x="22" y="${0}" width="76" height="6" rx="3" fill="#e0533d"/>`);
+  if (/queso|mozzarella/.test(t)) L.push(`<path d="M18 0h84l-6 6-5-4-6 7-6-6-7 6-6-5-6 6-7-5-6 6-7-6-6 5z" fill="#f4c94e"/>`);
+  const meat = /lentejas/.test(t) ? "#7a5a34" : /fr[ií]joles/.test(t) ? "#5a2f22" : /cerdo|fricadelle|carne/.test(t) ? "#7b3f22" : /pollo/.test(t) ? "#e3c084" : /jam[oó]n/.test(t) ? "#f0a39b" : /salami|salchicha/.test(t) ? "#b3322b" : /champi|berenjena/.test(t) ? "#8b6b4a" : "#c98d55";
+  L.push(`<rect x="20" y="0" width="80" height="${burger ? 11 : 7}" rx="${burger ? 5 : 3}" fill="${meat}"/>`);
+  let y = 60, body = "";
+  L.forEach((l, k) => { if (k === 0 && l.includes("q6-5")) { body += l; y = 66; return; } body += `<g transform="translate(0 ${y})">${l}</g>`; y += l.includes("height=\"11\"") ? 11 : 7; });
+  const top = burger ? `<path d="M18 60q0-32 42-32t42 32z" fill="#d9944a" stroke="#8a5a2b" stroke-width="2"/><g fill="#f6e7c4"><ellipse cx="44" cy="42" rx="2" ry="1.2"/><ellipse cx="60" cy="36" rx="2" ry="1.2"/><ellipse cx="76" cy="42" rx="2" ry="1.2"/><ellipse cx="52" cy="48" rx="2" ry="1.2"/><ellipse cx="68" cy="48" rx="2" ry="1.2"/></g>` : `<path d="M16 60q0-20 14-24h60q14 4 14 24z" fill="#e2b06a" stroke="#8a5a2b" stroke-width="2"/><path d="M26 44q34-10 68 0" stroke="#b9803e" stroke-width="2" fill="none"/>`;
+  const bot = burger ? `<path d="M18 ${y}h84q0 16-42 16t-42-16z" fill="#d9944a" stroke="#8a5a2b" stroke-width="2"/>` : `<rect x="16" y="${y}" width="88" height="13" rx="5" fill="#e2b06a" stroke="#8a5a2b" stroke-width="2"/>`;
+  return `<svg viewBox="0 0 120 120" role="img" aria-label="Ilustración: ${i.name}"><ellipse cx="60" cy="${y + 18}" rx="50" ry="6" fill="rgba(0,0,0,.3)"/>${body}${bot}${top}</svg>`;
+}
+function drawPlate(i) {
+  const rand = rng(i.id), id = i.id, plate = `<circle cx="61" cy="63" r="52" fill="rgba(0,0,0,.28)"/><circle cx="60" cy="60" r="52" fill="#f1e9da" stroke="#cdbfa6" stroke-width="2"/><circle cx="60" cy="60" r="40" fill="none" stroke="#e1d5bf" stroke-width="1.5"/>`;
+  let food = "";
+  if (id === "hummus" || id === "baba") {
+    const c = id === "hummus" ? "#e3c58f" : "#b89a78";
+    food = `<circle cx="54" cy="60" r="30" fill="${c}" stroke="#a8875a" stroke-width="1.5"/><path d="M54 60m-18 0a18 18 0 1 0 36 0a12 12 0 1 0-24 0a6 6 0 1 0 12 0" fill="none" stroke="#c29e62" stroke-width="2"/><circle cx="54" cy="60" r="4" fill="#d9a43a" opacity=".8"/><circle cx="58" cy="57" r="2.4" fill="#2c3a1c"/><path d="M84 40l18 10-14 10z M86 64l16 6-14 12z" fill="#e7c48a" stroke="#a87c3e" stroke-width="1.4"/>`;
+  } else if (id === "frankfurt") {
+    food = `<ellipse cx="52" cy="60" rx="30" ry="20" fill="#6b3d22" stroke="#3e220f" stroke-width="2"/><path d="M30 54q22-10 44 0M32 64q20-8 40 0" stroke="#4a2a14" stroke-width="2" fill="none"/><circle cx="88" cy="70" r="13" fill="#f3e6c6" stroke="#bfa47a" stroke-width="1.5"/><g fill="#5a8f3a"><circle cx="85" cy="68" r="1.4"/><circle cx="91" cy="72" r="1.2"/><circle cx="88" cy="66" r="1.1"/></g><g fill="#b3322b"><rect x="44" y="46" width="5" height="3" rx="1"/><rect x="58" y="70" width="5" height="3" rx="1"/></g>`;
+  } else if (id === "fondue") {
+    food = `<ellipse cx="60" cy="66" rx="30" ry="22" fill="#3a2a22"/><ellipse cx="60" cy="58" rx="27" ry="14" fill="#f2c94e"/><path d="M46 56q6 4 12 0t12 0" stroke="#d9a72a" stroke-width="2" fill="none"/>${[[26, 34], [92, 32], [24, 88], [96, 86], [60, 98]].map(([x, y]) => `<rect x="${x - 6}" y="${y - 6}" width="12" height="12" rx="2" fill="#e2b06a" stroke="#8a5a2b" stroke-width="1.2"/>`).join("")}`;
+  } else if (id === "pfannkuchen") {
+    food = `<circle cx="60" cy="60" r="34" fill="#efc76a" stroke="#c48a2e" stroke-width="2"/><g fill="#d9a03e" opacity=".7">${scatter(rand, 12, 26, 7).map(([x, y]) => `<circle cx="${x}" cy="${y}" r="${1.5 + rand() * 2.5}"/>`).join("")}</g><path d="M38 70q22 12 44 0" stroke="#c48a2e" stroke-width="2" fill="none"/><circle cx="92" cy="86" r="8" fill="#f6eedd" stroke="#bfa47a"/>`;
+  } else if (id === "bratwurst") {
+    food = `<rect x="22" y="40" width="64" height="14" rx="7" fill="#c97f45" stroke="#7a3f1c" stroke-width="2"/><rect x="26" y="58" width="62" height="14" rx="7" fill="#c97f45" stroke="#7a3f1c" stroke-width="2"/><g stroke="#7a3f1c" stroke-width="1.4"><path d="M40 42l4 10M56 42l4 10M70 42l4 10M44 60l4 10M60 60l4 10M74 60l4 10"/></g>${[[36, 88], [52, 92], [68, 89]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="7" fill="#e8c27a" stroke="#a87c3e" stroke-width="1.4"/>`).join("")}<path d="M88 82q8 4 10 14" stroke="#e0b52a" stroke-width="4" stroke-linecap="round" fill="none"/>`;
+  } else if (id === "ensalada") {
+    food = scatter(rand, 16, 32, 8).map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="${8 + rand() * 4}" ry="${5 + rand() * 3}" transform="rotate(${rand() * 180} ${x} ${y})" fill="${rand() > .5 ? "#6dbb4f" : "#4e9a3a"}" stroke="#2f6b22" stroke-width=".8"/>`).join("") + tops(rand, ["cherry", "aceituna", "cebolla", "cherry"], scatter(rand, 9, 28, 10)) + `<g fill="#f3ead2" stroke="#c8b98f">${scatter(rand, 4, 24, 12).map(([x, y]) => `<rect x="${x - 4}" y="${y - 4}" width="8" height="8" rx="1.5"/>`).join("")}</g>`;
+  } else {
+    const ings = ingOf(i.desc).filter(k => !["cilantro"].includes(k));
+    const noodles = Array.from({ length: 11 }, (_, k) => { const r = 8 + k * 2.6, a = rand() * 6.28; return `<path d="M${(60 + Math.cos(a) * r).toFixed(1)} ${(60 + Math.sin(a) * r).toFixed(1)}A${r} ${r * .9} 0 1 1 ${(60 + Math.cos(a + 4.4) * r).toFixed(1)} ${(60 + Math.sin(a + 4.4) * r).toFixed(1)}" fill="none" stroke="#f3d68f" stroke-width="3.6" stroke-linecap="round"/>`; }).join("");
+    food = `<circle cx="60" cy="60" r="36" fill="#f6e6bf"/>${noodles}<circle cx="60" cy="60" r="36" fill="#fff6dc" opacity=".25"/>${tops(rand, ings.length ? ings : ["albahaca"], scatter(rand, 10, 26, 10))}<g fill="#f8f2e0"><circle cx="44" cy="44" r="1.3"/><circle cx="70" cy="50" r="1.3"/><circle cx="62" cy="72" r="1.3"/></g>`;
+  }
+  return `<svg viewBox="0 0 120 120" role="img" aria-label="Ilustración: ${i.name}">${plate}${food}</svg>`;
+}
+const drawOf = i => i.cat === "pizza" ? drawPizza(i) : i.cat === "calzone" ? drawCalzone(i) : i.cat === "sandwich" ? drawSandwich(i) : drawPlate(i);
+const phHTML = (i, cls = "ph") => imgSrc(i) ? `<div class="${cls}"><img src="${imgSrc(i)}" alt="${i.name}" loading="lazy"></div>` : `<div class="${cls} ph-draw">${drawOf(i)}</div>`;
+
+/* sellos alemanes */
+document.querySelectorAll("[data-seal]").forEach((el, n) => {
+  const [ring, center, sub] = el.dataset.seal.split("|"), id = "sp" + n, ringTx = (ring.repeat(3)).slice(0, 52);
+  el.innerHTML = `<svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="${id}" d="M60 60m-45 0a45 45 0 1 1 90 0a45 45 0 1 1-90 0"/></defs><circle cx="60" cy="60" r="58" fill="#15100c" stroke="#e8b322" stroke-width="2.5"/><circle cx="60" cy="60" r="53" fill="none" stroke="#e8b322" stroke-width="1" stroke-dasharray="1.5 3"/><text fill="#f3e7cf" font-family="DM Sans, sans-serif" font-weight="700" font-size="9.4" letter-spacing="1.6"><textPath href="#${id}">${ringTx}</textPath></text><circle cx="60" cy="60" r="35" fill="#c8312b" stroke="#e8b322" stroke-width="2"/><rect x="25" y="52" width="70" height="4" fill="#111"/><rect x="25" y="64" width="70" height="4" fill="#e8b322"/><text x="60" y="${center.length > 3 ? 64 : 67}" text-anchor="middle" font-family="Rye, Georgia, serif" font-size="${center.length > 6 ? 12.5 : center.length > 3 ? 15 : 22}" fill="#fff6e6" stroke="#15100c" stroke-width=".6" paint-order="stroke">${center}</text><text x="60" y="85" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="700" font-size="7" letter-spacing="1.4" fill="#fff6e6">${(sub || "").toUpperCase()}</text></svg>`;
+});
 const fromPrice = i => i.sizes ? Math.min(...i.sizes.map(s => s[1])) : null;
 const priceHTML = i => { const p = fromPrice(i); if (p == null) return `<span class="price"><small>Precio en barra</small></span>`; return `<span class="price">${i.sizes.length > 1 ? "<small>desde </small>" : ""}${cop(p)}</span>`; };
 
@@ -479,7 +591,7 @@ function openItem(id) {
   cur = ALL.get(id); curSize = 0; curQty = 1; lastFocus = document.activeElement;
   const i = cur;
   sheet.innerHTML = `<button class="x" id="pdX" aria-label="Cerrar">×</button><div class="pd">
-    <div class="pd-ph">${imgSrc(i) ? `<img src="${imgSrc(i)}" alt="${i.name}"><small>Foto de clientes en Google</small>` : `<div class="ph-none" style="width:100%;height:100%;display:grid;place-items:center"><i style="font-size:6rem">H</i></div><small>Aquí va la foto profesional del plato</small>`}</div>
+    <div class="pd-ph">${imgSrc(i) ? `<img src="${imgSrc(i)}" alt="${i.name}"><small>Foto de clientes en Google</small>` : `<div class="ph-draw">${drawOf(i)}</div><small>Ilustración · aquí va la foto profesional</small>`}</div>
     <div class="pd-tx">
       <p class="eyebrow">${CARTA.find(c => c.id === i.cat).name}</p>
       <h3 id="pdName">${i.name}</h3>
@@ -528,7 +640,7 @@ function renderCart() {
   const n = cart.reduce((a, l) => a + l.qty, 0);
   $("#cartN").textContent = n;
   if (!cart.length) { $("#drBody").innerHTML = `<p class="empty">Tu pedido está vacío.<br>Toca un plato de la carta o gira la ruleta.</p>`; $("#drFoot").innerHTML = ""; return; }
-  $("#drBody").innerHTML = cart.map((l, k) => { const { i, label, unit } = lineInfo(l); return `<div class="ci">${imgSrc(i) ? `<img src="${imgSrc(i)}" alt="">` : `<div class="ph-none"><i>H</i></div>`}<div><b>${i.name}</b><small>${label ? label + " · " : ""}${unit ? cop(unit * l.qty) : "precio en barra"}</small></div><div class="qty"><button data-k="${k}" data-d="-1" aria-label="Quitar uno">−</button><output>${l.qty}</output><button data-k="${k}" data-d="1" aria-label="Sumar uno">+</button></div></div>`; }).join("");
+  $("#drBody").innerHTML = cart.map((l, k) => { const { i, label, unit } = lineInfo(l); return `<div class="ci">${imgSrc(i) ? `<img src="${imgSrc(i)}" alt="">` : `<div class="ph-draw" style="width:56px;height:56px;border-radius:10px;overflow:hidden">${drawOf(i)}</div>`}<div><b>${i.name}</b><small>${label ? label + " · " : ""}${unit ? cop(unit * l.qty) : "precio en barra"}</small></div><div class="qty"><button data-k="${k}" data-d="-1" aria-label="Quitar uno">−</button><output>${l.qty}</output><button data-k="${k}" data-d="1" aria-label="Sumar uno">+</button></div></div>`; }).join("");
   const tot = cart.reduce((a, l) => a + (lineInfo(l).unit || 0) * l.qty, 0);
   const tbd = cart.some(l => lineInfo(l).unit == null);
   $("#drFoot").innerHTML = `<div class="mode" role="group" aria-label="Cómo lo quieres"><button aria-pressed="${mode === "recoger"}" data-m="recoger">Paso a recoger</button><button aria-pressed="${mode === "mesa"}" data-m="mesa">Para la mesa</button></div>
