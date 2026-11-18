@@ -976,6 +976,9 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
             <tr><td>Menú o catálogo con precios</td><td class="n">–</td><td class="y">✓</td><td class="y">✓</td></tr>
             <tr><td>Ficha de Google Maps</td><td class="n">Adicional</td><td class="y">✓</td><td class="y">✓</td></tr>
             <tr><td>Formulario de pedidos o citas</td><td class="n">–</td><td class="y">✓</td><td class="y">✓</td></tr>
+            <tr><td>Identidad básica (colores y letra)</td><td class="y">Gratis</td><td class="y">Gratis</td><td class="y">Gratis</td></tr>
+            <tr><td>Fotos básicas de tu negocio</td><td class="y">Gratis</td><td class="y">Gratis</td><td class="y">Gratis</td></tr>
+            <tr><td>Sesión de fotos profesional</td><td>Adicional</td><td>Adicional</td><td>Adicional</td></tr>
             <tr><td>Galería de fotos</td><td class="n">–</td><td class="y">✓</td><td class="y">✓</td></tr>
             <tr><td>Tienda en línea y pagos</td><td class="n">–</td><td class="n">–</td><td class="y">✓</td></tr>
             <tr><td>Panel de pedidos e inventario</td><td class="n">–</td><td class="n">–</td><td class="y">✓</td></tr>
@@ -1014,7 +1017,7 @@ main>section.s-paper,main>section.s-crimson{border-radius:clamp(22px,3vw,44px) c
     <div id="faqList">
         <div class="qa"><h3><button aria-expanded="false" aria-controls="a1" id="q1">¿Necesito saber de computadores?<span class="pm" aria-hidden="true"></span></button></h3><div class="qa-a" id="a1" role="region" aria-labelledby="q1"><div><p>No. Nosotros nos encargamos de todo lo técnico: diseño, publicación y hosting. Tú nos cuentas de tu negocio y nos mandas fotos; nosotros hacemos el resto.</p></div></div></div>
         <div class="qa"><h3><button aria-expanded="false" aria-controls="a2" id="q2">¿El precio “desde” es el precio final?<span class="pm" aria-hidden="true"></span></button></h3><div class="qa-a" id="a2" role="region" aria-labelledby="q2"><div><p>Es el precio de entrada de cada plan. Según lo que necesites, te confirmamos el valor final por WhatsApp antes de empezar, sin compromiso.</p></div></div></div>
-        <div class="qa"><h3><button aria-expanded="false" aria-controls="a3" id="q3">¿Qué necesito para empezar?<span class="pm" aria-hidden="true"></span></button></h3><div class="qa-a" id="a3" role="region" aria-labelledby="q3"><div><p>Tu horario, dirección, número de WhatsApp, algunas fotos de tu local y tus productos, y tu logo si tienes. Si no tienes fotos o logo, los podemos sumar a tu plan.</p></div></div></div>
+        <div class="qa"><h3><button aria-expanded="false" aria-controls="a3" id="q3">¿Qué necesito para empezar?<span class="pm" aria-hidden="true"></span></button></h3><div class="qa-a" id="a3" role="region" aria-labelledby="q3"><div><p>Tu horario, dirección, número de WhatsApp, algunas fotos de tu local y tus productos, y tu logo si tienes. Si no tienes, la identidad básica y unas fotos básicas van gratis en todos los planes; las fotos profesionales y el logo profesional son adicionales.</p></div></div></div>
         <div class="qa"><h3><button aria-expanded="false" aria-controls="a4" id="q4">¿Cuánto se demora?<span class="pm" aria-hidden="true"></span></button></h3><div class="qa-a" id="a4" role="region" aria-labelledby="q4"><div><p>Depende del plan y de qué tan rápido tengamos tus fotos y textos. En la primera charla te damos una fecha de entrega concreta.</p></div></div></div>
         <div class="qa"><h3><button aria-expanded="false" aria-controls="a5" id="q5">¿Tengo que comprar un dominio?<span class="pm" aria-hidden="true"></span></button></h3><div class="qa-a" id="a5" role="region" aria-labelledby="q5"><div><p>No, es opcional. Si no tienes, tu página queda en una dirección gratuita que te damos. Si quieres una propia como tunegocio.co, te ayudamos a conseguirla y la conectamos.</p></div></div></div>
         <div class="qa"><h3><button aria-expanded="false" aria-controls="a6" id="q6">¿Cómo se paga?<span class="pm" aria-hidden="true"></span></button></h3><div class="qa-a" id="a6" role="region" aria-labelledby="q6"><div><p>Te lo explicamos en la cotización: de contado o en cuotas, como te quede más cómodo. Y si tu negocio crece, puedes pasar a otro plan sin empezar de cero.</p></div></div></div>
@@ -1100,19 +1103,19 @@ const CONFIG = {
     vitrina: { name: "Vitrina", price: 149000, mant: 12000,
       desc: "Para que te encuentren: quién eres, dónde estás y cómo escribirte.", ideal: "Emprendedores, servicios y profesionales",
       feat: [["page", "Página única con tus secciones clave"], ["chat", "Botón de WhatsApp y llamada"], ["pin", "Mapa, dirección y horario"]],
-      incT: "También incluye:", inc: ["Lista para celular", "Candado de seguridad (https)"] },
+      incT: "También incluye:", inc: ["Lista para celular", "Candado de seguridad (https)", "Identidad y fotos básicas gratis"] },
     local:   { name: "Local", price: 299000, mant: 19000, badge: "Recomendado",
       desc: "Para mostrar tu menú o catálogo y recibir pedidos por WhatsApp.", ideal: "Restaurantes, panaderías, talleres, barberías",
       feat: [["layers", "Hasta 5 secciones o páginas"], ["list", "Menú o catálogo con precios"], ["pin", "Ficha de Google Maps configurada"]],
-      incT: "Todo lo de Vitrina, más:", inc: ["Formulario de pedidos o citas", "Galería de fotos"] },
+      incT: "Todo lo de Vitrina, más:", inc: ["Formulario de pedidos o citas", "Galería de fotos", "Identidad y fotos básicas gratis"] },
     tienda:  { name: "Tienda", price: 590000, mant: 29000,
       desc: "Para vender y cobrar en línea, también mientras duermes.", ideal: "Ropa, accesorios y productos con envío",
       feat: [["cart", "Tienda en línea con carrito"], ["card", "Pagos en línea"], ["box", "Panel de pedidos e inventario"]],
-      incT: "Todo lo de Local, más:", inc: ["Envío a domicilio o recoger en tienda", "Capacitación para tu equipo"] }
+      incT: "Todo lo de Local, más:", inc: ["Envío a domicilio o recoger en tienda", "Capacitación para tu equipo", "Identidad y fotos básicas gratis"] }
   },
   addons: [
-    { id: "fotos", price: 69000,   name: "Fotos de tu local y productos", hint: "Una sesión en tu negocio" },
-    { id: "logo", price: 89000,    name: "Logo e identidad básica",       hint: "Si aún no tienes logo" },
+    { id: "fotos", price: 69000,   name: "Sesión de fotos profesional",   hint: "Las fotos básicas ya van gratis" },
+    { id: "logo", price: 89000,    name: "Logo profesional",              hint: "La identidad básica ya va gratis" },
     { id: "textos", price: 39000,  name: "Textos escritos por nosotros",  hint: "Te entrevistamos y redactamos" },
     { id: "google", price: 29000,  name: "Ficha de Google Maps",          hint: "Incluida en Local y Tienda", includedIn: ["local", "tienda"] },
     { id: "reservas", price: 79000,name: "Reservas o citas en línea",     hint: "Agenda que se llena sola" },
@@ -1465,7 +1468,7 @@ $("#qdate").textContent = today;
 
 function quoteLines() {
   const p = CONFIG.plans[qState.plan];
-  const lines = [{ key: "plan", label: `Plan ${p.name}`, val: `Desde ${cop(p.price)}` }, { key: "mant", label: "Mantenimiento mensual", val: `Desde ${cop(p.mant)}/mes`, m: true }];
+  const lines = [{ key: "plan", label: `Plan ${p.name}`, val: `Desde ${cop(p.price)}` }, { key: "basico", label: "Identidad y fotos básicas", val: "Gratis", m: true }, { key: "mant", label: "Mantenimiento mensual", val: `Desde ${cop(p.mant)}/mes`, m: true }];
   CONFIG.addons.forEach(a => {
     if (!qState.add.has(a.id)) return;
     const inc = a.includedIn && a.includedIn.includes(qState.plan);

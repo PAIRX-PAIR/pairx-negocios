@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Holy Water Ale Café · Buga — Demo PairX</title>
+<meta name="description" content="Propuesta de página web para Holy Water Ale Café en Buga: carta con fotos, pedido por WhatsApp y ruleta de lo más pedido. Demo hecha por PairX, no es la página oficial.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#15100c">
+<link rel="icon" href="img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#15100c;--bg-2:#1d1610;--wood:#3b2618;--wood-2:#5c3b25;--line:#3a2a1e;
+  --cream:#f3e7cf;--muted:#c9b393;--amber:#e3a536;--amber-2:#f2bd57;--red:#c8452f;--teal:#2f8f86;--green:#4f8a3c;
+  --display:'Rye',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;
+  --r:14px;--ease:cubic-bezier(.22,1,.36,1)
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--bg);color:var(--cream);font:16px/1.55 var(--sans);overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+:focus-visible{outline:2px solid var(--amber-2);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1160px,100% - 32px);margin-inline:auto}
+.h-d{font-family:var(--display);font-weight:400;letter-spacing:.01em;line-height:1.02}
+.eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);font-weight:700}
+
+/* aviso demo */
+.demo-bar{background:var(--amber);color:#1b120a;font-size:.82rem;text-align:center;padding:7px 16px;font-weight:500}
+.demo-bar a{font-weight:700}
+
+/* header */
+.top{position:sticky;top:0;z-index:40;background:rgba(21,16,12,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:14px;height:68px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
+.brand img{width:44px;height:44px;border-radius:50%}
+.brand b{font-family:var(--display);font-weight:400;font-size:1.05rem;line-height:1}
+.brand small{display:block;font-size:.72rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:3px}
+.nav{display:flex;gap:4px}
+.nav a{text-decoration:none;font-size:.92rem;padding:8px 12px;border-radius:999px;color:var(--muted);transition:color .2s,background .2s}
+.nav a:hover{color:var(--cream);background:var(--bg-2)}
+@media (max-width:760px){.nav{display:none}}
+.cart-btn{position:relative;display:flex;align-items:center;gap:8px;background:var(--amber);color:#1b120a;font-weight:700;padding:10px 16px;border-radius:999px;transition:transform .2s var(--ease)}
+.cart-btn:active{transform:scale(.96)}
+.cart-btn svg{width:18px;height:18px}
+.cart-btn .n{background:#1b120a;color:var(--amber-2);border-radius:999px;min-width:22px;height:22px;display:grid;place-items:center;font-size:.78rem;padding:0 6px}
+.cart-btn.bump{animation:bump .45s var(--ease)}
+@keyframes bump{30%{transform:scale(1.12)}}
+
+/* hero */
+.hero{position:relative;min-height:min(86svh,760px);display:grid;align-items:end;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url(img/local.jpg) center 40%/cover}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,16,12,.35) 0%,rgba(21,16,12,.55) 45%,var(--bg) 100%)}
+.hero .wrap{position:relative;padding:120px 0 56px}
+.hero h1{font-size:clamp(2.6rem,7.4vw,5.6rem);max-width:12ch;text-shadow:0 4px 30px rgba(0,0,0,.5)}
+.hero h1 em{font-style:normal;color:var(--amber-2)}
+.hero p.lead{max-width:46ch;font-size:clamp(1.02rem,1.6vw,1.2rem);color:#eadcc1;margin-top:18px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;padding:14px 22px;border-radius:999px;transition:transform .2s var(--ease),background .2s}
+.btn:active{transform:scale(.97)}
+.btn-a{background:var(--amber);color:#1b120a}
+.btn-a:hover{background:var(--amber-2)}
+.btn-g{border:1.5px solid rgba(243,231,207,.4);color:var(--cream)}
+.btn-g:hover{background:rgba(243,231,207,.08)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.chip{background:rgba(21,16,12,.7);border:1px solid var(--line);padding:8px 14px;border-radius:999px;font-size:.88rem;color:var(--muted)}
+.chip b{color:var(--cream)}
+
+/* cinta */
+.strip{background:var(--red);color:#fff3e4;overflow:hidden;white-space:nowrap;border-block:1px solid rgba(0,0,0,.25)}
+.strip-in{display:inline-flex;gap:40px;padding:12px 0;animation:roll 38s linear infinite;font-family:var(--display);font-size:1.05rem}
+.strip-in span::after{content:"✦";margin-left:40px;opacity:.7}
+@keyframes roll{to{transform:translateX(-50%)}}
+
+section{padding:88px 0}
+.sec-h{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;margin-bottom:34px}
+.sec-h h2{font-size:clamp(2rem,4.6vw,3.3rem);margin-top:8px}
+.sec-h p{color:var(--muted);max-width:44ch}
+
+/* cervezas */
+.beers{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
+.beer{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:3/4;background:var(--bg-2);text-align:left}
+.beer img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.beer:hover img{transform:scale(1.06)}
+.beer::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(10,7,5,.92))}
+.beer span{position:absolute;left:14px;right:14px;bottom:14px;z-index:1}
+.beer b{display:block;font-family:var(--display);font-weight:400;font-size:1.15rem;line-height:1.1}
+.beer small{color:var(--amber-2);font-size:.8rem}
+
+/* carta */
+.menu{background:linear-gradient(180deg,var(--bg) 0,var(--bg-2) 120px)}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:26px;scrollbar-width:none;position:sticky;top:68px;z-index:5;background:var(--bg-2);padding-top:10px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;padding:10px 18px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-weight:500;transition:all .2s}
+.tab[aria-selected=true]{background:var(--cream);color:#1b120a;border-color:var(--cream)}
+.cat-note{color:var(--muted);font-size:.9rem;margin:-10px 0 18px}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,460px),1fr));gap:14px}
+.item{display:grid;grid-template-columns:132px 1fr;gap:16px;align-items:stretch;text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:12px;transition:border-color .2s,transform .3s var(--ease)}
+.item:hover{border-color:var(--wood-2);transform:translateY(-2px)}
+.item .ph{border-radius:10px;overflow:hidden;aspect-ratio:1;background:var(--wood)}
+.item .ph img{width:100%;height:100%;object-fit:cover}
+.ph.ph-none{display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,var(--wood-2),var(--wood) 70%)}
+.ph-none i{font-family:var(--display);font-style:normal;font-size:2.6rem;color:rgba(243,231,207,.35)}
+.item .tx{display:flex;flex-direction:column;min-width:0}
+.item h3{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.1}
+.item p{color:var(--muted);font-size:.9rem;margin-top:6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.item .row{margin-top:auto;padding-top:10px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.price{font-weight:700;color:var(--amber-2)}
+.price small{color:var(--muted);font-weight:500}
+.add{width:38px;height:38px;border-radius:50%;background:var(--amber);color:#1b120a;display:grid;place-items:center;font-size:1.4rem;line-height:1;flex:none}
+.tags{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.tag{font-size:.7rem;font-weight:700;letter-spacing:.04em;padding:3px 8px;border-radius:999px}
+.t-veg{background:rgba(79,138,60,.2);color:#9fd08a}
+.t-hot{background:rgba(200,69,47,.22);color:#ff9a84}
+.t-new{background:rgba(227,165,54,.2);color:var(--amber-2)}
+.t-pop{background:rgba(47,143,134,.22);color:#86d6cc}
+@media (max-width:520px){.item{grid-template-columns:104px 1fr}}
+
+/* ruleta */
+.spin{background:radial-gradient(ellipse at 50% 0,#2a1c12,var(--bg) 70%)}
+.spin-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+@media (max-width:860px){.spin-grid{grid-template-columns:1fr}}
+.wheel-box{position:relative;width:min(440px,100%);aspect-ratio:1;margin-inline:auto}
+.wheel{width:100%;height:100%;border-radius:50%;box-shadow:0 0 0 10px var(--wood),0 0 0 14px var(--amber),0 30px 80px rgba(0,0,0,.6);transition:transform 4.6s cubic-bezier(.12,.8,.12,1)}
+.pointer{position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:18px solid transparent;border-right:18px solid transparent;border-top:34px solid var(--cream);filter:drop-shadow(0 4px 6px rgba(0,0,0,.5));z-index:2}
+.hub{position:absolute;inset:50% auto auto 50%;width:23%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;overflow:hidden;box-shadow:0 0 0 5px var(--cream)}
+.hub img{width:100%;height:100%;object-fit:cover}
+.spin-tx h2{font-size:clamp(2rem,4.6vw,3.3rem);margin:8px 0 14px}
+.spin-tx p{color:var(--muted);max-width:42ch}
+.result{margin-top:24px;display:none;grid-template-columns:110px 1fr;gap:16px;align-items:center;background:var(--bg-2);border:1px solid var(--wood-2);border-radius:var(--r);padding:12px;animation:pop .5s var(--ease)}
+.result.on{display:grid}
+.result img{width:110px;height:110px;object-fit:cover;border-radius:10px}
+.result b{font-family:var(--display);font-weight:400;font-size:1.3rem;display:block}
+.result .act{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.result .btn{padding:9px 16px;font-size:.9rem}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.98)}}
+
+/* lugar */
+.place-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
+@media (max-width:860px){.place-grid{grid-template-columns:1fr}}
+.place-ph{border-radius:20px;overflow:hidden;aspect-ratio:4/5;position:relative}
+.place-ph img{width:100%;height:100%;object-fit:cover}
+.place-ph figcaption{position:absolute;left:14px;bottom:14px;background:rgba(21,16,12,.8);font-size:.8rem;padding:6px 12px;border-radius:999px;color:var(--muted)}
+.place-tx h2{font-size:clamp(2rem,4.6vw,3.3rem);margin:8px 0 16px}
+.place-tx>p{color:#e3d4b8;max-width:48ch}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.stat{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.stat b{font-family:var(--display);font-weight:400;font-size:1.8rem;color:var(--amber-2);display:block;line-height:1}
+.stat span{font-size:.82rem;color:var(--muted)}
+
+/* visita */
+.visit{background:var(--bg-2);border-top:1px solid var(--line)}
+.visit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:860px){.visit-grid{grid-template-columns:1fr}}
+.card{background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.card h3{font-family:var(--display);font-weight:400;font-size:1.3rem;margin-bottom:10px}
+.card p{color:var(--muted)}
+.card .btn{margin-top:16px}
+.open{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:700;margin-bottom:8px}
+.open i{width:9px;height:9px;border-radius:50%;background:#7bd37b;box-shadow:0 0 0 4px rgba(123,211,123,.18)}
+.open.off i{background:#e0695a;box-shadow:0 0 0 4px rgba(224,105,90,.18)}
+.socials{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.soc{display:inline-flex;align-items:center;gap:8px;text-decoration:none;padding:10px 16px;border-radius:999px;background:var(--wood);font-weight:500;font-size:.92rem;transition:background .2s}
+.soc:hover{background:var(--wood-2)}
+.soc svg{width:18px;height:18px;fill:currentColor}
+
+footer{padding:40px 0 110px;border-top:1px solid var(--line);color:var(--muted);font-size:.86rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+.by{display:inline-flex;gap:8px;align-items:center;text-decoration:none;color:var(--cream)}
+.by b{color:#E0263F}
+
+/* hoja de producto */
+.ov{position:fixed;inset:0;background:rgba(5,3,2,.66);z-index:60;opacity:0;pointer-events:none;transition:opacity .3s}
+.ov.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;z-index:61;left:50%;bottom:0;width:min(860px,100%);transform:translate(-50%,105%);background:var(--bg-2);border:1px solid var(--line);border-radius:22px 22px 0 0;transition:transform .45s var(--ease);max-height:92svh;overflow:auto}
+.sheet.on{transform:translate(-50%,0)}
+@media (min-width:861px){.sheet{bottom:auto;top:50%;border-radius:22px;transform:translate(-50%,-40%) scale(.96);opacity:0;pointer-events:none;transition:transform .4s var(--ease),opacity .3s}.sheet.on{transform:translate(-50%,-50%);opacity:1;pointer-events:auto}}
+.pd{display:grid;grid-template-columns:1fr 1fr}
+@media (max-width:700px){.pd{grid-template-columns:1fr}}
+.pd-ph{aspect-ratio:1;background:var(--wood);position:relative}
+.pd-ph img{width:100%;height:100%;object-fit:cover}
+.pd-ph small{position:absolute;left:12px;bottom:12px;background:rgba(21,16,12,.75);font-size:.72rem;padding:4px 10px;border-radius:999px;color:var(--muted)}
+.pd-tx{padding:26px;display:flex;flex-direction:column;gap:14px}
+.pd-tx h3{font-family:var(--display);font-weight:400;font-size:1.9rem;line-height:1.05}
+.pd-tx p{color:var(--muted)}
+.x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;background:rgba(21,16,12,.8);font-size:1.3rem;z-index:2}
+.sizes{display:grid;gap:8px}
+.size{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;transition:border-color .2s,background .2s;text-align:left}
+.size small{color:var(--muted);display:block;font-size:.78rem}
+.size[aria-checked=true]{border-color:var(--amber);background:rgba(227,165,54,.08)}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px}
+.qty button{width:40px;height:40px;font-size:1.2rem}
+.qty output{min-width:28px;text-align:center;font-weight:700}
+.pd-foot{display:flex;gap:12px;align-items:center;margin-top:auto;padding-top:6px}
+.pd-foot .btn{flex:1;justify-content:center}
+
+/* carrito */
+.drawer{position:fixed;z-index:62;top:0;right:0;height:100%;width:min(420px,100%);background:var(--bg-2);border-left:1px solid var(--line);transform:translateX(105%);transition:transform .45s var(--ease);display:flex;flex-direction:column}
+.drawer.on{transform:none}
+.dr-h{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}
+.dr-h h3{font-family:var(--display);font-weight:400;font-size:1.4rem}
+.dr-b{flex:1;overflow:auto;padding:14px 20px;display:grid;align-content:start;gap:12px}
+.ci{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center}
+.ci img,.ci .ph-none{width:56px;height:56px;border-radius:10px;object-fit:cover}
+.ci .ph-none i{font-size:1.4rem}
+.ci b{display:block;font-size:.95rem}
+.ci small{color:var(--muted)}
+.ci .qty button{width:32px;height:32px}
+.empty{color:var(--muted);text-align:center;padding:40px 10px}
+.dr-f{padding:18px 20px;border-top:1px solid var(--line);display:grid;gap:10px}
+.dr-f .tot{display:flex;justify-content:space-between;font-weight:700;font-size:1.1rem}
+.dr-f .note{font-size:.8rem;color:var(--muted)}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mode button{padding:10px;border:1.5px solid var(--line);border-radius:10px;font-size:.88rem}
+.mode button[aria-pressed=true]{border-color:var(--amber);background:rgba(227,165,54,.08)}
+.dr-f .btn{justify-content:center}
+.wa-prev{white-space:pre-wrap;background:var(--bg);border:1px dashed var(--wood-2);border-radius:12px;padding:12px;font-size:.84rem;color:#e3d4b8;max-height:180px;overflow:auto}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,140%);background:var(--cream);color:#1b120a;font-weight:700;padding:12px 20px;border-radius:999px;z-index:70;transition:transform .4s var(--ease);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.toast.on{transform:translate(-50%,0)}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">Demo hecha por <a href="https://pairx-web.vercel.app" target="_blank" rel="noopener">PairX</a> para Holy Water Ale Café · propuesta, no es la página oficial</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Holy Water Ale Café, inicio"><img src="img/logo.jpg" alt="" width="44" height="44"><span><b>Holy Water</b><small>Ale Café · Buga</small></span></a>
+    <nav class="nav" aria-label="Secciones"><a href="#cervezas">Cervezas</a><a href="#carta">Carta</a><a href="#ruleta">Ruleta</a><a href="#visitanos">Visítanos</a></nav>
+    <button class="cart-btn" id="cartBtn" aria-label="Abrir pedido"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg><span class="lbl">Pedido</span><span class="n" id="cartN">0</span></button>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero" aria-labelledby="h1">
+    <div class="hero-bg" role="img" aria-label="Interior de Holy Water Ale Café"></div>
+    <div class="wrap">
+      <p class="eyebrow">Cervecería artesanal · Buga, Valle</p>
+      <h1 class="h-d" id="h1">Cerveza de la casa, <em>pizza</em> y pasta.</h1>
+      <p class="lead">Cerveza artesanal, pizza y pasta italiana, café expreso, sándwiches y postres, en la Cra. 13 #4-83 de Buga. Mira la carta con fotos, arma tu pedido y envíalo por WhatsApp.</p>
+      <div class="cta">
+        <a class="btn btn-a" href="#carta">Ver la carta →</a>
+        <a class="btn btn-g" href="#ruleta">¿No sabes qué pedir? 🎡</a>
+      </div>
+      <div class="chips">
+        <span class="chip"><b>★ 4,6</b> · 1.227 reseñas en Google</span>
+        <span class="chip"><b>4,8</b> en Tripadvisor</span>
+        <span class="chip" id="openChip"><b>Todos los días</b> · 12 m. a 12 a. m.</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip" aria-hidden="true"><div class="strip-in" id="strip"></div></div>
+
+  <section id="cervezas" aria-labelledby="beer-t">
+    <div class="wrap">
+      <div class="sec-h reveal">
+        <div><p class="eyebrow">De la casa</p><h2 class="h-d" id="beer-t">Nuestras cervezas</h2></div>
+        <p>Las favoritas de quienes nos visitan. Toca una para agregarla a tu pedido.</p>
+      </div>
+      <div class="beers" id="beers"></div>
+    </div>
+  </section>
+
+  <section class="menu" id="carta" aria-labelledby="menu-t">
+    <div class="wrap">
+      <div class="sec-h reveal">
+        <div><p class="eyebrow">La carta</p><h2 class="h-d" id="menu-t">Elige, mira y pide</h2></div>
+        <p>Toca un plato para ver su foto, escoger el tamaño y sumarlo a tu pedido.</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Categorías de la carta" id="tabs"></div>
+      <p class="cat-note" id="catNote"></p>
+      <div class="items" id="items" role="tabpanel"></div>
+    </div>
+  </section>
+
+  <section class="spin" id="ruleta" aria-labelledby="spin-t">
+    <div class="wrap spin-grid">
+      <div class="wheel-box reveal">
+        <div class="pointer" aria-hidden="true"></div>
+        <svg class="wheel" id="wheel" viewBox="0 0 400 400" role="img" aria-label="Ruleta con lo más pedido"></svg>
+        <div class="hub"><img src="img/logo.jpg" alt=""></div>
+      </div>
+      <div class="spin-tx reveal">
+        <p class="eyebrow">Para los indecisos</p>
+        <h2 class="h-d" id="spin-t">¿No sabes qué pedir? Gira la ruleta.</h2>
+        <p>La ruleta tiene lo más pedido de Holy Water. Lo que salga, lo agregas con un toque.</p>
+        <div class="cta"><button class="btn btn-a" id="spinBtn">Girar la ruleta 🎡</button></div>
+        <div class="result" id="result" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lugar" aria-labelledby="place-t">
+    <div class="wrap place-grid">
+      <figure class="place-ph reveal"><img src="img/local.jpg" alt="Sala de Holy Water con sofás, cuadros y luces" loading="lazy"><figcaption>El rincón de la casa</figcaption></figure>
+      <div class="place-tx reveal">
+        <p class="eyebrow">El lugar</p>
+        <h2 class="h-d" id="place-t">Una casa vieja de Buga con cerveza propia.</h2>
+        <p>Sofás, cuadros, vigas de madera y una barra con cerveza artesanal. Ven por una pinta, quédate por la pizza y cierra con un volcán de chocolate.</p>
+        <div class="stats">
+          <div class="stat"><b>4,6</b><span>en Google · 1.227 reseñas</span></div>
+          <div class="stat"><b>4,8</b><span>en Tripadvisor</span></div>
+          <div class="stat"><b>12 h</b><span>abiertos todos los días</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="visit" id="visitanos" aria-labelledby="visit-t">
+    <div class="wrap">
+      <div class="sec-h reveal"><div><p class="eyebrow">Visítanos</p><h2 class="h-d" id="visit-t">Te esperamos en Buga</h2></div></div>
+      <div class="visit-grid">
+        <div class="card reveal">
+          <h3>Dónde</h3>
+          <p>Cra. 13 #4-83<br>Guadalajara de Buga, Valle del Cauca</p>
+          <a class="btn btn-a" href="https://www.google.com/maps/search/?api=1&query=Holy+Water+Ale+Caf%C3%A9+Buga" target="_blank" rel="noopener">Cómo llegar →</a>
+        </div>
+        <div class="card reveal">
+          <h3>Horario</h3>
+          <p class="open" id="openNow"><i></i><span>—</span></p>
+          <p>Todos los días<br>12:00 m. a 12:00 a. m.</p>
+        </div>
+        <div class="card reveal">
+          <h3>Escríbenos</h3>
+          <p>Pedidos, reservas y preguntas al 301 737 7998.</p>
+          <div class="socials">
+            <a class="soc" href="https://wa.me/573017377998" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .3-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.6-.1 1.1z"/></svg>WhatsApp</a>
+            <a class="soc" href="tel:+573017377998"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1z"/></svg>Llamar</a>
+            <a class="soc" href="https://www.facebook.com/HolyWaterAleCafe/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 8V6.3c0-.8.2-1.3 1.4-1.3H17V2h-2.6C11.6 2 10.7 3.6 10.7 6.2V8H8v3h2.7v11H14V11h2.7l.4-3z"/></svg>Facebook</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Holy Water Ale Café · Cra. 13 #4-83, Buga · Fotos: clientes en Google Maps</span>
+    <a class="by" href="https://pairx-web.vercel.app" target="_blank" rel="noopener">Página de ejemplo hecha por <b>PairX</b></a>
+  </div>
+</footer>
+
+<!-- hoja de producto -->
+<div class="ov" id="ov"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="pdName"></div>
+
+<!-- carrito -->
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drT">
+  <div class="dr-h"><h3 id="drT">Tu pedido</h3><button class="x" style="position:static" id="drClose" aria-label="Cerrar pedido">×</button></div>
+  <div class="dr-b" id="drBody"></div>
+  <div class="dr-f" id="drFoot"></div>
+</aside>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(() => {
+"use strict";
+const WA = "573017377998";
+const $ = (s, r = document) => r.querySelector(s);
+const cop = n => "$" + n.toLocaleString("es-CO");
+
+/* ---------- Carta (precios de la carta publicada en Google Maps) ---------- */
+const P3 = ["Personal · 1 persona", "Grande · 2 personas", "Mega · 4 personas"];
+const S2 = ["Personal", "Grande"];
+const pz = (id, name, desc, a, b, c, extra = {}) => ({ id, name, desc, sizes: [[P3[0], a], [P3[1], b], [P3[2], c]], ...extra });
+const CARTA = [
+  { id: "cervezas", name: "Cervezas", note: "Cervezas artesanales de la casa. El precio y las presentaciones te los confirmamos al pedir.", items: [
+    { id: "black-honey", name: "Black Honey", desc: "Cerveza artesanal oscura de la casa, con miel. La más pedida.", img: "black-honey", tags: ["pop"] },
+    { id: "brown-honey", name: "Brown Honey", desc: "Cerveza artesanal de la casa, con miel.", img: "brown-honey" },
+    { id: "jamaica", name: "Jamaica", desc: "Cerveza artesanal de la casa con flor de jamaica.", img: "jamaica", tags: ["pop"] },
+    { id: "ipa", name: "IPA", desc: "Cerveza artesanal de la casa, estilo IPA.", img: "ipa" },
+    { id: "roja", name: "Roja", desc: "Cerveza artesanal roja de la casa.", img: "roja" },
+    { id: "mango", name: "Mango", desc: "Cerveza artesanal de la casa con mango.", img: "mango" }
+  ]},
+  { id: "pizza", name: "Pizzas", note: "Tres tamaños: Personal (1 persona), Grande (2) y Mega (4).", items: [
+    pz("margherita", "Margherita", "Salsa napolitana, queso mozzarella, tomate y albahaca.", 20500, 27600, 48500, { img: "margherita", tags: ["veg"] }),
+    pz("funghi", "Funghi", "Queso mozzarella, salsa napolitana, champiñones, tomate y cilantro.", 23500, 35000, 62000, { tags: ["veg"] }),
+    pz("hawaiana", "Hawaiana", "Salsa napolitana, queso mozzarella, jamón y piña.", 27000, 36000, 67500),
+    pz("aubergine", "Aubergine", "Queso mozzarella, salsa napolitana, berenjena, cebolla caramelizada y champiñones.", 23500, 35000, 62000, { tags: ["veg"] }),
+    pz("verduras", "Especial de Verduras", "Queso mozzarella, salsa napolitana, berenjena, piña, pimentón, cebolla roja, cilantro y champiñones.", 28000, 39000, 70000, { tags: ["veg"] }),
+    pz("diavolo", "Holy Diavolo", "Salsa napolitana, champiñones, salami, ají, queso mozzarella, camarones y aceitunas negras.", 36000, 46000, 87000, { tags: ["hot"] }),
+    pz("holy-chicken", "Holy Chicken", "Queso mozzarella, salsa napolitana, pollo, tomate y albahaca.", 27000, 36000, 67500),
+    pz("carnes", "Especial de Carnes", "Queso mozzarella, salsa napolitana, chorizo, tocineta, piña, pimentón, cebolla roja y cilantro.", 35000, 46000, 83000, { img: "pizza-carnes", tags: ["pop"] }),
+    pz("monster", "Monster Meat", "Queso mozzarella, salsa napolitana, tocineta, pollo, jamón, chorizo, piña, pimentón, cebolla roja y cilantro.", 38500, 49500, 89500),
+    pz("ranchera", "Ranchera", "Salsa ranchera, queso mozzarella, salchicha ahumada, tomate y cilantro.", 29500, 40000, 72500, { tags: ["hot"] }),
+    pz("cibo", "Holy Cibo", "Queso mozzarella, salsa napolitana, cebolla caramelizada, tocineta y pimentón.", 27500, 42000, 76500)
+  ]},
+  { id: "calzone", name: "Calzone", note: "Nuevo en la carta. Tamaño personal.", items: [
+    ["margherita", "Margherita", "Salsa napolitana, queso mozzarella, tomate y albahaca.", 20500, ["veg", "new"]],
+    ["funghi", "Funghi", "Queso mozzarella, salsa napolitana, champiñones, tomate y cilantro.", 23500, ["veg"]],
+    ["hawaiana", "Hawaiana", "Salsa napolitana, queso mozzarella, jamón y piña.", 27000],
+    ["diavolo", "Holy Diavolo", "Salsa napolitana, champiñones, salami, ají, mozzarella, camarones y aceitunas negras.", 36000, ["hot"]],
+    ["holy-chicken", "Holy Chicken", "Queso mozzarella, salsa napolitana, pollo, tomate y albahaca.", 27000],
+    ["carnes", "Especial de Carnes", "Mozzarella, salsa napolitana, chorizo, tocineta, piña, pimentón, cebolla roja y cilantro.", 35000],
+    ["monster", "Monster Meat", "Mozzarella, salsa napolitana, tocineta, pollo, jamón, chorizo, piña, pimentón, cebolla roja y cilantro.", 38500],
+    ["cibo", "Holy Cibo", "Mozzarella, salsa napolitana, cebolla caramelizada, tocineta y pimentón.", 27500]
+  ].map(([id, name, desc, p, tags]) => ({ id: "cz-" + id, name: "Calzone " + name, desc, sizes: [["Personal · 1 persona", p]], img: id === "margherita" ? "holy-water" : null, tags }))},
+  { id: "sandwich", name: "Sándwich", note: "Personal o grande.", items: [
+    { id: "cilantro-salami", name: "Cilantro y Salami", desc: "Pesto de cilantro, salami, pimentón, queso mozzarella, cebolla roja y tomate.", sizes: [[S2[0], 25000], [S2[1], 35000]] },
+    { id: "tapenade", name: "Tapenade y Jamón", desc: "Queso mozzarella, tapenade de aceitunas, tomate, cebolla caramelizada y jamón.", sizes: [[S2[0], 22000], [S2[1], 32000]] },
+    { id: "fricadelle", name: "Sandwich a la Fricadelle", desc: "Carne de receta suiza, tomate, lechuga, salsa de ajo, salsa BBQ y cebolla caramelizada.", sizes: [["Único", 17500]] },
+    { id: "curry", name: "Curry y Pollo", desc: "Salsa de curry, pollo, tomate, pimentón, queso mozzarella y cebolla caramelizada.", sizes: [[S2[0], 22500], [S2[1], 32000]], img: "curry-pollo", tags: ["pop"] },
+    { id: "tomate-champ", name: "Tomate y Champiñón", desc: "Mozzarella, salsa napolitana, berenjena, pimentón, tomate, champiñones y cebolla caramelizada.", sizes: [[S2[0], 22000], [S2[1], 32000]], tags: ["veg"] },
+    { id: "garden", name: "Garden Burger", desc: "Queso mozzarella, carne de lentejas, tomate y lechuga.", sizes: [["Grande", 26500]], tags: ["veg"] },
+    { id: "spicy-bean", name: "Spicy Bean Burger", desc: "Queso mozzarella, carne de fríjoles picante, tomate y lechuga.", sizes: [["Grande", 26800]], tags: ["veg", "hot"] },
+    { id: "pan-relleno", name: "Pan Relleno", desc: "Queso mozzarella, mayonesa, tocineta, pollo y piña.", sizes: [[S2[0], 25000], [S2[1], 33500]], img: "pan-relleno" },
+    { id: "pan-ranchero", name: "Pan Relleno Ranchero", desc: "Salsa ranchera, queso mozzarella, tomate y salchicha.", sizes: [[S2[0], 23000], [S2[1], 31500]], tags: ["hot"] },
+    { id: "arizona", name: "Arizona", desc: "120 g de pierna de cerdo, cebolla caramelizada, queso, salsa BBQ de la casa, mayonesa, lechuga y tomate.", sizes: [["Grande", 31000]] }
+  ]},
+  { id: "entradas", name: "Entradas", note: "", items: [
+    { id: "hummus", name: "Hummus", desc: "De la cocina árabe: garbanzos, cilantro, un toque de limón, ajo y especias. Con una aceituna y pan pita.", sizes: [["Porción", 10000]], tags: ["veg"] },
+    { id: "baba", name: "Baba Ganoush", desc: "De origen árabe: berenjena, pimentón, ajo, limón, ajonjolí y especias. Con pan pita.", sizes: [["Porción", 10000]], tags: ["veg"] },
+    { id: "frankfurt", name: "Frankfurt", desc: "Pan alemán hecho con cerveza tipo stout, tomates secos y dip de queso con finas hierbas.", sizes: [["Porción", 16500]], tags: ["veg"] },
+    { id: "fondue", name: "Fondue con queso de Búfala", desc: "Queso fundido con especias y vino, acompañado de pan especiado de la casa.", sizes: [["Porción", 24000]], tags: ["veg"] },
+    { id: "pfannkuchen", name: "Pfannkuchen", desc: "Plato tradicional alemán con queso y salsa de ajo. Adiciones de $4.000: jamón, pollo, champiñones, tocineta o jamón-piña.", sizes: [["Porción", 15800]], tags: ["veg"] },
+    { id: "bratwurst", name: "Bratwurst", desc: "Salchicha, ensalada alemana y papas al horno, con mostaza de la casa.", sizes: [["Porción", 18500]] },
+    { id: "ensalada", name: "Ensalada Holy", desc: "Lechuga, cebolla roja, aceitunas, tomate cherry, queso de búfala, almendras, crotones, jamón y vinagre balsámico.", sizes: [["Porción", 31500]] }
+  ]},
+  { id: "fuertes", name: "Platos fuertes", note: "Todas las pastas vienen con pan pita y salsa de ajo.", items: [
+    { id: "carbonara", name: "Fettuccine a la Carbonara", desc: "Tocineta, vino blanco y crema de leche.", sizes: [["Plato", 31000]] },
+    { id: "holy-pasta", name: "Holy Pasta", desc: "Chorizo, jamón, pollo, crema de leche, salsa napolitana y albahaca.", sizes: [["Plato", 35000]], img: "pasta", tags: ["pop"] },
+    { id: "baffi", name: "Fettuccine a la Baffi", desc: "Jamón serrano, calabacín, cebolla blanca, crema de leche, tomate cherry y aceite de oliva.", sizes: [["Plato", 33500]] },
+    { id: "pickford", name: "Fettuccini Pickford", desc: "Camarones, crema de leche, queso parmesano, mantequilla y cilantro.", sizes: [["Plato", 39500]] },
+    { id: "verano", name: "Holy Verano", desc: "Calabacín, champiñones, tomate cherry y crema de leche.", sizes: [["Plato", 31000]], tags: ["veg"] },
+    { id: "lasana", name: "Lasaña Mixta", desc: "Pollo, carne, jamón, bechamel, tomate, pimentón, queso parmesano y mozzarella, albahaca y salsa napolitana.", sizes: [["Plato", 35000]], img: "lasana", tags: ["pop"] }
+  ]},
+  { id: "postres", name: "Bebidas y postres", note: "El precio te lo confirmamos al pedir.", items: [
+    { id: "volcan", name: "Volcán de chocolate con helado", desc: "Volcán de chocolate tibio con helado.", img: "volcan", tags: ["pop"] },
+    { id: "galleta", name: "Galleta con helado de vainilla", desc: "Galleta de la casa con helado de vainilla.", img: "galleta-helado" },
+    { id: "malteada", name: "Malteada de Milo", desc: "Malteada de Milo.", img: "malteada-milo" },
+    { id: "limonada", name: "Limonada de coco", desc: "Limonada de coco.", img: "limonada-coco", tags: ["pop"] },
+    { id: "americano", name: "Café americano", desc: "Café expreso alargado.", img: "cafe-americano" }
+  ]}
+];
+const ALL = new Map();
+CARTA.forEach(c => c.items.forEach(i => { i.cat = c.id; ALL.set(i.id, i); }));
+const TAG = { veg: ["t-veg", "Vegetariano"], hot: ["t-hot", "Picante"], new: ["t-new", "Nuevo"], pop: ["t-pop", "Lo más pedido"] };
+const imgSrc = i => i.img ? `img/${i.img}.jpg` : null;
+const phHTML = (i, cls = "ph") => imgSrc(i) ? `<div class="${cls}"><img src="${imgSrc(i)}" alt="${i.name}" loading="lazy"></div>` : `<div class="${cls} ph-none" aria-hidden="true"><i>H</i></div>`;
+const fromPrice = i => i.sizes ? Math.min(...i.sizes.map(s => s[1])) : null;
+const priceHTML = i => { const p = fromPrice(i); if (p == null) return `<span class="price"><small>Precio en barra</small></span>`; return `<span class="price">${i.sizes.length > 1 ? "<small>desde </small>" : ""}${cop(p)}</span>`; };
+
+/* cinta */
+const strip = ["Cerveza artesanal", "Pizza", "Pasta italiana", "Café expreso", "Sándwiches", "Postres", "Cra. 13 #4-83", "Abiertos todos los días"];
+$("#strip").innerHTML = [...strip, ...strip].map(s => `<span>${s}</span>`).join("");
+
+/* cervezas */
+$("#beers").innerHTML = CARTA[0].items.map(b => `<button class="beer reveal" data-id="${b.id}"><img src="img/${b.img}.jpg" alt="" loading="lazy"><span><b>${b.name}</b><small>De la casa · ver y pedir</small></span></button>`).join("");
+
+/* tabs + items */
+let cat = "pizza";
+function renderTabs() {
+  $("#tabs").innerHTML = CARTA.map(c => `<button class="tab" role="tab" aria-selected="${c.id === cat}" data-cat="${c.id}">${c.name}</button>`).join("");
+}
+function renderItems() {
+  const c = CARTA.find(x => x.id === cat);
+  $("#catNote").textContent = c.note;
+  $("#items").innerHTML = c.items.map(i => `<button class="item" data-id="${i.id}">${phHTML(i)}<span class="tx"><h3>${i.name}</h3>${i.tags ? `<span class="tags">${i.tags.map(t => `<span class="tag ${TAG[t][0]}">${TAG[t][1]}</span>`).join("")}</span>` : ""}<p>${i.desc}</p><span class="row">${priceHTML(i)}<span class="add" aria-hidden="true">+</span></span></span></button>`).join("");
+}
+renderTabs(); renderItems();
+$("#tabs").addEventListener("click", e => { const t = e.target.closest(".tab"); if (!t) return; cat = t.dataset.cat; renderTabs(); renderItems(); });
+
+/* ---------- hoja de producto ---------- */
+const ov = $("#ov"), sheet = $("#sheet");
+let cur = null, curSize = 0, curQty = 1, lastFocus = null;
+function openItem(id) {
+  cur = ALL.get(id); curSize = 0; curQty = 1; lastFocus = document.activeElement;
+  const i = cur;
+  sheet.innerHTML = `<button class="x" id="pdX" aria-label="Cerrar">×</button><div class="pd">
+    <div class="pd-ph">${imgSrc(i) ? `<img src="${imgSrc(i)}" alt="${i.name}"><small>Foto de clientes en Google</small>` : `<div class="ph-none" style="width:100%;height:100%;display:grid;place-items:center"><i style="font-size:6rem">H</i></div><small>Aquí va la foto profesional del plato</small>`}</div>
+    <div class="pd-tx">
+      <p class="eyebrow">${CARTA.find(c => c.id === i.cat).name}</p>
+      <h3 id="pdName">${i.name}</h3>
+      ${i.tags ? `<span class="tags">${i.tags.map(t => `<span class="tag ${TAG[t][0]}">${TAG[t][1]}</span>`).join("")}</span>` : ""}
+      <p>${i.desc}</p>
+      ${i.sizes ? `<div class="sizes" role="radiogroup" aria-label="Tamaño">${i.sizes.map((s, k) => `<button class="size" role="radio" aria-checked="${k === 0}" data-k="${k}"><span>${s[0].split(" · ")[0]}<small>${s[0].split(" · ")[1] || ""}</small></span><b>${cop(s[1])}</b></button>`).join("")}</div>` : `<p class="price"><small>Precio y presentación: te los confirmamos al pedir.</small></p>`}
+      <div class="pd-foot"><div class="qty"><button data-q="-1" aria-label="Quitar uno">−</button><output id="pdQ">1</output><button data-q="1" aria-label="Sumar uno">+</button></div><button class="btn btn-a" id="pdAdd"></button></div>
+    </div></div>`;
+  updAdd();
+  ov.classList.add("on"); sheet.classList.add("on");
+  setTimeout(() => $("#pdAdd").focus(), 60);
+}
+function updAdd() {
+  const p = cur.sizes ? cur.sizes[curSize][1] * curQty : null;
+  $("#pdAdd").textContent = "Agregar" + (p ? " · " + cop(p) : "");
+  $("#pdQ").textContent = curQty;
+}
+function closeSheet() { ov.classList.remove("on"); sheet.classList.remove("on"); drawer.classList.remove("on"); if (lastFocus) lastFocus.focus(); }
+sheet.addEventListener("click", e => {
+  if (e.target.closest("#pdX")) return closeSheet();
+  const s = e.target.closest(".size");
+  if (s) { curSize = +s.dataset.k; sheet.querySelectorAll(".size").forEach(b => b.setAttribute("aria-checked", b === s)); return updAdd(); }
+  const q = e.target.closest("[data-q]");
+  if (q) { curQty = Math.max(1, Math.min(20, curQty + +q.dataset.q)); return updAdd(); }
+  if (e.target.closest("#pdAdd")) { addToCart(cur.id, curSize, curQty); closeSheet(); }
+});
+ov.addEventListener("click", closeSheet);
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet(); });
+document.addEventListener("click", e => { const b = e.target.closest(".item,.beer"); if (b) openItem(b.dataset.id); });
+
+/* ---------- carrito ---------- */
+const drawer = $("#drawer");
+let cart = [];
+try { cart = JSON.parse(localStorage.getItem("hw-cart") || "[]").filter(l => ALL.has(l.id)); } catch (e) {}
+let mode = "recoger";
+const save = () => { try { localStorage.setItem("hw-cart", JSON.stringify(cart)); } catch (e) {} };
+function addToCart(id, size, qty) {
+  const l = cart.find(x => x.id === id && x.size === size);
+  l ? l.qty += qty : cart.push({ id, size, qty });
+  save(); renderCart();
+  const b = $("#cartBtn"); b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump");
+  toast(`${ALL.get(id).name} agregado ✓`);
+}
+const lineInfo = l => { const i = ALL.get(l.id); const s = i.sizes ? i.sizes[l.size] : null; return { i, label: s ? s[0].split(" · ")[0] : "", unit: s ? s[1] : null }; };
+function renderCart() {
+  const n = cart.reduce((a, l) => a + l.qty, 0);
+  $("#cartN").textContent = n;
+  if (!cart.length) { $("#drBody").innerHTML = `<p class="empty">Tu pedido está vacío.<br>Toca un plato de la carta o gira la ruleta.</p>`; $("#drFoot").innerHTML = ""; return; }
+  $("#drBody").innerHTML = cart.map((l, k) => { const { i, label, unit } = lineInfo(l); return `<div class="ci">${imgSrc(i) ? `<img src="${imgSrc(i)}" alt="">` : `<div class="ph-none"><i>H</i></div>`}<div><b>${i.name}</b><small>${label ? label + " · " : ""}${unit ? cop(unit * l.qty) : "precio en barra"}</small></div><div class="qty"><button data-k="${k}" data-d="-1" aria-label="Quitar uno">−</button><output>${l.qty}</output><button data-k="${k}" data-d="1" aria-label="Sumar uno">+</button></div></div>`; }).join("");
+  const tot = cart.reduce((a, l) => a + (lineInfo(l).unit || 0) * l.qty, 0);
+  const tbd = cart.some(l => lineInfo(l).unit == null);
+  $("#drFoot").innerHTML = `<div class="mode" role="group" aria-label="Cómo lo quieres"><button aria-pressed="${mode === "recoger"}" data-m="recoger">Paso a recoger</button><button aria-pressed="${mode === "mesa"}" data-m="mesa">Para la mesa</button></div>
+    <div class="tot"><span>Total</span><span>${cop(tot)}${tbd ? " +" : ""}</span></div>
+    ${tbd ? `<p class="note">+ cervezas o bebidas con precio por confirmar.</p>` : ""}
+    <details><summary class="note" style="cursor:pointer">Ver el mensaje que le llega a Holy Water</summary><div class="wa-prev">${waText().replace(/</g, "&lt;")}</div></details>
+    <a class="btn btn-a" id="waSend" href="https://wa.me/${WA}?text=${encodeURIComponent(waText())}" target="_blank" rel="noopener">Enviar pedido por WhatsApp →</a>
+    <p class="note">Demo: en la versión final el pedido llega directo al WhatsApp del local.</p>`;
+}
+function waText() {
+  const tot = cart.reduce((a, l) => a + (lineInfo(l).unit || 0) * l.qty, 0);
+  return "Hola Holy Water 👋 quiero pedir:\n" + cart.map(l => { const { i, label, unit } = lineInfo(l); return `• ${l.qty} × ${i.name}${label ? " (" + label + ")" : ""}${unit ? " — " + cop(unit * l.qty) : ""}`; }).join("\n") + `\n\nTotal: ${cop(tot)}${cart.some(l => lineInfo(l).unit == null) ? " + cervezas/bebidas" : ""}\n${mode === "recoger" ? "Paso a recogerlo." : "Es para la mesa."}`;
+}
+$("#drBody").addEventListener("click", e => { const b = e.target.closest("[data-d]"); if (!b) return; const l = cart[+b.dataset.k]; l.qty += +b.dataset.d; if (l.qty < 1) cart.splice(+b.dataset.k, 1); save(); renderCart(); });
+$("#drFoot").addEventListener("click", e => { const m = e.target.closest("[data-m]"); if (m) { mode = m.dataset.m; renderCart(); } });
+$("#cartBtn").addEventListener("click", () => { lastFocus = $("#cartBtn"); ov.classList.add("on"); drawer.classList.add("on"); setTimeout(() => $("#drClose").focus(), 60); });
+$("#drClose").addEventListener("click", closeSheet);
+renderCart();
+
+let tt;
+function toast(m) { const t = $("#toast"); t.textContent = m; t.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("on"), 1800); }
+
+/* ---------- ruleta (lo más pedido según Google Maps) ---------- */
+const WHEEL = ["black-honey", "carnes", "holy-pasta", "jamaica", "lasana", "limonada", "curry", "volcan"].map(id => ALL.get(id));
+const COLORS = ["#c8452f", "#3b2618", "#e3a536", "#2f8f86", "#5c3b25", "#4f8a3c", "#a8361f", "#6b4429"];
+const svg = $("#wheel"), N = WHEEL.length, seg = 360 / N;
+const pt = (a, r) => [200 + r * Math.sin(a * Math.PI / 180), 200 - r * Math.cos(a * Math.PI / 180)];
+svg.innerHTML = WHEEL.map((it, k) => {
+  const a0 = k * seg, a1 = a0 + seg, [x0, y0] = pt(a0, 198), [x1, y1] = pt(a1, 198), mid = a0 + seg / 2;
+  const short = it.name.replace("Especial de ", "").replace("Volcán de chocolate con helado", "Volcán").replace("Limonada de coco", "Limonada coco").replace("Lasaña Mixta", "Lasaña");
+  const light = ["#e3a536"].includes(COLORS[k]);
+  return `<path d="M200 200 L${x0} ${y0} A198 198 0 0 1 ${x1} ${y1} Z" fill="${COLORS[k]}" stroke="#15100c" stroke-width="2"/>
+    <text x="376" y="205" transform="rotate(${mid - 90} 200 200)" text-anchor="end" font-family="Rye, Georgia, serif" font-size="14" fill="${light ? "#1b120a" : "#f3e7cf"}">${short}</text>`;
+}).join("");
+let rot = 0, spinning = false;
+$("#spinBtn").addEventListener("click", () => {
+  if (spinning) return; spinning = true;
+  const pick = Math.floor(Math.random() * N);
+  const target = 360 - (pick * seg + seg / 2);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  rot += (reduce ? 0 : 360 * 6) + ((target - rot % 360) + 360) % 360 + (Math.random() * seg * .6 - seg * .3);
+  svg.style.transform = `rotate(${rot}deg)`;
+  $("#result").classList.remove("on");
+  setTimeout(() => {
+    spinning = false;
+    const it = WHEEL[pick];
+    $("#result").innerHTML = `<img src="${imgSrc(it)}" alt=""><div><p class="eyebrow">Te tocó</p><b>${it.name}</b><div class="act"><button class="btn btn-a" data-open="${it.id}">Ver y agregar</button><button class="btn btn-g" id="again">Girar otra vez</button></div></div>`;
+    $("#result").classList.add("on");
+  }, reduce ? 300 : 4700);
+});
+$("#result").addEventListener("click", e => { const o = e.target.closest("[data-open]"); if (o) openItem(o.dataset.open); if (e.target.closest("#again")) $("#spinBtn").click(); });
+
+/* ---------- abierto ahora (hora de Colombia) ---------- */
+const h = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Bogota" })).getHours();
+const open = h >= 12;
+$("#openNow").classList.toggle("off", !open);
+$("#openNow span").textContent = open ? "Abierto ahora · cierra a las 12 a. m." : "Cerrado ahora · abre a las 12 m.";
+
+/* ---------- aparecer al hacer scroll ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>
