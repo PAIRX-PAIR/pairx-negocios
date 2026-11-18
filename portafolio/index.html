@@ -167,7 +167,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       <p class="eyebrow" data-reveal>Portafolio PairX</p>
       <h1 data-split>Trece negocios. <span class="nw"><em>Trece vitrinas</em>.</span></h1>
       <p class="lead" data-reveal style="--i:2">Una página completa por giro, cada una con su propio estilo, su catálogo con precios y su botón de pedido por WhatsApp. Pasa el cursor sobre una para recorrerla, o ábrela y pruébala en tu celular.</p>
-      <p class="stats" data-reveal style="--i:3"><span><b>13</b> giros</span><span><b>6</b> estilos de diseño</span><span><b>13 de 13</b> con pedidos por WhatsApp</span><span>Negocios ficticios · diseño y funciones reales</span></p>
+      <p class="stats" data-reveal style="--i:3"><span><b>13</b> giros</span><span><b>6</b> estilos de diseño</span><span><b>13 de 13</b> con pedidos por WhatsApp</span><span>Negocios ficticios (el restaurante es una propuesta real) · diseño y funciones reales</span></p>
     </div>
   </section>
 
@@ -222,9 +222,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
   /* Tarjetas */
   const grid = $("#grid");
-  grid.innerHTML = WORKS.map((w, i) => `<a class="card" data-cat="${w.cat}" href="${w.slug}/" style="--c0:${w.colors[0]};--c1:${w.colors[1]};--c2:${w.colors[2]}">
-    <div class="shot"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="url">${w.name.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "")}.co</span></div>
-      <div class="view"><span class="ph" aria-hidden="true"><small>${w.niche}</small><b>${w.name}</b></span><iframe data-src="${w.slug}/?preview" title="Vista previa de ${w.name}" tabindex="-1" aria-hidden="true"></iframe><span class="hint" aria-hidden="true">Recorriendo la página…</span></div></div>
+  const wHref = w => w.href ? ".." + w.href : w.slug + "/";
+  grid.innerHTML = WORKS.map((w, i) => `<a class="card" data-cat="${w.cat}" href="${wHref(w)}" style="--c0:${w.colors[0]};--c1:${w.colors[1]};--c2:${w.colors[2]}">
+    <div class="shot"><div class="chrome" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="url">${w.real ? "propuesta PairX · " + w.name : w.name.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "") + ".co"}</span></div>
+      <div class="view"><span class="ph" aria-hidden="true"><small>${w.niche}</small><b>${w.name}</b></span><iframe data-src="${wHref(w)}?preview" title="Vista previa de ${w.name}" tabindex="-1" aria-hidden="true"></iframe><span class="hint" aria-hidden="true">Recorriendo la página…</span></div></div>
     <div class="meta"><span class="n">${String(i + 1).padStart(2, "0")}</span><h2>${w.name}</h2><p>${w.niche} · ${w.barrio}, ${w.city}</p>
       <span class="side"><span class="tag">${STYLE[w.layout] || ""}</span><span class="sw" aria-hidden="true"><i style="background:${w.colors[0]}"></i><i style="background:${w.colors[1]}"></i><i style="background:${w.colors[2]}"></i></span><span class="open" aria-hidden="true">→</span></span></div>
   </a>`).join("");

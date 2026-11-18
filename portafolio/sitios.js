@@ -70,18 +70,20 @@ window.PAIRX_WORKS = [
  },
  {
   "slug": "restaurante",
+  "href": "/demos/holy-water/",
+  "real": true,
   "cat": "Comida",
   "niche": "Restaurante",
-  "name": "El Fogón",
-  "barrio": "Galerías",
-  "city": "Bogotá",
+  "name": "Holy Water",
+  "barrio": "Centro",
+  "city": "Buga",
   "layout": "board",
-  "tagline": "Hamburguesas al carbón, hasta medianoche.",
-  "sub": "Carne molida en casa, pan brioche y papas cortadas a mano. Domicilios en Teusaquillo y Galerías.",
+  "tagline": "Cerveza propia, pizza y pasta de tradición alemana.",
+  "sub": "Propuesta para Holy Water Ale Café en Buga: carta con fotos y tamaños, ruleta de lo más pedido y pedido por WhatsApp con ticket.",
   "colors": [
-   "#1a110c",
-   "#f0592a",
-   "#fbeee0"
+   "#15100c",
+   "#e3a536",
+   "#f3e7cf"
   ],
   "art": "burger"
  },
